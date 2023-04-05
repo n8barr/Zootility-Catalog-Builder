@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "fast-csv": "^4.3.6",
+    "fs": "^0.0.1-security",
+    "handlebars": "^4.7.7",
+    "path": "^0.12.7"
+  },
+  "type": "module",
+  "name": "build-a-html-catalog-from-products-csv-and-images",
+  "version": "1.0.0",
+  "main": "catalog_generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
