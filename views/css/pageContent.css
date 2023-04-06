@@ -34,6 +34,7 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.2rem;
+  z-index: 1;
 }
 
 .page:nth-child(odd) .page-header,
@@ -63,3 +64,13 @@ body {
   height: 50%;
 }
   
+.page-separator-bg {
+  position: absolute;
+  width: 120%;
+  height: 18vh;
+  background: #f2f219;
+  display: block;
+  z-index: -1;
+  overflow: visible;
+  margin-top: 47vh;
+}

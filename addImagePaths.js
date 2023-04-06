@@ -1,36 +1,71 @@
 import fs from 'fs';
 import path from 'path';
 
-function addProductImagePaths(product) {
-  const sku = product.sku;
+// Read the modified_skus.json file and store the skus in an array
+const originalImageSkus = JSON.parse(fs.readFileSync('original_image_skus.json', 'utf8'));
+
+// Set the constants for both functions
+const extensions = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
+const croppedFolder = 'cropped_images';
+const originalFolder = 'original_images';
+const lifestyleFolder = 'lifestyle_images';
+const packagingFolder = 'packaging_images';
+
+function addVariantImages(variant) {
+  const sku = variant.sku;
   const [subfolder1, subfolder2] = sku.split('-');
-  const basePath = `product_images/${subfolder1}/${subfolder2}`;
+  const basePath = originalImageSkus.includes(variant.sku) ? originalFolder : croppedFolder;
 
   for (let i = 1; i <= 4; i++) {
-    const imageFileName = i === 1 ? `${sku}.png` : `${sku}-${i}.png`;
-    const imagePath = path.join(basePath, imageFileName);
+    for (const ext of extensions) {
+      const imageFileName = i === 1 ? `${sku}${ext}` : `${sku}-${i}${ext}`;
+      const imagePath = path.join(basePath, subfolder1, subfolder2, imageFileName);
 
-    if (fs.existsSync(imagePath)) {
-      product[`imagePath${i}`] = imagePath;
+      if (fs.existsSync(imagePath)) {
+        variant.images.push(imagePath);
+        break;
+      }
     }
   }
 };
 
-function addLifestyleImagePaths(variant) {
-  const extensions = ['.png', '.PNG', '.jpeg', '.JPEG', '.jpg', '.JPG'];
+function addProductImages(product) {
+  if (!product.images) {
+    product.images = [];
+  }
+  // Check for and add the Lifestyle image
+  const lifestyleImagePath = getAdditionalImagePath(product, lifestyleFolder);
+  if (lifestyleImagePath) {
+    product.hasLifestyleImage = true;
+  }
+  
+  // Check for and add the Packaging image
+  const packagingImagePath = getAdditionalImagePath(product, packagingFolder);
 
-  const [folder, subfolder] = variant.sku.split('-');
-  const baseLifestyleImageName = `${folder}-${subfolder}`;
+  // Add the images in the desired order (packaging image is second, even if no lifestyle image)
+  if (!packagingImagePath && lifestyleImagePath) {
+    product.images.unshift(lifestyleImagePath);
+  } else if (packagingImagePath && lifestyleImagePath) {
+    product.images.unshift(packagingImagePath);
+    product.images.unshift(lifestyleImagePath);
+  } else if (packagingImagePath && !lifestyleImagePath) {
+    product.images.splice(1, 0, packagingImagePath);
+  }
+};
+
+function getAdditionalImagePath(product, folder) {
+  const [subfolder1, subfolder2] = product.sku.split('-');
+  const baseProductSku = `${subfolder1}-${subfolder2}`;
 
   for (const ext of extensions) {
-    const lifestyleImageName = baseLifestyleImageName + ext;
-    const lifestyleImagePath = path.join('lifestyle_images', folder, lifestyleImageName);
+    const productImageName = baseProductSku + ext;
+    const imagePath = path.join(folder, subfolder1, productImageName);
 
-    if (fs.existsSync(lifestyleImagePath)) {
-      variant.lifestyleImage = lifestyleImagePath;
-      break;
+    if (fs.existsSync(imagePath)) {
+      return imagePath;
     }
   }
+  return false;
 };
 
-export { addProductImagePaths, addLifestyleImagePaths };
+export { addProductImages, addVariantImages };

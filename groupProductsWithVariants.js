@@ -1,4 +1,4 @@
-import { addProductImagePaths, addLifestyleImagePaths } from "./addImagePaths.js";
+import { addProductImages, addVariantImages } from "./addImagePaths.js";
 
 function groupProductsWithVariants(products) {
     const productsByName = {};
@@ -8,17 +8,17 @@ function groupProductsWithVariants(products) {
       const variant = {
         sku: product.sku,
         'option1Value': product.option1Value,
-        'option2Value': product.option2Value
+        'option2Value': product.option2Value,
+        images: []
       };
 
-      addProductImagePaths(variant);
-      addLifestyleImagePaths(variant);
+      addVariantImages(variant);
 
       if (!productsByName[productName]) {
+        addProductImages(product);
+        product.productDescription = shortenDescription(product.productDescription);
         productsByName[productName] = {
           ...product,
-          imagePath1: variant.lifestyleImage || variant.imagePath1,
-          imageType: variant.lifestyleImage ? 'lifestyle' : 'product',
           variants: [],
         };
       }
@@ -29,5 +29,12 @@ function groupProductsWithVariants(products) {
     const productsWithVariants = Object.values(productsByName);
     return productsWithVariants;
 };   
+
+function shortenDescription(description) {
+  const regex = /<p>(.*?)<\/p>/;
+  const matches = description.match(regex);
+  const firstParagraph = matches && matches[1];
+  return firstParagraph || description;
+}
 
 export { groupProductsWithVariants };

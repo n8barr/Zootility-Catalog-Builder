@@ -1,89 +1,100 @@
-import { compiledProductTemplates, compiledProductLifestyleTemplates, compiledVariantTemplate } from "./compileTemplates.js";
+import { compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate } from "./compileTemplates.js";
+import { bgTemplate } from "./staticTemplate.js";
+
+// Global variables for this module
+let pageIndex = 1;
+let pageSections = [];
+let collectionName;
+const pages = [];
 
 // Create pages from the product list
 function createPages(productsWithVariants) {
-    const pages = [];
-    let pageIndex = 1
-  
-    //build the page sections list
-    let pageSections = [];
-    productsWithVariants.forEach((product) => {
-        const newPageSections = generatePageSections(product);
-        pageSections = pageSections.concat(newPageSections);
-    });
 
-    //break the page sections into pages
-    for (let i = 0; i < pageSections.length; i += 2) {
-      const firstPageSection = pageSections[i];
-      const secondPageSection = pageSections[i + 1] || null;
-  
-      const firstPageSectionHtml = firstPageSection.content;
-      let secondPageSectionHtml = '';
-      if (secondPageSection) {
-        secondPageSectionHtml = secondPageSection.content;
-      }
-  
-      const pageContent = firstPageSectionHtml + secondPageSectionHtml;
-      const collectionName = firstPageSection.collectionName;
-      const page = {
-        collectionName,
-        content: pageContent,
-        page: pageIndex
-      };
-      pages.push(page);
-  
-      pageIndex++;
-    }
-  
-    return pages;
+  // Build the page sections list
+  productsWithVariants.forEach((product, index) => {
+    generatePageSections(product);
+  });
+
+  if (pageSections.length === 1) {
+    insertPage();
   }
-  
-  //split a product into the number of needed page sections
-  function generatePageSections(product) {
-    const variantsCount = product.variants.length;
-    let pageSections = [];
-  
-    if (variantsCount === 1 || variantsCount >= 6) {
-        //only pass the product with the first variant into the template
-        let subProduct = { ...product, variants: product.variants[0] };
 
-        pageSections.push({
-            content: compiledProductTemplates[0](subProduct),
-            collectionName: product.productType
-        });
-        //remove that variant from the array
-        product.variants.shift();
-    }
+  return pages;
+}
   
-    if (variantsCount >= 2 && variantsCount <= 5) {
-        // Render variant templates and add them to the product object
-        product.variants.forEach((variant) => {
-            variant.variantTemplate = compiledVariantTemplate(variant);
-        });
+//split a product into the number of needed page sections
+function generatePageSections(product) {
+  const variantsCount = product.variants.length;
 
-        let content;
-        if (product.imageType === 'lifestyle') {
-          content = compiledProductLifestyleTemplates[1](product);
-        } else {
-          content = compiledProductTemplates[1](product);
-        }
-
-        pageSections.push({
-            content,
-            collectionName: product.productType
-        });
-    } else if (variantsCount >= 6) {
-      while (product.variants.length > 0) {
-        const subVariants = product.variants.splice(0, 12);
-        const subProduct = { ...product, variants: subVariants };
-        pageSections.push({
-            content: compiledProductTemplates[2](subProduct),
-            collectionName: product.productType
-        });
-      }
-    }
-  
-    return pageSections;
+  if (variantsCount === 1 || variantsCount >= 6) {
+      pageSections.push({
+          content: selectTemplate(0)(product),
+          collectionName: product.productType
+      });
+      checkInsertPage();
+      // remove that variant from the array
+      // product.variants.shift();
   }
-  
-  export { createPages };
+
+  if (variantsCount >= 2 && variantsCount <= 5) {
+      // Render variant templates and add them to the product object
+      product.variants.forEach((variant) => {
+          variant.variantTemplate = compiledVariantTemplate(variant);
+      });
+
+      pageSections.push({
+          content: selectTemplate(1)(product),
+          collectionName: product.productType
+      });
+      checkInsertPage();
+  } else if (variantsCount >= 6) {
+    while (product.variants.length > 0) {
+      const subVariants = product.variants.splice(0, 12);
+      const subProduct = { ...product, variants: subVariants };
+      pageSections.push({
+          content: selectTemplate(2)(subProduct),
+          collectionName: product.productType
+      });
+      checkInsertPage();
+    }
+  }
+
+  return;
+}
+
+// 
+function selectTemplate(version) {
+  let selectedTemplate;
+
+  //determine if the product-image content should be on the right or left of the page
+  if (pageIndex % 2 === 1) {
+    selectedTemplate = compiledProductLeftTemplates[version];
+  } else {
+    selectedTemplate = compiledProductRightTemplates[version];
+  }
+
+  return selectedTemplate;
+}
+
+function checkInsertPage() {
+  if (pageSections.length === 2) {
+    insertPage();
+  }
+}
+
+function insertPage() {
+  const content = pageSections[0].content + '\n' + (pageSections[1] && pageSections[1].content);
+  const collectionName = pageSections[0].collectionName;
+  const page = {
+    collectionName,
+    content,
+    page: pageIndex
+  };
+  pages.push(page);
+
+  //update the utility variables
+  pageIndex++;
+  pageSections = [];
+}
+
+export { createPages };
