@@ -8,6 +8,8 @@ const pageTemplate = `
   <link rel="stylesheet" type="text/css"  href="views/css/pageContent.css">
   <link rel="stylesheet" type="text/css"  href="views/css/productTemplate1.css">
   <link rel="stylesheet" type="text/css"  href="views/css/productTemplate2.css">
+  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate3.css">
+  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate4.css">
   <link rel="stylesheet" type="text/css"  href="views/css/imageContainer.css">
   <style>
     /* CSS styles go here */
@@ -27,7 +29,7 @@ const pageTemplate = `
 
 // Define the Product template for Products with 1 Variant
 const productImage1Template = `
-  <div class="product-image">
+  <div class="product-image" {{#if hasLifestyleImage}}style="background-image: url('{{images.[0]}}')"{{/if}}>
     <div class="image-container">
       <img src="{{#if images}}{{images.[0]}}{{else}}{{variants.[0].images.[0]}}{{/if}}" alt="{{productName}}" />
     </div>
@@ -78,7 +80,7 @@ const productTemplateRight1 = `
 
 // Define the Product template for Products with 2-7 Variants
 const productImage2Template = `
-  <div class="product2-image">
+  <div class="product2-image" {{#if hasLifestyleImage}}style="background-image: url('{{images.[0]}}')"{{/if}}>
     <div class="image-container">
     <img src="{{#if images}}{{images.[0]}}{{else}}{{variants.[0].images.[0]}}{{/if}}" alt="{{productName}}" />
     </div>
@@ -90,14 +92,14 @@ const productImage2Template = `
 
 const productInfo2Template = `
 <div class="product2-info">
-    <h2 class="product-name">{{productName}}</h2>
-    <div class="prices">
-      <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
-      <div class="retail-price">Retail: $ {{retailPrice}}</div>
-      <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
-    </div>
-    <div class="product-description">{{{productDescription}}}</div>
-    <div class="product2-variants">
+  <h2 class="product-name">{{productName}}</h2>
+  <div class="prices">
+    <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
+    <div class="retail-price">Retail: $ {{retailPrice}}</div>
+    <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
+  </div>
+  <div class="product-description">{{{productDescription}}}</div>
+  <div class="product2-variants">
     {{#if hasLifestyleImage}}
       {{#each variants}}
           {{{variantTemplate}}}
@@ -109,8 +111,8 @@ const productInfo2Template = `
         {{/if}}
       {{/each}}
     {{/if}}
-    </div>
   </div>
+</div>
 `;
 
 const productTemplateLeft2 = `
@@ -136,24 +138,40 @@ const variantTemplate = `
 </div>
 `;
 
-const productTemplateLeft3 = `...`; // Define the Product template for Products with 10+ Variants
-const productTemplateRight3 = `...`;
+// Define the Product template for Products with 7-8 Variants
+const productTemplate3 = `
+<div class="product3-variants">
+  {{#each variants}}
+    {{{variantTemplate}}}
+  {{/each}}
+</div>
+`;
+
+// Define the Product template for Products with 9+ Variants
+const productTemplate4 = `
+<div class="product4-variants">
+  {{#each variants}}
+    {{{variantTemplate}}}
+  {{/each}}
+</div>
+`;
 
 // Compile the templates
 const compiledPageTemplate = Handlebars.compile(pageTemplate);
 const compiledProductLeftTemplates = [
   Handlebars.compile(productTemplateLeft1),
   Handlebars.compile(productTemplateLeft2),
-  Handlebars.compile(productTemplateLeft3),
+  Handlebars.compile(productTemplate3),
+  Handlebars.compile(productTemplate4),
 ];
 
 const compiledProductRightTemplates = [
   Handlebars.compile(productTemplateRight1),
   Handlebars.compile(productTemplateRight2),
-  Handlebars.compile(productTemplateRight3),
+  Handlebars.compile(productTemplate3),
+  Handlebars.compile(productTemplate4),
 ];
 
 const compiledVariantTemplate = Handlebars.compile(variantTemplate);
-//const compiledProduct1ImageTemplate = Handlebars.compile(product1ImageTemplate);
 
 export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate };

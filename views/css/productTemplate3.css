@@ -1,0 +1,20 @@
+.product3-variants {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
+    margin: 15px 30px 30px 30px;
+}
+
+.product3-variants .image-container img {
+    bottom: 0;
+    top: initial;
+}
+
+.page:nth-child(odd) .product3-variants {
+    margin-right: 10%;
+}
+
+.page:nth-child(even) .product3-variants {
+    margin-left: 10%;
+}

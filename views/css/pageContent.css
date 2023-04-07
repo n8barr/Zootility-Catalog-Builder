@@ -11,14 +11,6 @@ body {
   page-break-after: always;
 }
 
-.page:nth-child(odd) .product {
-  margin-right: 10%;
-}
-
-.page:nth-child(even) .product {
-  margin-left: 10%;
-}
-
 .page-header {
   font-size: 1.5rem;
 }
@@ -51,7 +43,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  width: 90%;
+  width: 100%;
   /* justify-content: space-between; */
 }
 

@@ -26,7 +26,7 @@ function createPages(productsWithVariants) {
 function generatePageSections(product) {
   const variantsCount = product.variants.length;
 
-  if (variantsCount === 1 || variantsCount >= 6) {
+  if (variantsCount === 1 || variantsCount >= 7) {
       pageSections.push({
           content: selectTemplate(0)(product),
           collectionName: product.productType
@@ -36,7 +36,7 @@ function generatePageSections(product) {
       // product.variants.shift();
   }
 
-  if (variantsCount >= 2 && variantsCount <= 5) {
+  if (variantsCount >= 2 && variantsCount <= 6) {
       // Render variant templates and add them to the product object
       product.variants.forEach((variant) => {
           variant.variantTemplate = compiledVariantTemplate(variant);
@@ -47,12 +47,28 @@ function generatePageSections(product) {
           collectionName: product.productType
       });
       checkInsertPage();
-  } else if (variantsCount >= 6) {
+  } else if (variantsCount >= 7 && variantsCount <= 8) {
     while (product.variants.length > 0) {
-      const subVariants = product.variants.splice(0, 12);
+      const subVariants = product.variants.splice(0, 8);
+      subVariants.forEach((variant) => {
+        variant.variantTemplate = compiledVariantTemplate(variant);
+      });
       const subProduct = { ...product, variants: subVariants };
       pageSections.push({
           content: selectTemplate(2)(subProduct),
+          collectionName: product.productType
+      });
+      checkInsertPage();
+    }
+  } else if (variantsCount >= 9) {
+    while (product.variants.length > 0) {
+      const subVariants = product.variants.splice(0, 18);
+      subVariants.forEach((variant) => {
+        variant.variantTemplate = compiledVariantTemplate(variant);
+      });
+      const subProduct = { ...product, variants: subVariants };
+      pageSections.push({
+          content: selectTemplate(3)(subProduct),
           collectionName: product.productType
       });
       checkInsertPage();

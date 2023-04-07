@@ -3,24 +3,54 @@
   width: 100%;
 }
 
-.page:nth-child(odd) .product.imageType-lifestyle {
-  margin-right: 0;
+.page:nth-child(odd) .product2-info {
+  margin-right: 10%;
+  padding-right: 0;
 }
 
-.page:nth-child(even) .product.imageType-lifestyle {
-  margin-left: 0;
+.page:nth-child(even) .product2-info {
+  margin-left: 10%;
+  padding-left: 0;
 }
 
 .product2-image {
+  display: flex;
+  justify-content: start;
   width: 30%;
-  margin: 5% 0 10% 10%;
-  box-sizing: border-box;
+  margin: 5% 10% 10% 10%;
+  flex-flow: column;
+}
+
+.page:nth-child(odd) .product2-image {
+  align-items: start;
+}
+
+.page:nth-child(odd) .product2-variants {
+  margin-left: 40px;
+}
+
+.page:nth-child(even) .product2-image {
+  align-items: end;
+}
+
+.page:nth-child(even) .product2-variants {
+  margin-right: 40px;
 }
 
 .imageType-lifestyle .product2-image {
-  width: 60%;
+  width: 50%;
   margin: 0;
   box-sizing: border-box;
+}
+
+.imageType-lifestyle .product2-image img {
+  display: none;
+}
+
+.imageType-lifestyle .product2-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 .product2-image img {
@@ -36,46 +66,22 @@
 
 .product2-info {
   width: 50%;
-  padding: 0 25px;
+  padding: 25px;
   box-sizing: border-box;
 }
 
 .product2-variants {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   /* grid-template-columns: repeat(4, 1fr); */
   gap: 15px;
   margin-top: 10px;
-  margin-right: 25%;
 }
 
-.variant {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.variant img {
-  width: 100%;
-  height: auto;
-}
-
-.variant .sku {
-  padding-top: 10px;
-}
-
-.image-container img {
-  position: absolute;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  top: 0;
-  right: 0;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+.product2-image .image-container img {
+  bottom: 0;
+  top: initial;
 }
   
 .product2-variants .image-container img {

@@ -1,0 +1,20 @@
+.product4-variants {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 15px;
+    margin: 15px 30px 30px 30px;
+}
+
+.product4-variants .image-container img {
+    bottom: 0;
+    top: initial;
+}
+
+.page:nth-child(odd) .product4-variants {
+    margin-right: 10%;
+}
+
+.page:nth-child(even) .product4-variants {
+    margin-left: 10%;
+}
