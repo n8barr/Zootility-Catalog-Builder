@@ -18,8 +18,12 @@ function groupProductsWithVariants(products) {
         addProductImages(product);
         product.productDescription = shortenDescription(product.productDescription);
         product.productDescription = removeHTMLSpans(product.productDescription);
+        const [subfolder1, subfolder2] = product.sku.split('-');
+        const baseSku = `${subfolder1}-${subfolder2}`;
+    
         productsByName[productName] = {
           ...product,
+          baseSku,
           variants: [],
         };
       }

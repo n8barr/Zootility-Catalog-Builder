@@ -12,6 +12,7 @@
   width: 50%;
   gap: 10px;
   padding: 25px;
+  box-sizing: border-box;
 }
 
 .product-name {
@@ -38,7 +39,8 @@
   justify-content: center;
   align-items: center;
   width: 30%;
-  margin: 5% 10% 10% 10%;
+  padding: 5% 10% 10% 10%;
+  background-color: #00000022;
 }
 
 .product-image img {
@@ -96,6 +98,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center;
 }
 
 .variant img {
@@ -107,10 +110,15 @@
   padding-top: 10px;
 }
 
-.product-1-variant .product-variants .image-container img {
+.product-image .image-container {
+  padding-bottom: initial;
+}
+
+.product-image .image-container img {
   position: relative;
 }
 
+/*
 .product-1-variant .product-variants .variant {
   flex-direction: initial;
-}
+} */

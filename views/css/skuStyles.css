@@ -1,0 +1,40 @@
+.product-baseSku-ZL-MOU .product2-image {
+    background-position: 82%;
+}
+
+.product-baseSku-ZL-FAR .product2-image {
+    background-position: 76%;
+}
+
+.product-baseSku-ZL-EXO .product2-image {
+    background-position: 80%;
+}
+
+.product-baseSku-ZL-SEA .product2-image {
+    background-position: 40%;
+}
+
+.product-baseSku-ZL-ZOO .product2-image {
+    background-position: 89%;
+}
+
+.product-baseSku-ZL-WOO .product2-image {
+    background-position: 79%;
+}
+
+.product-baseSku-PS-MPW .product2-image {
+    background-position: 69%;
+}
+
+.product-baseSku-GR-G .product2-image {
+    background-position: right;
+}
+
+
+
+.product-baseSku-ZL-DES .product2-image,
+.product-baseSku-ZL-BIR .product2-image
+{
+    width: 40%;
+    padding: 15% 5% 0 5%;
+}

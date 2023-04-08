@@ -37,32 +37,29 @@ function addProductImages(product) {
   const lifestyleImagePath = getAdditionalImagePath(product, lifestyleFolder);
   if (lifestyleImagePath) {
     product.hasLifestyleImage = true;
+    product.images.push(lifestyleImagePath);
   }
   
   // Check for and add the Packaging image
   const packagingImagePath = getAdditionalImagePath(product, packagingFolder);
-
-  // Add the images in the desired order (packaging image is second, even if no lifestyle image)
-  if (!packagingImagePath && lifestyleImagePath) {
-    product.images.unshift(lifestyleImagePath);
-  } else if (packagingImagePath && lifestyleImagePath) {
-    product.images.unshift(packagingImagePath);
-    product.images.unshift(lifestyleImagePath);
-  } else if (packagingImagePath && !lifestyleImagePath) {
-    product.images.splice(1, 0, packagingImagePath);
+  if (packagingImagePath) {
+    product.hasPackagingImage = true;
+    product.images.push(packagingImagePath);
   }
 };
 
 function getAdditionalImagePath(product, folder) {
   const [subfolder1, subfolder2] = product.sku.split('-');
-  const baseProductSku = `${subfolder1}-${subfolder2}`;
+  const baseSku = `${subfolder1}-${subfolder2}`;
 
-  for (const ext of extensions) {
-    const productImageName = baseProductSku + ext;
-    const imagePath = path.join(folder, subfolder1, productImageName);
+  for (let i = 1; i <= 2; i++) {
+    for (const ext of extensions) {
+      const productImageName = i === 1 ? `${baseSku}${ext}` : `${baseSku}-${i}${ext}`;
+      const imagePath = path.join(folder, subfolder1, productImageName);
 
-    if (fs.existsSync(imagePath)) {
-      return imagePath;
+      if (fs.existsSync(imagePath)) {
+        return imagePath;
+      }
     }
   }
   return false;

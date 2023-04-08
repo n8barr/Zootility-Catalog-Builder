@@ -17,8 +17,9 @@
   display: flex;
   justify-content: start;
   width: 30%;
-  margin: 5% 10% 10% 10%;
+  padding: 5% 10% 10% 10%;
   flex-flow: column;
+  background-color: #00000022;
 }
 
 .page:nth-child(odd) .product2-image {
@@ -67,9 +68,12 @@
 }
 
 .product2-info {
-  width: 50%;
-  padding: 25px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+  padding: 25px;
 }
 
 .product2-variants {
@@ -84,6 +88,7 @@
 .product2-image .image-container img {
   bottom: 0;
   top: initial;
+  position: relative;
 }
   
 .product2-variants .image-container img {
@@ -91,4 +96,8 @@
   left: 0;
   top: initial;
   right: initial;
+}
+
+.product .product2-image .image-container {
+  padding-bottom: initial;
 }

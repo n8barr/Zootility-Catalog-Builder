@@ -1,6 +1,8 @@
 body {
   font-family: sans-serif;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .page {
@@ -44,7 +46,7 @@ body {
   flex-direction: column;
   height: 90vh;
   width: 100%;
-  /* justify-content: space-between; */
+  gap: 5px;
 }
 
 .page-footer {

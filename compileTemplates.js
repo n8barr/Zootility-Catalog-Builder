@@ -11,6 +11,7 @@ const pageTemplate = `
   <link rel="stylesheet" type="text/css"  href="views/css/productTemplate3.css">
   <link rel="stylesheet" type="text/css"  href="views/css/productTemplate4.css">
   <link rel="stylesheet" type="text/css"  href="views/css/imageContainer.css">
+  <link rel="stylesheet" type="text/css"  href="views/css/skuStyles.css">
   <style>
     /* CSS styles go here */
   </style>
@@ -31,7 +32,7 @@ const pageTemplate = `
 const productImage1Template = `
   <div class="product-image" {{#if hasLifestyleImage}}style="background-image: url('{{images.[0]}}')"{{/if}}>
     <div class="image-container">
-      <img src="{{#if images}}{{images.[0]}}{{else}}{{variants.[0].images.[0]}}{{/if}}" alt="{{productName}}" />
+      <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
     </div>
   </div>
 `;
@@ -63,14 +64,14 @@ const product1ImageTemplate = `
 `;
 
 const productTemplateLeft1 = `
-<div class="product product-1-variant content-block {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
+<div class="product product-1-variant product-baseSku-{{baseSku}} content-block {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
   ${productImage1Template}
   ${productInfo1Template}
 </div>
 `;
 
 const productTemplateRight1 = `
-<div class="product product-1-variant content-block {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
+<div class="product product-1-variant product-baseSku-{{baseSku}} content-block {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
   ${productInfo1Template}
   ${productImage1Template}
 </div>
@@ -114,14 +115,14 @@ const productInfo2Template = `
 `;
 
 const productTemplateLeft2 = `
-<div class="product product2 {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
+<div class="product product2 product-baseSku-{{baseSku}} {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
   ${productImage2Template}
   ${productInfo2Template}
 </div>
 `;
 
 const productTemplateRight2 = `
-<div class="product product2 {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
+<div class="product product2 product-baseSku-{{baseSku}} {{#if hasLifestyleImage}}imageType-lifestyle{{/if}}">
   ${productInfo2Template}
   ${productImage2Template}
 </div>
