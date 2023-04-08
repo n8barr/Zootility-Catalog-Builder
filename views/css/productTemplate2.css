@@ -51,6 +51,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: #00000022;
+  background-blend-mode: darken;
 }
 
 .product2-image img {

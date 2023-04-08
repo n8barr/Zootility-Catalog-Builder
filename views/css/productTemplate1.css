@@ -87,6 +87,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: #00000022;
+  background-blend-mode: darken;
 }
 
 .variant {
@@ -103,4 +105,12 @@
 
 .variant .sku {
   padding-top: 10px;
+}
+
+.product-1-variant .product-variants .image-container img {
+  position: relative;
+}
+
+.product-1-variant .product-variants .variant {
+  flex-direction: initial;
 }

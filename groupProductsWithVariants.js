@@ -17,6 +17,7 @@ function groupProductsWithVariants(products) {
       if (!productsByName[productName]) {
         addProductImages(product);
         product.productDescription = shortenDescription(product.productDescription);
+        product.productDescription = removeHTMLSpans(product.productDescription);
         productsByName[productName] = {
           ...product,
           variants: [],
@@ -35,6 +36,12 @@ function shortenDescription(description) {
   const matches = description.match(regex);
   const firstParagraph = matches && matches[1];
   return firstParagraph || description;
+}
+
+function removeHTMLSpans(html) {
+  const regex = /<\/?span[^>]*>/gi;
+  const result = html.replace(regex, '');
+  return result;
 }
 
 export { groupProductsWithVariants };

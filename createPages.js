@@ -1,4 +1,4 @@
-import { compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate } from "./compileTemplates.js";
+import { compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate } from "./compileTemplates.js";
 import { bgTemplate } from "./staticTemplate.js";
 
 // Global variables for this module
@@ -27,13 +27,24 @@ function generatePageSections(product) {
   const variantsCount = product.variants.length;
 
   if (variantsCount === 1 || variantsCount >= 7) {
-      pageSections.push({
-          content: selectTemplate(0)(product),
-          collectionName: product.productType
-      });
-      checkInsertPage();
-      // remove that variant from the array
-      // product.variants.shift();
+    product.imageTemplates = [];
+    product.images.forEach((image, index) => {
+      if (product.hasLifestyleImage && index === 0) {
+        // don't show the lifestyle image twice
+        return;
+      }
+      product.imageTemplates.push(compiledProduct1ImageTemplate(image));
+    });
+    if (variantsCount === 1 && product.hasLifestyleImage) {
+      product.imageTemplates.push(compiledProduct1ImageTemplate(product.variants[0].images[0]));      
+    }
+    pageSections.push({
+        content: selectTemplate(0)(product),
+        collectionName: product.productType
+    });
+    checkInsertPage();
+    // remove that variant from the array
+    // product.variants.shift();
   }
 
   if (variantsCount >= 2 && variantsCount <= 6) {

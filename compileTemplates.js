@@ -47,10 +47,8 @@ const productInfo1Template = `
     <div class="sku">{{sku}}</div>
     <div class="product-description">{{{productDescription}}}</div>
     <div class="product-variants">
-      {{#each images}}
-        {{#if @index}}
-          {{{product1ImageTemplate}}}
-        {{/if}}
+      {{#each imageTemplates}}
+        {{{this}}}
       {{/each}}
     </div>
   </div>
@@ -174,4 +172,6 @@ const compiledProductRightTemplates = [
 
 const compiledVariantTemplate = Handlebars.compile(variantTemplate);
 
-export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate };
+const compiledProduct1ImageTemplate = Handlebars.compile(product1ImageTemplate);
+
+export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate };
