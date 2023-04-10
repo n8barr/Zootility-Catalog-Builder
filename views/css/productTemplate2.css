@@ -15,11 +15,18 @@
 
 .product2-image {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   width: 30%;
   padding: 5% 10% 10% 10%;
   flex-flow: column;
   background-color: #00000022;
+}
+
+.product2-image img[src$=".jpg"],
+.product2-image img[src$=".jpeg"],
+.product2-image img[src$=".JPG"],
+.product2-image img[src$=".JPEG"] {
+  background-color: white;
 }
 
 .page:nth-child(odd) .product2-image {
@@ -53,7 +60,14 @@
   background-size: cover;
   background-position: center;
   background-color: #00000022;
+}
+
+.imageType-lifestyle .product2-image.image-jpg {
   background-blend-mode: darken;
+}
+
+.product2-image.image-jpg {
+  background-color: white;
 }
 
 .product2-image img {

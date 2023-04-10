@@ -1,25 +1,27 @@
 .product-baseSku-ZL-MOU .product2-image {
-    background-position: 82%;
+    background-size: 125%;
+    background-color: linen!important;
+    background-position: 65%;
 }
 
 .product-baseSku-ZL-FAR .product2-image {
-    background-position: 76%;
+    background-position: 55%;
+    background-size: 130%;
 }
 
 .product-baseSku-ZL-EXO .product2-image {
     background-position: 80%;
+    background-color: lemonchiffon!important;
 }
 
-.product-baseSku-ZL-SEA .product2-image {
+.product-baseSku-ZL-SEA .product-image {
     background-position: 40%;
+    background-color: honeydew!important;
 }
 
-.product-baseSku-ZL-ZOO .product2-image {
-    background-position: 89%;
-}
-
-.product-baseSku-ZL-WOO .product2-image {
+.product-baseSku-ZL-WOO .product-image {
     background-position: 79%;
+    background-color: aliceblue!important;
 }
 
 .product-baseSku-PS-MPW .product2-image {
@@ -30,11 +32,33 @@
     background-position: right;
 }
 
-
-
 .product-baseSku-ZL-DES .product2-image,
 .product-baseSku-ZL-BIR .product2-image
 {
     width: 40%;
     padding: 15% 5% 0 5%;
+}
+
+.product-baseSku-ZL-DES .product2-image {
+    background-color: lightcoral!important;
+}
+
+.product-baseSku-D-TC .product-image {
+    background-color: #f0ede8!important;
+}
+
+/* .product-baseSku-ZL-PET .product2-image,
+.product-baseSku-ZL-TRA .product2-image,
+.product-baseSku-ZL-DIN .product2-image,
+.product-baseSku-PS-LFW .product2-image,
+.product-baseSku-PS-LSW .product2-image,
+.product-baseSku-Z-PP .product2-image {
+    background-color: white;
+} */
+
+.product-baseSku-PS-ARB .product2-image,
+.product-baseSku-D-SDN .product2-image,
+.product-baseSku-SG-CCWO .product-image,
+.product-baseSku-J-CCP .product2-image {
+    background-color: white!important;
 }

@@ -1,4 +1,11 @@
 import Handlebars from 'handlebars';
+import { 
+  lifestyleBgColorHelper,
+  productBgColorHelper
+  } from './helpers/backgroundColorHelper.js';
+
+Handlebars.registerHelper('lifestyleBgColor', lifestyleBgColorHelper);
+Handlebars.registerHelper('productBgColor', productBgColorHelper);
 
 // Define the HTML templates
 const pageTemplate = `
@@ -30,7 +37,7 @@ const pageTemplate = `
 
 // Define the Product template for Products with 1 Variant
 const productImage1Template = `
-  <div class="product-image" {{#if hasLifestyleImage}}style="background-image: url('{{images.[0]}}')"{{/if}}>
+  <div class="product-image {{#if hasJpgImage}}image-jpg{{/if}}" style="{{#if hasLifestyleImage}}background-image: url('{{images.[0]}}'); background-color: {{lifestyleBgColor images.[0]}};{{else}} background-color: {{productBgColor variants.[0].images.[0]}}{{/if}}">
     <div class="image-container">
       <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
     </div>
@@ -47,7 +54,7 @@ const productInfo1Template = `
     </div>
     <div class="sku">{{sku}}</div>
     <div class="product-description">{{{productDescription}}}</div>
-    <div class="product-variants">
+    <div class="product-variants {{#if use1x2Grid}}grid-1x2{{/if}}">
       {{#each imageTemplates}}
         {{{this}}}
       {{/each}}
@@ -79,9 +86,9 @@ const productTemplateRight1 = `
 
 // Define the Product template for Products with 2-7 Variants
 const productImage2Template = `
-  <div class="product2-image" {{#if hasLifestyleImage}}style="background-image: url('{{images.[0]}}')"{{/if}}>
+  <div class="product2-image {{#if hasJpgImage}}image-jpg{{/if}}" style="{{#if hasLifestyleImage}}background-image: url('{{images.[0]}}'); background-color: {{lifestyleBgColor images.[0]}};{{else}} background-color: {{productBgColor variants.[0].images.[0]}}{{/if}}">
     <div class="image-container">
-    <img src="{{#if images}}{{images.[0]}}{{else}}{{variants.[0].images.[0]}}{{/if}}" alt="{{productName}}" />
+    <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
     </div>
     {{#unless hasLifestyleImage}}
       <div class="sku">{{variants.0.option1Value}}</br>{{variants.0.sku}}</div>
@@ -98,7 +105,7 @@ const productInfo2Template = `
     <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
   </div>
   <div class="product-description">{{{productDescription}}}</div>
-  <div class="product2-variants">
+  <div class="product2-variants {{#if use1x2Grid}}grid-1x2{{/if}}">
     {{#if hasLifestyleImage}}
       {{#each variants}}
           {{{variantTemplate}}}
@@ -131,7 +138,7 @@ const productTemplateRight2 = `
 const variantTemplate = `
 <div class="variant">
   <div class="image-container">
-    <img src="{{images.[0]}}" alt="{{sku}} - {{optionValue1}}" />
+    <img src="{{images.[0]}}" alt="{{sku}} - {{option1Value}}" />
   </div>
   <div class="sku">{{option1Value}}</br>{{sku}}</div>
 </div>

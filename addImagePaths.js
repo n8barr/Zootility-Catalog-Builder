@@ -38,6 +38,13 @@ function addProductImages(product) {
   if (lifestyleImagePath) {
     product.hasLifestyleImage = true;
     product.images.push(lifestyleImagePath);
+
+    // check if the image is a jpg format
+    const jpgRegex = /\.(jpg|jpeg)$/i;
+
+    if (jpgRegex.test(lifestyleImagePath)) {
+      product.hasJpgImage = true;
+    }
   }
   
   // Check for and add the Packaging image

@@ -6,6 +6,11 @@ import { compiledPageTemplate } from './compileTemplates.js';
 import { groupProductsWithVariants } from './groupProductsWithVariants.js';
 import { renameProperties } from './renameProperties.js';
 import { filterOnlineOrderingProducts } from './filterOnlineOrderingProducts.js';
+import { summary_generator } from './summary_generator.js';
+
+// Prepare the summary JSON file
+summary_generator();
+
 // Read and parse the CSV file
 const csvData = [];
 fs.createReadStream('products.csv')

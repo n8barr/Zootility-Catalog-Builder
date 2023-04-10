@@ -1,0 +1,19 @@
+# .gptignore
+summary_generator.js
+.gptignore
+code_summary.json
+package-lock.json
+.DS_Store
+.git
+.gitignore
+node_modules
+original_images
+lifestyle_images
+packaging_images
+cropped_images
+catalog.html
+products.csv
+views
+todo.txt
+original_image_skus.json
+createPages_gpt.js

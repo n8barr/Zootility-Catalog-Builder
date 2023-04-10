@@ -26,7 +26,8 @@ function createPages(productsWithVariants) {
 function generatePageSections(product) {
   const variantsCount = product.variants.length;
 
-  if (variantsCount === 1 || variantsCount >= 7) {
+  // only use the product images in the thumbnail positions on productTemplate1
+  if (variantsCount === 1 || variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage)) {
     product.imageTemplates = [];
     product.images.forEach((image, index) => {
       if (product.hasLifestyleImage && index === 0) {
@@ -35,9 +36,17 @@ function generatePageSections(product) {
       }
       product.imageTemplates.push(compiledProduct1ImageTemplate(image));
     });
+
+    // add the variant image to the grid images if the product has a lifestyle image
     if (variantsCount === 1 && product.hasLifestyleImage) {
       product.imageTemplates.push(compiledProduct1ImageTemplate(product.variants[0].images[0]));      
     }
+
+    // use the 1x2 grid if there are 2 or less images
+    if (product.imageTemplates.length <= 2) {
+      product.use1x2Grid = true;
+    }
+
     pageSections.push({
         content: selectTemplate(0)(product),
         collectionName: product.productType
@@ -47,18 +56,36 @@ function generatePageSections(product) {
     // product.variants.shift();
   }
 
-  if (variantsCount >= 2 && variantsCount <= 6) {
+  if ((variantsCount >= 2 && variantsCount <= 4) || (variantsCount === 5 && !product.hasLifestyleImage)) {
       // Render variant templates and add them to the product object
       product.variants.forEach((variant) => {
           variant.variantTemplate = compiledVariantTemplate(variant);
       });
 
+      if ((product.hasLifestyleImage && variantsCount <= 2) || (!product.hasLifestyleImage && variantsCount === 3)) {
+        product.use1x2Grid = true;
+      }
+
       pageSections.push({
           content: selectTemplate(1)(product),
           collectionName: product.productType
       });
+
       checkInsertPage();
-  } else if (variantsCount >= 7 && variantsCount <= 8) {
+
+  } else if ((variantsCount >= 5 && variantsCount <= 6) || (variantsCount === 7 && !product.hasLifestyleImage)){
+    // Render variant templates and add them to the product object
+    product.variants.forEach((variant) => {
+      variant.variantTemplate = compiledVariantTemplate(variant);
+    });
+
+    pageSections.push({
+      content: selectTemplate(1)(product),
+      collectionName: product.productType
+    });
+
+    checkInsertPage();
+  } else if ((variantsCount >= 7 && variantsCount <= 8) || (variantsCount === 9 && !product.hasLifestyleImage)) {
     while (product.variants.length > 0) {
       const subVariants = product.variants.splice(0, 8);
       subVariants.forEach((variant) => {
