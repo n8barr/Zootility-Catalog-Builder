@@ -1,4 +1,5 @@
 import { addProductImages, addVariantImages } from "./addImagePaths.js";
+import { sortProducts } from "./sortProducts.js";
 
 function groupProductsWithVariants(products) {
     const productsByName = {};
@@ -43,7 +44,8 @@ function groupProductsWithVariants(products) {
     });
   
     const productsWithVariants = Object.values(productsByName);
-    return productsWithVariants;
+    const sortedProducts = sortProducts(productsWithVariants);
+    return sortedProducts;
 };   
 
 function shortenDescription(description) {
