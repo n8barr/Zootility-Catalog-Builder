@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Primary Product Image/",
+      "destinationBasePath": "./build/original_images/",
+      "type": "variant"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Primary Product Image/",
+      "destinationBasePath": "./build/cropped_images/",
+      "maxWidth": 300,
+      "minHeight": 150,
+      "trimWhitespace": true,
+      "type": "variant"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Packaging_Images/",
+      "destinationBasePath": "./build/packaging_images/",
+      "maxWidth": 300,
+      "minHeight": 150,
+      "trimWhitespace": true,
+      "type": "product"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Lifestyle_Images/",
+      "destinationBasePath": "./build/lifestyle_images/",
+      "maxWidth": 500,
+      "minHeight": 600,
+      "type": "product"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Collection Images/",
+      "destinationBasePath": "./build/collection_images/",
+      "maxWidth": 1000,
+      "minHeight": 600,
+      "type": "collection"
+    }
+  ]
+}

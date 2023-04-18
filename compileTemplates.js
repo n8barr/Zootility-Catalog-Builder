@@ -38,9 +38,7 @@ const pageTemplate = `
 // Define the Product template for Products with 1 Variant
 const productImage1Template = `
   <div class="product-image {{#if hasJpgImage}}image-jpg{{/if}}" style="{{#if hasLifestyleImage}}background-image: url('{{images.[0]}}'); background-color: {{lifestyleBgColor images.[0]}};{{else}} background-color: {{productBgColor variants.[0].images.[0]}}{{/if}}">
-    <div class="image-container">
-      <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
-    </div>
+    <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
   </div>
 `;
 
@@ -52,7 +50,7 @@ const productInfo1Template = `
       <div class="retail-price">Retail: $ {{retailPrice}}</div>
       <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
     </div>
-    <div class="sku">{{sku}}</div>
+    <div class="sku">{{variants.0.sku}}</div>
     <div class="product-description">{{{productDescription}}}</div>
     <div class="product-variants {{#if use1x2Grid}}grid-1x2{{/if}}">
       {{#each imageTemplates}}
@@ -162,6 +160,11 @@ const productTemplate4 = `
 </div>
 `;
 
+// Define the Filler Section template (show an image or leave a blank section)
+const sectionFillerTemplate = `
+<div class="product section-filler" style="background-image: url('{{this}}');"></div>
+`;
+
 // Compile the templates
 const compiledPageTemplate = Handlebars.compile(pageTemplate);
 const compiledProductLeftTemplates = [
@@ -182,4 +185,6 @@ const compiledVariantTemplate = Handlebars.compile(variantTemplate);
 
 const compiledProduct1ImageTemplate = Handlebars.compile(product1ImageTemplate);
 
-export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate };
+const compiledSectionFillerTemplate = Handlebars.compile(sectionFillerTemplate);
+
+export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate, compiledSectionFillerTemplate };

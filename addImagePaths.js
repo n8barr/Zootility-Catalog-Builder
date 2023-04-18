@@ -6,10 +6,10 @@ const originalImageSkus = JSON.parse(fs.readFileSync('original_image_skus.json',
 
 // Set the constants for both functions
 const extensions = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
-const croppedFolder = 'cropped_images';
-const originalFolder = 'original_images';
-const lifestyleFolder = 'lifestyle_images';
-const packagingFolder = 'packaging_images';
+const croppedFolder = 'build/cropped_images';
+const originalFolder = 'build/original_images';
+const lifestyleFolder = 'build/lifestyle_images';
+const packagingFolder = 'build/packaging_images';
 
 function addVariantImages(variant) {
   const sku = variant.sku;

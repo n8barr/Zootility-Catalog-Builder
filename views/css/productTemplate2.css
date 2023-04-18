@@ -114,4 +114,6 @@
 
 .product .product2-image .image-container {
   padding-bottom: initial;
+  display: flex;
+  justify-content: center;
 }

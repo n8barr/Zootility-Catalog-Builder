@@ -140,3 +140,7 @@
 .product-1-variant .product-variants .variant {
   flex-direction: initial;
 } */
+
+.product.section-filler {
+  background-size: cover;
+}
