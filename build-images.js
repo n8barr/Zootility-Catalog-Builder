@@ -6,7 +6,7 @@ import { processData } from './processData.js';
 
 const SUPPORTED_EXTENSIONS = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
 const CSV_FILE_PATH = './products.csv';
-const SKU_COL_NAME = 'SKU (Required)';
+const BUILD_BASE_PATH = './build';
 const TRIM_OPTIONS = {
     threshold: 1,
 };
@@ -16,7 +16,7 @@ async function readConfiguration() {
     return config;
 }
 
-async function findImagesInFolderStructure(config, sku) {
+function findImagesInFolderStructure(config, sku) {
     const [subfolder1, subfolder2] = sku.split('-');
     const basePath = config.sourceBasePath;
     let imagePaths = [];
@@ -115,27 +115,18 @@ async function processCSVFile(csvFilePath) {
     });
 }
 
-async function processProduct(folderConfig, sku) {
+async function processProduct(sku, folderConfig) {
     const sourceBasePath = folderConfig.sourceBasePath;
-    const destinationBasePath = folderConfig.destinationBasePath;
-    const imagePaths = await findImagesInFolderStructure(folderConfig, sku);
+    const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath);
+    const imagePaths = findImagesInFolderStructure(folderConfig, sku);
 
-    imagePaths.forEach(async (imagePath) => {
+    for (const imagePath of imagePaths) {
         const relativePath = path.relative(sourceBasePath, imagePath);
         const destinationPath = path.join(destinationBasePath, relativePath);
         const destinationFolder = path.dirname(destinationPath);
         await fs.ensureDir(destinationFolder);
         await fs.copy(imagePath, destinationPath);
-        
-        if (folderConfig.trimWhitespace) {
-            await trimWhitespace(destinationFolder);
-        }
-        
-        if (folderConfig.maxWidth && folderConfig.minHeight) {
-            await resizeImages(destinationFolder, folderConfig.maxWidth, folderConfig.minHeight);
-        }
-
-    });
+    }
 }
   
   
@@ -144,27 +135,61 @@ async function processFolders() {
     const products = await processCSVFile(CSV_FILE_PATH);
   
     for (const folderConfig of config.folders) {
+        // Avoid trouble if the destinationBasePath wasn't properly specified
+        if (!folderConfig.destinationBasePath || folderConfig.destinationBasePath.length <= 2) break;
+
+        // Remove the destination directory if it exists
+        const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath);
+        await fs.remove(destinationBasePath);
+
+        // Create the destination directory
+        await fs.ensureDir(destinationBasePath);
+
         const skuComponentList = [];
-        products.forEach((product) => {
+        for (const product of products) {
             const sku = product.sku;
 
             // Collections don't need to repeat the search for every variant in the collection
             if (folderConfig.type === 'collection') {
                 const regex = /^[^-]+/;
                 const match = sku.match(regex);
-                if (skuComponentList.find(component => component === match[0])) return;
-                skuComponentList.push(match[0]);
+                if (skuComponentList.find(component => component === match[0])) { 
+                    // skip
+                } else {
+                    skuComponentList.push(match[0]);
+                    // Copy the images for each SKU
+                    await processProduct(sku, folderConfig);
+                }
 
             // Products don't need to repeat the search for every variant in the prodcut
             } else if (folderConfig.type === 'product') {
                 const regex = /^([^-]+-[^-]+)/;
                 const match = sku.match(regex);
-                if (skuComponentList.find(component => component === match[0])) return;
-                skuComponentList.push(match[0]);
+                if (skuComponentList.find(component => component === match[0])) {
+                    // skip
+                } else {
+                    skuComponentList.push(match[0]);
+                    // Copy the images for each SKU
+                    await processProduct(sku, folderConfig);
+                }
+                
+            } else {
+                // Copy the images for each SKU
+                await processProduct(sku, folderConfig);
             }
 
-            processProduct(folderConfig, sku);
-        });
+
+        }
+
+        // Trim Whitespace from each image in the destinationBase folder
+        if (folderConfig.trimWhitespace) {
+            await trimWhitespace(destinationBasePath);
+        }
+        
+        // Resize each image in the destinationBase folder
+        if (folderConfig.maxWidth && folderConfig.minHeight) {
+            await resizeImages(destinationBasePath, folderConfig.maxWidth, folderConfig.minHeight);
+        }
     }
 }
   

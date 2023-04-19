@@ -208,7 +208,7 @@ function insertFillerSection(product) {
   pageSections.push({
     content: compiledSectionFillerTemplate({
       image: foundFillerImagePath,
-      class: `${collectionPrefix}-${count}`
+      class: `filler-${collectionPrefix}-${count}`
     }),
     collectionName: product.productType
   });
