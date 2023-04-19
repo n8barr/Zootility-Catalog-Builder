@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "colorthief": "^2.4.0",
     "csv-parse": "^5.3.6",
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",

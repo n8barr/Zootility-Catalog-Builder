@@ -8,8 +8,8 @@
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Primary Product Image/",
       "destinationBasePath": "./build/cropped_images/",
-      "maxWidth": 300,
-      "minHeight": 150,
+      "maxWidth": 500,
+      "minHeight": 250,
       "trimWhitespace": true,
       "type": "variant"
     },

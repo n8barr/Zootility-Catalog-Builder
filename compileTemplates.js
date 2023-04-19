@@ -162,7 +162,7 @@ const productTemplate4 = `
 
 // Define the Filler Section template (show an image or leave a blank section)
 const sectionFillerTemplate = `
-<div class="product section-filler" style="background-image: url('{{this}}');"></div>
+<div class="product section-filler {{class}}" style="background-image: url('{{image}}');"></div>
 `;
 
 // Compile the templates

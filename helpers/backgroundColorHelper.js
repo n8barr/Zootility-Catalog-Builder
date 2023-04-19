@@ -8,20 +8,19 @@ function isJpg(imagePath) {
 
 const lightColors = [
     'honeydew',
-    'lightgoldenrodyellow',
+    'mistyrose',
     'linen',
-    'ivory',
+    'ivolavenderblushry',
     'aliceblue',
     'lightcyan'
 ];
 
 const brightColors = [
-    'lemonchiffon',
-    'wheat',
-    'khaki',
+    'powderblue',
+    'lightsteelblue',
+    'paleturquoise',
     'aquamarine',
-    'bisque',
-    'palegoldenrod',
+    'lightsalmon',
     'burlywood',
     'peachpuff'
 ];

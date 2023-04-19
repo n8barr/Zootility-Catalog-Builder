@@ -180,20 +180,21 @@ const extensions = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
 const collectionFolder = 'collection_images';
 
 function insertFillerSection(product) {
+  const [collectionPrefix] = product.baseSku.split('-');
+
   // Create an entry if the collection is not in the counter array yet
-  if (!collectionSectionFillerCounter.hasOwnProperty(product.productType)) {
-    collectionSectionFillerCounter[product.productType] = 1;
+  if (!collectionSectionFillerCounter.hasOwnProperty(collectionPrefix)) {
+    collectionSectionFillerCounter[collectionPrefix] = 1;
   } else {
     // Increment the existing counter
-    collectionSectionFillerCounter[product.productType]++;
+    collectionSectionFillerCounter[collectionPrefix]++;
   }
 
-  const count = collectionSectionFillerCounter[product.productType];
+  const count = collectionSectionFillerCounter[collectionPrefix];
   let foundFillerImagePath = '';
 
   // Insert a filler section if an image exsists for the collection and counter
   const baseSku = product.baseSku;
-  const [collectionPrefix] = baseSku.split('-');
   for (const ext of extensions) {
     const imageFileName = count === 1 ? `${collectionPrefix}${ext}` : `${collectionPrefix}-${count}${ext}`;
     const fillerImagePath = path.join(collectionFolder, imageFileName);
@@ -205,7 +206,10 @@ function insertFillerSection(product) {
 
   // Generate the content to add the section
   pageSections.push({
-    content: compiledSectionFillerTemplate(foundFillerImagePath),
+    content: compiledSectionFillerTemplate({
+      image: foundFillerImagePath,
+      class: `${collectionPrefix}-${count}`
+    }),
     collectionName: product.productType
   });
 
