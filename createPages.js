@@ -3,6 +3,10 @@ import path from 'path';
 import { compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate, compiledSectionFillerTemplate } from "./compileTemplates.js";
 import { bgTemplate } from "./staticTemplate.js";
 
+// Constants for the insertSectionFiller function
+const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
+const COLLECTION_FOLDER = 'build/collection_images';
+
 // Global variables for this module
 let pageIndex = 1;
 let pageSections = [];
@@ -175,10 +179,6 @@ function insertPage() {
   pageSections = [];
 }
 
-// Constants for the insertSectionFiller function
-const extensions = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
-const collectionFolder = 'collection_images';
-
 function insertFillerSection(product) {
   const [collectionPrefix] = product.baseSku.split('-');
 
@@ -195,9 +195,9 @@ function insertFillerSection(product) {
 
   // Insert a filler section if an image exsists for the collection and counter
   const baseSku = product.baseSku;
-  for (const ext of extensions) {
+  for (const ext of EXTENSIONS) {
     const imageFileName = count === 1 ? `${collectionPrefix}${ext}` : `${collectionPrefix}-${count}${ext}`;
-    const fillerImagePath = path.join(collectionFolder, imageFileName);
+    const fillerImagePath = path.join(COLLECTION_FOLDER, imageFileName);
     if (fs.existsSync(fillerImagePath)) {
       foundFillerImagePath = fillerImagePath;
       break;
