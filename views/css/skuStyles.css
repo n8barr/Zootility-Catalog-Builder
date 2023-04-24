@@ -1,3 +1,137 @@
+.product-baseSku-Z-PP .product2-image {
+    background-color: #5cbdbd!important;
+}
+
+.product-baseSku-Z-HT420 .product-image {
+    background-color: #efdb43!important;
+}
+
+.product-baseSku-Z-K .product2-image {
+    background-color: #645151!important;
+    color: ivory;}
+
+.product-baseSku-Z-WCB .product-image {
+    background-color: darkgrey!important;
+}
+
+.product-baseSku-BG-AWO .product-image {
+    background-color: #605b48!important;
+}
+
+.product-baseSku-GR-MC .product-image {
+    background-color: #e57b21!important;
+}
+
+.product-baseSku-BG-BFWO .product2-image {
+    background-color: #d1aa5d!important;
+}
+
+.product-baseSku-GR-AGS .product2-image {
+    background-color: #ffbb72!important;
+}
+
+.product-baseSku-BG-FCP .product2-image {
+    background-color: #ddd1c0!important;
+    width: 40%;
+    padding: 5%;
+    padding-right: 6%;
+}
+
+.product-baseSku-PS-LSW .product-image {
+    background-color: #c1977c!important;
+}
+
+.product-baseSku-PS-LSW .product2-variants {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.product3-variants.product-baseSku-PS-LSW {
+    gap: 40px;
+}
+
+.product.section-filler.filler-PS-2 {
+    margin: 25px;
+}
+
+.product-baseSku-PS-FPW .product-image {
+    background-color: #b9ac9b!important;
+}
+
+.product-baseSku-PS-FPWS .product2-image {
+    background-color: #856e49!important;
+    color: ivory;
+}
+
+.product-baseSku-PS-RFID .product-image {
+    background-color: #67a8aa!important;
+}
+
+.product-baseSku-PS-RMW .product2-image {
+    background-color: #4a4633!important;
+    color: ivory;
+}
+
+.product-baseSku-Z-RBA .product2-image {
+    background-color: #d3cb96!important;
+    color: ivory;
+}
+
+.product-baseSku-PS-SCRB .product2-image {
+    background-color: #6f694d!important;
+    color: ivory;
+    width: 40%;
+    padding: 5%;
+    padding-left: 6%;
+}
+
+.product-baseSku-LG-CWA .product-image {
+    background-color: #cef2ef!important;
+}
+
+.variant-sku-LG-CWA-BLK18 img,
+.variant-sku-LG-CWA-CRE18 img,
+.variant-sku-LG-CWA-NAV18 img,
+.variant-sku-LG-CWA-TEA18 img {
+    width: 66%;
+}
+
+.variant-sku-LG-CWA-BLK18 .image-container,
+.variant-sku-LG-CWA-CRE18 .image-container,
+.variant-sku-LG-CWA-NAV18 .image-container,
+.variant-sku-LG-CWA-TEA18 .image-container {
+    padding-bottom: inherit;
+}
+
+.variant-sku-LG-CWA-BLK18 img,
+.variant-sku-LG-CWA-CRE18 img,
+.variant-sku-LG-CWA-NAV18 img,
+.variant-sku-LG-CWA-TEA18 img {
+    position: inherit;
+}
+
+.product-baseSku-LG-CWA .variant {
+    justify-content: end;
+}
+
+.product-baseSku-LG-CPWO .product2-image {
+    background-color: #d8b6a6!important;
+}
+
+.product-baseSku-J-ZCPG .product4-variants {
+    gap: 0;
+    margin: 0;
+    margin-right: 5%;
+}
+
+.product-baseSku-PS-VT .product-image {
+    background-color: #ebd9ab!important;
+}
+
+.product-baseSku-PS-DT .product-image {
+    background-color: #96e5eb!important;
+}
+
 .product-baseSku-Z-HT420 .product-image,
 .product-baseSku-Z-ST1 .product-image {
     padding-left: 5%;
@@ -18,17 +152,23 @@
 
 .product-baseSku-ZL-EXO .product2-image {
     background-position: 80%;
-    background-color: lemonchiffon!important;
+    background-color: #f7e19d!important;
 }
 
+.product-baseSku-ZL-DES .product2-image {
+    background-color: #f4c841!important;
+}
+
+.product-baseSku-ZL-VEH .product-image {
+    background-color: #eb7a4d!important;
+}
 .product-baseSku-ZL-SEA .product-image {
     background-position: 40%;
     background-color: lightcyan!important;
 }
 
-.product-baseSku-ZL-WOO .product-image {
-    background-position: 79%;
-    background-color: aliceblue!important;
+.product-baseSku-ZL-WOO .product2-image {
+    background-color: #ffb95b!important;
 }
 
 .product-baseSku-PS-MPW .product2-image {
@@ -46,6 +186,31 @@
     padding: 7.5% 5%;
 }
 
+.product-baseSku-ZL-LBIR .product2-image {
+    background-color: #91e2e4!important;
+}
+
+.product-baseSku-ZL-LDIN .product2-image {
+    background-color: #53888a!important;
+    color: ivory;
+}
+
+.product-baseSku-ZL-LEXO .product-image {
+    background-color: #fcdab9!important;
+}
+
+.product-baseSku-ZL-LMYT .product2-image {
+    background-color: #54d2b1!important;
+}
+
+.product-baseSku-ZL-LREP .product-image {
+    background-color: #276f5c!important;
+}
+
+.product-baseSku-ZL-LMOU .product2-image {
+    background-color: paleturquoise!important;
+}
+
 .product-baseSku-ZL-INS .product-image,
 .product-baseSku-ZL-DIN .product2-image,
 .product-baseSku-ZL-ZOO .product2-image,
@@ -60,10 +225,6 @@
     width: 40%;
     padding-left: 5%;
     padding-right: 6%;
-}
-
-.product-baseSku-ZL-DES .product2-image {
-    background-color: lightcoral!important;
 }
 
 .product-baseSku-D-TC .product-image {
@@ -89,12 +250,13 @@
 
 .product-baseSku-Z-RB .product2-image {
     background-color: darkslategrey!important;
-    color: white!important;
+    color: ivory!important;
 }
 
 .product-baseSku-PS-DT .product-image {
     background-size: 50%;
 }
+
 .product-baseSku-PS-CC .product-image {
     width: 50%;
     padding: 0;
@@ -106,9 +268,73 @@
     padding: 5%;
 }
 
+.product-baseSku-PG-DS .product-image {
+    background-color: #ef504d!important;
+}
+
 .section-filler.filler-ZL-1 {
     background-size: contain;
     background-repeat: no-repeat;
+    background-color: bisque;
+}
+
+.product-baseSku-ZL-DIN .product2-image {
+    background-color: #ceff95!important;
+}
+.product-baseSku-ZL-INS .product-image {
+    background-color: #fff8b2!important;
+}
+
+.product-baseSku-ZL-MYT .product2-image {
+    background-color: #6a286a!important;
+    color: ivory;
+}
+
+.product-baseSku-ZL-FAR .product2-image {
+    background-color: #431743!important;
+    color: ivory;
+}
+
+.product-baseSku-ZL-BIR .product2-image {
+    background-color: #7dc2a9!important;
+}
+
+.product-baseSku-ZL-TRA .product2-image {
+    background-color: #e03535!important;
+    color: ivory;
+}
+
+.product-baseSku-ZL-ZOO .product2-image {
+    background-color: #8b2323!important;
+    color: ivory;
+}
+
+.product-baseSku-LG-CNO .product2-image{ 
+    /* background-color: #eed44f!important; */
+    background-color: #58869e!important;
+}
+
+.product-baseSku-LG-CFC .product2-image {
+    background-color: #d0c7c2!important;
+}
+
+.product-baseSku-LG-CWM .product2-image {
+    background-color: #b6a656!important;
+    color: ivory;
+}
+
+.product-baseSku-LG-CEWO .product-image {
+    background-color: #3f7374!important;
+}
+
+.product-baseSku-PS-CLSW .product2-image {
+    background-color: #b27e55!important;
+    color: ivory;
+}
+
+.product-baseSku-PS-CFPW .product2-image {
+    background-color: #284f50!important;
+    color: ivory;
 }
 
 .product-baseSku-SG-CCWO .product-image,
@@ -117,4 +343,36 @@
     width: 20%;
     padding-left: 14%;
     padding-right: 15%;
+}
+
+.product-baseSku-CG-CPMD .product-image {
+    background-color: #535f6f!important;
+}
+
+.product-baseSku-CG-CPMX .product-image {
+    background-color: #2f3843!important;
+}
+
+.product-baseSku-SG-SWO .product-image {
+    background-color: #a6967f!important;
+}
+
+.product-baseSku-SG-SNO .product-variants.grid-1x2 {
+    margin-right: 0;
+}
+
+.product-baseSku-D-BOX .product2-image {
+    background-color: #fcaa5c!important;
+}
+
+.product-baseSku-D-URS .product2-image {
+    background-color: #84bdc4!important;
+}
+
+.product-baseSku-D-DP .product-image {
+    background-color: #d6ccac!important;
+}
+
+.product-baseSku-D-DP:nth-of-type(2) .product-image {
+    background-color: #fff9e8!important;
 }

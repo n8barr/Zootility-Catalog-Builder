@@ -103,9 +103,9 @@
   background-color: #00000022;
 }
 
-.imageType-lifestyle .product-image.image-jpg {
+/* .imageType-lifestyle .product-image.image-jpg {
   background-blend-mode: darken;
-}
+} */
 
 .product-image.image-jpg {
   background-color: white;
@@ -136,10 +136,11 @@
   position: relative;
 }
 
-/*
-.product-1-variant .product-variants .variant {
-  flex-direction: initial;
-} */
+
+.product-1-variant .product-variants {
+  margin-right: 0;
+  margin-left: 0;
+}
 
 .product.section-filler {
   background-size: cover;

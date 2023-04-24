@@ -134,7 +134,7 @@ const productTemplateRight2 = `
 `;
 
 const variantTemplate = `
-<div class="variant">
+<div class="variant variant-sku-{{sku}}">
   <div class="image-container">
     <img src="{{images.[0]}}" alt="{{sku}} - {{option1Value}}" />
   </div>
@@ -144,7 +144,7 @@ const variantTemplate = `
 
 // Define the Product template for Products with 7-8 Variants
 const productTemplate3 = `
-<div class="product3-variants">
+<div class="product3-variants product-baseSku-{{baseSku}}">
   {{#each variants}}
     {{{variantTemplate}}}
   {{/each}}

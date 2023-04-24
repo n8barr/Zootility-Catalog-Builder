@@ -63,7 +63,8 @@
 }
 
 .imageType-lifestyle .product2-image.image-jpg {
-  background-blend-mode: darken;
+  /* background-blend-mode: darken; */
+  background-position: center;
 }
 
 .product2-image.image-jpg {

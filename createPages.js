@@ -80,8 +80,9 @@ function generatePageSections(product) {
     checkInsertPage();
     // Handle the case where the first variant image is shown as the product image
     // Remove it after the content for the first section has been generated
-    //if (variantsCount >= 2 && !product.hasLifestyleImage) {
-    product.variants.shift();
+    if (variantsCount >= 2 && !product.hasLifestyleImage) {
+      product.variants.shift();
+    }
   }
 
   if ((variantsCount >= 2 && variantsCount <= 4) || (variantsCount === 5 && !product.hasLifestyleImage)) {
