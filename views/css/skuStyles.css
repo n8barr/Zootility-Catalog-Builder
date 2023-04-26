@@ -131,12 +131,36 @@
 .product-baseSku-PS-DT .product-image {
     background-color: #96e5eb!important;
 }
-
+/*
 .product-baseSku-Z-HT420 .product-image,
 .product-baseSku-Z-ST1 .product-image {
     padding-left: 5%;
     padding-right: 6%;
     width: 40%;
+}
+
+.product-baseSku-PG-BIG .product-image img,
+.product-baseSku-PG-LAK .product2-image img,
+.product-baseSku-PG-SPO .product2-image img
+{
+    width: 80%;
+}
+*/
+.product-baseSku-PG-UPL .product-image img
+{
+    width: 75%;
+}
+
+.product-baseSku-PG-INS .product2-image img
+{
+    width: 45%;
+}
+/*
+.product-baseSku-PG-MOU .product2-image img,*/
+.product-baseSku-PG-SLY .product2-image img,
+.product-baseSku-PG-PEA .product-image img
+{
+    width: 65%;
 }
 
 .product-baseSku-ZL-MOU .product2-image {
@@ -165,6 +189,7 @@
 .product-baseSku-ZL-SEA .product-image {
     background-position: 40%;
     background-color: lightcyan!important;
+    background-blend-mode: darken;
 }
 
 .product-baseSku-ZL-WOO .product2-image {
@@ -220,8 +245,7 @@
 .product-baseSku-ZL-LMYT .product2-image,
 .product-baseSku-D-TC .product-image,
 .product-baseSku-D-BOX .product2-image,
-.product-baseSku-D-STD .product-image,
-.product-baseSku-Z-RBA .product2-image {
+.product-baseSku-D-STD .product-image {
     width: 40%;
     padding-left: 5%;
     padding-right: 6%;

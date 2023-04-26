@@ -47,7 +47,7 @@ const productInfo1Template = `
     <h2 class="product-name">{{productName}}</h2>
     <div class="prices">
       <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
-      <div class="retail-price">Retail: $ {{retailPrice}}</div>
+      {{#if retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/if}}
       <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
     </div>
     <div class="sku">{{variants.0.sku}}</div>
@@ -99,7 +99,7 @@ const productInfo2Template = `
   <h2 class="product-name">{{productName}}</h2>
   <div class="prices">
     <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
-    <div class="retail-price">Retail: $ {{retailPrice}}</div>
+    {{#if retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/if}}
     <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
   </div>
   <div class="product-description">{{{productDescription}}}</div>

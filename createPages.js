@@ -1,6 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import { compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate, compiledSectionFillerTemplate } from "./compileTemplates.js";
+import { compiledProductLeftTemplates, 
+  compiledProductRightTemplates, 
+  compiledVariantTemplate, 
+  compiledProduct1ImageTemplate, 
+  compiledSectionFillerTemplate 
+} from "./compileTemplates.js";
 import { bgTemplate } from "./staticTemplate.js";
 
 // Constants for the insertSectionFiller function
@@ -33,12 +38,12 @@ function createPages(productsWithVariants) {
 
   // Fill to the end of the page if needed
   if (pageSections.length === 1) {
-    insertPage();
+    insertFillerSection(lastProduct);
   }
 
   return pages;
 }
-  
+
 //split a product into the number of needed page sections
 function generatePageSections(product) {
   const variantsCount = product.variants.length;
@@ -195,7 +200,6 @@ function insertFillerSection(product) {
   let foundFillerImagePath = '';
 
   // Insert a filler section if an image exsists for the collection and counter
-  const baseSku = product.baseSku;
   for (const ext of EXTENSIONS) {
     const imageFileName = count === 1 ? `${collectionPrefix}${ext}` : `${collectionPrefix}-${count}${ext}`;
     const fillerImagePath = path.join(COLLECTION_FOLDER, imageFileName);
