@@ -34,6 +34,13 @@
       "maxWidth": 1000,
       "minHeight": 600,
       "type": "collection"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Cover Images/",
+      "destinationBasePath": "cover_images",
+      "maxWidth": 2600,
+      "minHeight": 3300,
+      "type": "cover"
     }
   ]
 }

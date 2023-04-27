@@ -1,0 +1,32 @@
+.collection-summary {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  font-size: 1.2em;
+  text-shadow: #00000066 1px 0 20px;
+}
+
+.collection-summary-title {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
+
+.collection-summary-products {
+  margin: auto;
+  width: 40%;
+  text-overflow: ellipsis;
+}
+
+.collection-summary-products li {
+  list-style: none;
+  line-height: 2em;
+  text-shadow: #00000066 1px 0 10px;
+}

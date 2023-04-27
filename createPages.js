@@ -1,33 +1,51 @@
-import fs from 'fs';
-import path from 'path';
 import { compiledProductLeftTemplates, 
   compiledProductRightTemplates, 
   compiledVariantTemplate, 
   compiledProduct1ImageTemplate, 
-  compiledSectionFillerTemplate 
+  compiledSectionFillerTemplate,
+  compiledCollectionSummaryTemplate,
 } from "./compileTemplates.js";
-import { bgTemplate } from "./staticTemplate.js";
 
-// Constants for the insertSectionFiller function
-const EXTENSIONS = ['.png', '.jpg', '.jpeg', '.PNG', '.jpeg', '.JPEG', '.JPG'];
-const COLLECTION_FOLDER = 'build/collection_images';
+import {
+  findCollectionImage,
+  findCoverImage
+} from "./findImagePath.js";
 
 // Global variables for this module
 let pageIndex = 1;
 let pageSections = [];
-let collectionName;
 const pages = [];
-const collectionSectionFillerCounter = {};
 
 // Create pages from the product list
 function createPages(productsWithVariants) {
 
   // Build the pages in order of the product entries
-  let lastProduct;
+  let lastProduct = {};
   productsWithVariants.forEach((product, index) => {
+    const collectionName = product.productType;
     // Check for a transition from one Collection to another.
-    if (pageSections.length === 1 && product.productType !== pageSections[0].collectionName) {
-      insertFillerSection(lastProduct);
+    if (pageSections.length === 1 && collectionName !== pageSections[0].collectionName) {
+      // Add filler section if page is only half full
+        insertFillerSection(lastProduct);
+    }
+
+    // Check if the lastProduct is a different collection than the current
+    if (collectionName !== lastProduct.productType) {
+      // Add a collection contents summary page to the start of a 
+      // new section
+
+      // Return a list of products in the collection
+      const collectionProducts = productsWithVariants.filter((product) => {
+        return product.productType === collectionName;
+      });
+
+      // Create the collection summary page using the collectionSummaryTemplate
+      const collectionSummaryPage = compiledCollectionSummaryTemplate({
+        collectionName: collectionName,
+        products: collectionProducts,
+        cover: findCoverImage(collectionName),
+      });
+      insertPage(collectionSummaryPage, "MADE IN USA");
     }
     // Set this for the next Insert Filler Check
     lastProduct = product;
@@ -43,6 +61,7 @@ function createPages(productsWithVariants) {
 
   return pages;
 }
+
 
 //split a product into the number of needed page sections
 function generatePageSections(product) {
@@ -166,13 +185,17 @@ function selectTemplate(version) {
 
 function checkInsertPage() {
   if (pageSections.length === 2) {
-    insertPage();
+    insertPageSections();
   }
 }
 
-function insertPage() {
+function insertPageSections() {
   const content = pageSections[0].content + '\n' + (pageSections[1] && pageSections[1].content);
   const collectionName = pageSections[0].collectionName;
+  insertPage(content, collectionName);
+}
+
+function insertPage(content, collectionName) {
   const page = {
     collectionName,
     content,
@@ -188,26 +211,7 @@ function insertPage() {
 function insertFillerSection(product) {
   const [collectionPrefix] = product.baseSku.split('-');
 
-  // Create an entry if the collection is not in the counter array yet
-  if (!collectionSectionFillerCounter.hasOwnProperty(collectionPrefix)) {
-    collectionSectionFillerCounter[collectionPrefix] = 1;
-  } else {
-    // Increment the existing counter
-    collectionSectionFillerCounter[collectionPrefix]++;
-  }
-
-  const count = collectionSectionFillerCounter[collectionPrefix];
-  let foundFillerImagePath = '';
-
-  // Insert a filler section if an image exsists for the collection and counter
-  for (const ext of EXTENSIONS) {
-    const imageFileName = count === 1 ? `${collectionPrefix}${ext}` : `${collectionPrefix}-${count}${ext}`;
-    const fillerImagePath = path.join(COLLECTION_FOLDER, imageFileName);
-    if (fs.existsSync(fillerImagePath)) {
-      foundFillerImagePath = fillerImagePath;
-      break;
-    }
-  }
+  const { foundFillerImagePath, count } = findCollectionImage(collectionPrefix);
 
   // Generate the content to add the section
   pageSections.push({

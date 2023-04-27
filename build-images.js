@@ -24,7 +24,7 @@ function findImagesInFolderStructure(config, sku) {
     for (let i = 1; i <= 4; i++) {
       for (const ext of SUPPORTED_EXTENSIONS) {
         let imageFileName, imagePath;
-        if (config.type === 'collection') {
+        if (config.type === 'collection' || config.type === 'cover') {
             imageFileName = i === 1 ? `${subfolder1}${ext}` : `${subfolder1}-${i}${ext}`;
             imagePath = path.join(basePath, imageFileName);
         } else if (config.type === 'product') {

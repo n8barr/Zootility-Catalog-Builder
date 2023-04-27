@@ -19,6 +19,7 @@ const pageTemplate = `
   <link rel="stylesheet" type="text/css"  href="views/css/productTemplate4.css">
   <link rel="stylesheet" type="text/css"  href="views/css/imageContainer.css">
   <link rel="stylesheet" type="text/css"  href="views/css/skuStyles.css">
+  <link rel="stylesheet" type="text/css"  href="views/css/cover.css">
   <style>
     /* CSS styles go here */
   </style>
@@ -165,6 +166,18 @@ const sectionFillerTemplate = `
 <div class="product section-filler {{class}}" style="background-image: url('{{image}}');"></div>
 `;
 
+// Define the Collection Summary Template
+const collectionSummaryTemplate = `
+<div class="collection-summary" style="background-image: url('{{cover}}')">
+  <div class="collection-summary-title">{{collectionName}}</div>
+  <ul class="collection-summary-products">
+    {{#each products}}
+      <li class="collection-summary-product-name">{{productName}}</li>
+    {{/each}}
+  </ul>
+</div>
+`;
+
 // Compile the templates
 const compiledPageTemplate = Handlebars.compile(pageTemplate);
 const compiledProductLeftTemplates = [
@@ -187,4 +200,14 @@ const compiledProduct1ImageTemplate = Handlebars.compile(product1ImageTemplate);
 
 const compiledSectionFillerTemplate = Handlebars.compile(sectionFillerTemplate);
 
-export { compiledPageTemplate, compiledProductLeftTemplates, compiledProductRightTemplates, compiledVariantTemplate, compiledProduct1ImageTemplate, compiledSectionFillerTemplate };
+const compiledCollectionSummaryTemplate = Handlebars.compile(collectionSummaryTemplate);
+
+export { 
+  compiledPageTemplate, 
+  compiledProductLeftTemplates, 
+  compiledProductRightTemplates, 
+  compiledVariantTemplate, 
+  compiledProduct1ImageTemplate, 
+  compiledSectionFillerTemplate,
+  compiledCollectionSummaryTemplate,
+};
