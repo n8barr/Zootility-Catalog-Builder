@@ -168,13 +168,17 @@ const sectionFillerTemplate = `
 
 // Define the Collection Summary Template
 const collectionSummaryTemplate = `
-<div class="collection-summary" style="background-image: url('{{cover}}')">
+<div class="collection-summary" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) {{gradientStart}}%, transparent {{gradientEnd}}%), url('{{cover}}')">
   <div class="collection-summary-title">{{collectionName}}</div>
-  <ul class="collection-summary-products">
-    {{#each products}}
-      <li class="collection-summary-product-name">{{productName}}</li>
-    {{/each}}
-  </ul>
+  {{#if blurb}}
+    <div class="collection-blurb">{{{blurb}}}</div>
+  {{else}}
+    <ul class="collection-summary-products">
+      {{#each products}}
+        <li class="collection-summary-product-name">{{productName}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </div>
 `;
 

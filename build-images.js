@@ -16,23 +16,29 @@ async function readConfiguration() {
     return config;
 }
 
-function findImagesInFolderStructure(config, sku) {
-    const [subfolder1, subfolder2] = sku.split('-');
+function findImagesInFolderStructure(config, identifier) {
     const basePath = config.sourceBasePath;
     let imagePaths = [];
   
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 6; i++) {
       for (const ext of SUPPORTED_EXTENSIONS) {
         let imageFileName, imagePath;
-        if (config.type === 'collection' || config.type === 'cover') {
+        if (config.type === 'collection') {
+            const [subfolder1, subfolder2] = identifier.split('-');
             imageFileName = i === 1 ? `${subfolder1}${ext}` : `${subfolder1}-${i}${ext}`;
             imagePath = path.join(basePath, imageFileName);
+        } else if (config.type === 'cover') {
+            const collectionName = identifier;
+            imageFileName = i === 1 ? `${collectionName}${ext}` : `${collectionName}-${i}${ext}`;
+            imagePath = path.join(basePath, imageFileName);
         } else if (config.type === 'product') {
+            const [subfolder1, subfolder2] = identifier.split('-');
             imageFileName = i === 1 ? `${subfolder1}-${subfolder2}${ext}` : `${subfolder1}-${subfolder2}-${i}${ext}`;
             imagePath = path.join(basePath, subfolder1, imageFileName);
         } else {
             // Assume type is variant
-            imageFileName = i === 1 ? `${sku}${ext}` : `${sku}-${i}${ext}`;
+            const [subfolder1, subfolder2] = identifier.split('-');
+            imageFileName = i === 1 ? `${identifier}${ext}` : `${identifier}-${i}${ext}`;
             imagePath = path.join(basePath, subfolder1, subfolder2, imageFileName);
         }
   
@@ -115,10 +121,10 @@ async function processCSVFile(csvFilePath) {
     });
 }
 
-async function processProduct(sku, folderConfig) {
+async function processProduct(identifier, folderConfig) {
     const sourceBasePath = folderConfig.sourceBasePath;
     const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath);
-    const imagePaths = findImagesInFolderStructure(folderConfig, sku);
+    const imagePaths = findImagesInFolderStructure(folderConfig, identifier);
 
     for (const imagePath of imagePaths) {
         const relativePath = path.relative(sourceBasePath, imagePath);
@@ -145,7 +151,7 @@ async function processFolders() {
         // Create the destination directory
         await fs.ensureDir(destinationBasePath);
 
-        const skuComponentList = [];
+        const componentList = [];
         for (const product of products) {
             const sku = product.sku;
 
@@ -153,10 +159,10 @@ async function processFolders() {
             if (folderConfig.type === 'collection') {
                 const regex = /^[^-]+/;
                 const match = sku.match(regex);
-                if (skuComponentList.find(component => component === match[0])) { 
+                if (componentList.find(component => component === match[0])) { 
                     // skip
                 } else {
-                    skuComponentList.push(match[0]);
+                    componentList.push(match[0]);
                     // Copy the images for each SKU
                     await processProduct(sku, folderConfig);
                 }
@@ -165,14 +171,24 @@ async function processFolders() {
             } else if (folderConfig.type === 'product') {
                 const regex = /^([^-]+-[^-]+)/;
                 const match = sku.match(regex);
-                if (skuComponentList.find(component => component === match[0])) {
+                if (componentList.find(component => component === match[0])) {
                     // skip
                 } else {
-                    skuComponentList.push(match[0]);
+                    componentList.push(match[0]);
                     // Copy the images for each SKU
                     await processProduct(sku, folderConfig);
                 }
                 
+            } else if (folderConfig.type === 'cover') {
+                // Collections don't need to repeat on every variant in the product
+                const collectionName = product.productType;
+                if (componentList.includes(collectionName)) { 
+                    // skip
+                } else {
+                    componentList.push(componentList);
+                    // Copy the images for each Collection
+                    await processProduct(collectionName, folderConfig);
+                }
             } else {
                 // Copy the images for each SKU
                 await processProduct(sku, folderConfig);

@@ -3,13 +3,13 @@ import { compiledProductLeftTemplates,
   compiledVariantTemplate, 
   compiledProduct1ImageTemplate, 
   compiledSectionFillerTemplate,
-  compiledCollectionSummaryTemplate,
 } from "./compileTemplates.js";
 
 import {
   findCollectionImage,
-  findCoverImage
 } from "./findImagePath.js";
+
+import { buildCollectionSummary } from "./buildCollectionSummary.js";
 
 // Global variables for this module
 let pageIndex = 1;
@@ -34,17 +34,13 @@ function createPages(productsWithVariants) {
       // Add a collection contents summary page to the start of a 
       // new section
 
-      // Return a list of products in the collection
+      // First Return a list of products in the collection
       const collectionProducts = productsWithVariants.filter((product) => {
         return product.productType === collectionName;
       });
 
-      // Create the collection summary page using the collectionSummaryTemplate
-      const collectionSummaryPage = compiledCollectionSummaryTemplate({
-        collectionName: collectionName,
-        products: collectionProducts,
-        cover: findCoverImage(collectionName),
-      });
+      const collectionSummaryPage = buildCollectionSummary(product, collectionProducts);
+      
       insertPage(collectionSummaryPage, "MADE IN USA");
     }
     // Set this for the next Insert Filler Check
