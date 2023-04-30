@@ -2,10 +2,15 @@ import Handlebars from 'handlebars';
 import { 
   lifestyleBgColorHelper,
   productBgColorHelper
-  } from './helpers/backgroundColorHelper.js';
+} from './helpers/backgroundColorHelper.js';
+import './helpers/isNotZero.js';
+import { isNotZero } from './helpers/isNotZero.js';
+import { nameToClass } from './helpers/nameToClass.js';
 
 Handlebars.registerHelper('lifestyleBgColor', lifestyleBgColorHelper);
 Handlebars.registerHelper('productBgColor', productBgColorHelper);
+Handlebars.registerHelper('isNotZero', isNotZero);
+Handlebars.registerHelper('nameToClass', nameToClass);
 
 // Define the HTML templates
 const pageTemplate = `
@@ -48,8 +53,8 @@ const productInfo1Template = `
     <h2 class="product-name">{{productName}}</h2>
     <div class="prices">
       <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
-      {{#if retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/if}}
-      <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
+      {{#isNotZero retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/isNotZero}}
+      {{#isNotZero minimumOrderQuantity}}<div class="min-qty">Min: {{minimumOrderQuantity}}</div>{{/isNotZero}}
     </div>
     <div class="sku">{{variants.0.sku}}</div>
     <div class="product-description">{{{productDescription}}}</div>
@@ -100,8 +105,8 @@ const productInfo2Template = `
   <h2 class="product-name">{{productName}}</h2>
   <div class="prices">
     <div class="wholesale-price">Wholesale: $ {{wholesalePrice}}</div>
-    {{#if retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/if}}
-    <div class="min-qty">Min: {{minimumOrderQuantity}}</div>
+    {{#isNotZero retailPrice}}<div class="retail-price">Retail: $ {{retailPrice}}</div>{{/isNotZero}}
+    {{#isNotZero minimumOrderQuantity}}<div class="min-qty">Min: {{minimumOrderQuantity}}</div>{{/isNotZero}}
   </div>
   <div class="product-description">{{{productDescription}}}</div>
   <div class="product2-variants {{#if use1x2Grid}}grid-1x2{{/if}}">
@@ -168,8 +173,9 @@ const sectionFillerTemplate = `
 
 // Define the Collection Summary Template
 const collectionSummaryTemplate = `
-<div class="collection-summary" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) {{gradientStart}}%, transparent {{gradientEnd}}%), url('{{cover}}')">
+<div class="collection-summary collection-name-{{#nameToClass}}{{collectionName}}{{/nameToClass}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) {{gradientStart}}%, transparent {{gradientEnd}}%), url('{{cover}}')">
   <div class="collection-summary-title">{{collectionName}}</div>
+  <div class="collection-tagline">{{{tagline}}}</div>
   {{#if blurb}}
     <div class="collection-blurb">{{{blurb}}}</div>
   {{else}}

@@ -8,33 +8,43 @@
 }
 
 .collection-summary-title {
-  font-size: 2em;
+  font-size: 3em;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.2rem;
   margin: auto;
-  width: 100%;
+  width: 80%;
   text-align: center;
   margin-top: 10%;
   margin-bottom: 5%;
 }
 
+.collection-tagline {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  font-size: 3em;
+  font-family: Marck Script;
+  rotate: -5deg;
+  letter-spacing: -0.05em;
+}
+
 .collection-summary-products,
 .collection-blurb {
   margin: auto;
-  width: 40%;
+  width: 48%;
   text-overflow: ellipsis;
-  /* background: #33333366;
-  padding: 40px 0 40px 40px; */
 }
 
 .collection-summary-products li {
   list-style: none;
   line-height: 2em;
+  font-size: 1.2em;
   /*text-shadow: #00000066 1px 0 10px; */
 }
 
 .collection-blurb {
-  font-size: 1.2em;
   text-align: center;
 }

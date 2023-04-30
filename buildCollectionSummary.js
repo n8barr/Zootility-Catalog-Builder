@@ -10,12 +10,16 @@ function buildCollectionSummary(product, collectionProducts) {
   const collectionBlurb = collectionBlurbs[product.productType];
 
   const collectionName = product.productType;
+  let blurb, tagline;
 
   // Calculate the gradient start and end points
   let gradientStart, gradientEnd;
   if (collectionBlurb) {
-    const blurbLength = collectionBlurb.length;
+    blurb = collectionBlurb.blurb;
+    tagline = collectionBlurb.tagline;
+    const blurbLength = blurb.length;
     gradientStart = 10 + (Math.round(blurbLength / 40) * 5);
+    if (tagline.length) gradientStart += 10;
   } else {
     // Using the number of products in the collection
     gradientStart = collectionProducts.length >= 14 ? 100 : 10 + (collectionProducts.length * 5);
@@ -27,8 +31,9 @@ function buildCollectionSummary(product, collectionProducts) {
     collectionName,
     gradientStart,
     gradientEnd,
+    blurb,
+    tagline,
     products: collectionProducts,
-    blurb: collectionBlurb,
     cover: findCoverImage(collectionName),
   });
 

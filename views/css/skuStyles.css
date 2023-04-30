@@ -59,7 +59,8 @@
     gap: 40px;
 }
 
-.product.section-filler.filler-PS-2 {
+.product.section-filler.filler-PS-2,
+.product.section-filler.filler-ZL-3 {
     margin: 25px;
 }
 
@@ -408,4 +409,26 @@
 
 .product-baseSku-D-DP:nth-of-type(2) .product-image {
     background-color: #fff9e8!important;
+}
+
+.collection-name-rift-collection .collection-summary-title {
+    font-size: 2.5em;
+    font-style: italic;
+}
+
+.collection-name-rift-collection .collection-tagline,
+.collection-name-techpets .collection-tagline {
+    padding-top: 0;
+    padding-bottom: 40px;
+    font-size: 1.5em;
+    font-family: Bebas Neue;
+    rotate: initial;
+    letter-spacing: 0.2em;
+    width: 40%;
+
+}
+
+.collection-name-rift-collection .collection-blurb {
+    width: 33%;
+    text-align: justify;
 }

@@ -1,6 +1,46 @@
 {
-  "WanderMade Wallets": "Discover the WanderMade Wallet collection, where durable, minimalist leather designs meet vibrant recycled materials to create long-lasting and stylish wallets.",
-  "Rift Collection": "Minimalist design fused with rugged utility for the discerning, yet practical man. Elevate your everyday carry with this stylish and functional trio.",
-  "TechPets": "Discover the captivating world of TechPets, our collection of intricately designed wooden puzzle toys that spark imagination, creativity, and interactive play for all ages. Assemble your own delightful menagerie with TechPets, and let the adventures begin!",
-  "Loopets": "Introducing Loopets, our enchanting series of wooden puzzle toys that combine simplicity and charm, featuring an easy peg and o-ring assembly. Dive into the delightful world of Loopets, where creativity, fun, and engagement await enthusiasts of all ages!"
+  "Zootility Tools": {
+    "tagline": "Ultra-Thin Everyday Solutions",
+    "blurb": "Ingeniously designed credit-card-sized multi-tools that effortlessly fit in your wallet, pocket, or on your keychain. Made with high-quality materials, these durable tools provide practical solutions for daily tasks and adventures."
+  },
+  "Backyard & Bar": {
+    "tagline": "from Grilling to Chilling",
+    "blurb": "Elevate your outdoor gatherings or cozy nights in. Designed for convenience and crafted with durable materials, these products make the perfect addition to any home or backyard party."
+  },
+  "Timeless Terrain": {
+    "tagline": "Inspired by Nature",
+    "blurb": "An array of personalized, high-quality products that beautifully capture your favorite locations and memories. Transform your cherished places into functional and stylish home décor items"
+  },
+  "TūLRY": {
+    "tagline": "Carry Your Story",
+    "blurb": "Discover the beauty of TūLRY, a captivating jewelry collection that combines modern design and personal significance. From zodiac constellations to custom geo-shapes, our meticulously crafted pieces allow you to carry your story with style and grace."
+  },
+  "WanderMade Wallets": {
+    "tagline": "for the Modern Adventurer",
+    "blurb": "Discover the WanderMade Wallet collection, where durable, minimalist leather designs meet vibrant recycled materials to create long-lasting and stylish wallets."
+  },
+  "Rift Collection": {
+    "tagline": "Minimalist Design, Maximum Utility",
+    "blurb": "Minimalist design fused with rugged utility for the discerning, yet practical man. Elevate your everyday carry with this stylish and functional trio."
+  },
+  "TechPets": {
+    "tagline": "Creative STEM Building Sets",
+    "blurb": "Discover the captivating world of TechPets, our collection of intricately designed wooden puzzle toys that spark imagination, creativity, and interactive play for ages 6+. Assemble your own delightful menagerie with TechPets, and let the adventures begin!"
+  },
+  "Loopets": {
+    "tagline": "Simple, Charming, and Engaging",
+    "blurb": "Our enchanting series of wooden puzzle toys that combine simplicity and charm, featuring an easy peg and o-ring assembly. Dive into the delightful world of Loopets, where creativity, fun, and engagement await enthusiasts of all ages!"
+  },
+  "State Goods": {
+    "tagline": "State of the Heart",
+    "blurb": "A unique and personalized range of bottle openers designed to celebrate your home state pride. Made from high-quality materials, these sleek and durable openers are the perfect wallet companions for on-the-go refreshment and a testament to your state-of-heart allegiance."
+  },
+  "Definitively Stickers": {
+    "tagline": "Express Yourself",
+    "blurb": "A fun and expressive range of high-quality, waterproof vinyl stickers that showcase your unique identity. These stickers make a statement while adding a touch of humor and sentiment to your everyday items like water bottles, laptops, sports equipment, and coolers."
+  },
+  "Peak and Port Bags": {
+    "tagline": "Adventure Meets Style",
+    "blurb": "A collection of thoughtfully designed, stylish, and versatile bags crafted to accompany you on all your adventures. From daily commutes to weekend escapes, each bag seamlessly combines functionality and fashion, empowering you to conquer the world with confidence and style."
+  }
 }
