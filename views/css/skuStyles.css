@@ -83,8 +83,7 @@
 }
 
 .product-baseSku-Z-RBA .product2-image {
-    background-color: #d3cb96!important;
-    color: ivory;
+    background-size: 135%;
 }
 
 .product-baseSku-PS-SCRB .product2-image {
@@ -139,7 +138,7 @@
 }
 
 .product-baseSku-PS-DT .product-image {
-    background-color: #96e5eb!important;
+    background-color: #78bbc3!important;
 }
 /*
 .product-baseSku-Z-HT420 .product-image,
@@ -276,10 +275,13 @@
 
 .product-baseSku-PS-ARB .product2-image,
 .product-baseSku-D-SDN .product2-image,
-.product-baseSku-SG-CCWO .product-image,
 .product-baseSku-J-CCP .product2-image,
 .product-baseSku-D-SDN .product2-image {
     background-color: white!important;
+}
+
+.product-baseSku-SG-CCWO .product-image {
+    background-color: #0b2126!important;
 }
 
 .product-baseSku-Z-RB .product2-image {
@@ -411,21 +413,41 @@
     background-color: #fff9e8!important;
 }
 
+.product-baseSku-D-DP ul {
+    list-style: none;
+    line-height: 1.75em;
+}
+
+.collection-name-zootility-tools .collection-tagline {
+    letter-spacing: initial;
+}
+
 .collection-name-rift-collection .collection-summary-title {
-    font-size: 2.5em;
     font-style: italic;
 }
 
 .collection-name-rift-collection .collection-tagline,
-.collection-name-techpets .collection-tagline {
+.collection-name-techpets .collection-tagline,
+.collection-name-loopets .collection-tagline {
+    font-size: 1.5em;
+    rotate: initial;
+    letter-spacing: 0.2em;
+}
+
+.collection-name-rift-collection .collection-tagline {
     padding-top: 0;
     padding-bottom: 40px;
-    font-size: 1.5em;
     font-family: Bebas Neue;
     rotate: initial;
     letter-spacing: 0.2em;
     width: 40%;
+}
 
+.collection-name-techpets .collection-tagline,
+.collection-name-loopets .collection-tagline {
+    margin-top: 4%;
+    font-family: Marker Felt;
+    width: 66%;
 }
 
 .collection-name-rift-collection .collection-blurb {

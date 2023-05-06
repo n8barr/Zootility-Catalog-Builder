@@ -26,7 +26,8 @@
   font-size: 0.9em;
 }
 
-.sku {
+.sku,
+.variant-price .wholesale-price {
   font-size: 0.6em;
 }
 

@@ -9,6 +9,7 @@
 
 .collection-summary-title {
   font-size: 3em;
+  font-family: 'Bebas Neue', sans-serif;
   text-transform: uppercase;
   font-weight: bold;
   letter-spacing: 0.2rem;
@@ -16,7 +17,6 @@
   width: 80%;
   text-align: center;
   margin-top: 10%;
-  margin-bottom: 5%;
 }
 
 .collection-tagline {
@@ -25,7 +25,7 @@
   text-align: center;
   padding-top: 10px;
   padding-bottom: 50px;
-  font-size: 3em;
+  font-size: 2.75em;
   font-family: Marck Script;
   rotate: -5deg;
   letter-spacing: -0.05em;
@@ -36,6 +36,11 @@
   margin: auto;
   width: 48%;
   text-overflow: ellipsis;
+}
+
+.collection-summary-products,
+.collection-tagline {
+  margin-top: 5%;
 }
 
 .collection-summary-products li {

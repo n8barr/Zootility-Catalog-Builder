@@ -1,6 +1,7 @@
 import { compiledProductLeftTemplates, 
   compiledProductRightTemplates, 
   compiledVariantTemplate, 
+  compiledVariantTemplateWithPrice,
   compiledProduct1ImageTemplate, 
   compiledSectionFillerTemplate,
 } from "./compileTemplates.js";
@@ -69,6 +70,12 @@ function generatePageSections(product) {
     insertFillerSection(product);
   }
 
+  // Check if the product needs a price range
+  let hasPriceRange = false;
+  if (product.minRetailPrice !== product.maxRetailPrice) {
+    hasPriceRange = true;
+  }
+
   // only use the product images in the thumbnail positions on productTemplate1
   if (variantsCount === 1 || variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage)) {
     product.imageTemplates = [];
@@ -108,7 +115,7 @@ function generatePageSections(product) {
   if ((variantsCount >= 2 && variantsCount <= 4) || (variantsCount === 5 && !product.hasLifestyleImage)) {
       // Render variant templates and add them to the product object
       product.variants.forEach((variant) => {
-          variant.variantTemplate = compiledVariantTemplate(variant);
+          variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
       });
 
       if ((variantsCount <= 2) || (!product.hasLifestyleImage && variantsCount === 3)) {
@@ -125,7 +132,7 @@ function generatePageSections(product) {
   } else if ((variantsCount >= 5 && variantsCount <= 6) || (variantsCount === 7 && !product.hasLifestyleImage)){
     // Render variant templates and add them to the product object
     product.variants.forEach((variant) => {
-      variant.variantTemplate = compiledVariantTemplate(variant);
+      variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
     });
 
     pageSections.push({
@@ -138,7 +145,7 @@ function generatePageSections(product) {
     while (product.variants.length > 0) {
       const subVariants = product.variants.splice(0, 8);
       subVariants.forEach((variant) => {
-        variant.variantTemplate = compiledVariantTemplate(variant);
+        variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
       });
       const subProduct = { ...product, variants: subVariants };
       pageSections.push({
@@ -151,7 +158,7 @@ function generatePageSections(product) {
     while (product.variants.length > 0) {
       const subVariants = product.variants.splice(0, 18);
       subVariants.forEach((variant) => {
-        variant.variantTemplate = compiledVariantTemplate(variant);
+        variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
       });
       const subProduct = { ...product, variants: subVariants };
       pageSections.push({

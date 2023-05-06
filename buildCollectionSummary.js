@@ -18,7 +18,7 @@ function buildCollectionSummary(product, collectionProducts) {
     blurb = collectionBlurb.blurb;
     tagline = collectionBlurb.tagline;
     const blurbLength = blurb.length;
-    gradientStart = 10 + (Math.round(blurbLength / 40) * 5);
+    gradientStart = 10 + (Math.round(blurbLength / 50) * 3);
     if (tagline.length) gradientStart += 10;
   } else {
     // Using the number of products in the collection

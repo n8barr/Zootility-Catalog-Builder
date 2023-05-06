@@ -6,11 +6,15 @@ function groupProductsWithVariants(products) {
   
     products.forEach((product) => {
       const productName = product.productName;
+      const wholesalePrice = parseFloat(product.wholesalePrice);
+      const retailPrice = parseFloat(product.retailPrice);
       const variant = {
         sku: product.sku,
+        wholesalePrice: wholesalePrice.toFixed(2),
+        retailPrice: retailPrice.toFixed(2),
         'option1Value': product.option1Value,
         'option2Value': product.option2Value,
-        images: []
+        images: [],
       };
 
       addVariantImages(variant);
@@ -37,7 +41,40 @@ function groupProductsWithVariants(products) {
           baseSku,
           use1x2Grid,
           variants: [],
+          minRetailPrice: retailPrice.toFixed(2),
+          maxRetailPrice: retailPrice.toFixed(2),
+          minWholesalePrice: wholesalePrice.toFixed(2),
+          maxWholesalePrice: wholesalePrice.toFixed(2)
         };
+      }
+      const productsByNameRetailPrice = parseFloat(productsByName[productName].retailPrice);
+      const productsByNameWholesalePrice = parseFloat(productsByName[productName].wholesalePrice);
+      const productsByNameMinRetailPrice = parseFloat(productsByName[productName].minRetailPrice);
+      const productsByNameMaxRetailPrice = parseFloat(productsByName[productName].maxRetailPrice);
+      const productsByNameMinWholesalePrice = parseFloat(productsByName[productName].minWholesalePrice);
+      const productsByNameMaxWholesalePrice = parseFloat(productsByName[productName].maxWholesalePrice);
+      // check if this variant has a different price than the product
+      if (retailPrice !== productsByNameRetailPrice) {
+        // if the variant price is higher, set the max price on the productsByName, otherwise set the min price
+        if (retailPrice > productsByNameRetailPrice) {
+          if (retailPrice > productsByNameMaxRetailPrice) {
+            productsByName[productName].maxRetailPrice = parseFloat(retailPrice).toFixed(2);
+          }
+        } else if (retailPrice < productsByNameMinRetailPrice) {
+          productsByName[productName].minRetailPrice = parseFloat(retailPrice).toFixed(2);
+        }
+      }
+
+      // check if this variant has a different price than the product
+      if (wholesalePrice !== productsByNameWholesalePrice) {
+        // if the variant price is higher, set the max price on the productsByName, otherwise set the min price
+        if (wholesalePrice > productsByNameWholesalePrice) {
+          if (wholesalePrice > productsByNameMaxWholesalePrice) {
+            productsByName[productName].maxWholesalePrice = parseFloat(wholesalePrice).toFixed(2);
+          }
+        } else if (wholesalePrice < productsByNameMinWholesalePrice) {
+          productsByName[productName].minWholesalePrice = parseFloat(wholesalePrice).toFixed(2);
+        }
       }
   
       productsByName[productName].variants.push(variant);

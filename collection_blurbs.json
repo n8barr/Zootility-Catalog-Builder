@@ -5,15 +5,15 @@
   },
   "Backyard & Bar": {
     "tagline": "from Grilling to Chilling",
-    "blurb": "Elevate your outdoor gatherings or cozy nights in. Designed for convenience and crafted with durable materials, these products make the perfect addition to any home or backyard party."
+    "blurb": "Elevate your outdoor gatherings and cozy nights in. Designed for convenience and crafted with durable materials, these products make the perfect addition to any home or backyard party."
   },
   "Timeless Terrain": {
-    "tagline": "Inspired by Nature",
+    "tagline": "Transform Maps into Art",
     "blurb": "An array of personalized, high-quality products that beautifully capture your favorite locations and memories. Transform your cherished places into functional and stylish home décor items"
   },
   "TūLRY": {
     "tagline": "Carry Your Story",
-    "blurb": "Discover the beauty of TūLRY, a captivating jewelry collection that combines modern design and personal significance. From zodiac constellations to custom geo-shapes, our meticulously crafted pieces allow you to carry your story with style and grace."
+    "blurb": "Discover the beauty of TūLRY, a captivating jewelry collection that combines modern design and personal significance. Our meticulously crafted pieces allow you to carry your story with style and grace."
   },
   "WanderMade Wallets": {
     "tagline": "for the Modern Adventurer",
@@ -42,5 +42,9 @@
   "Peak and Port Bags": {
     "tagline": "Adventure Meets Style",
     "blurb": "A collection of thoughtfully designed, stylish, and versatile bags crafted to accompany you on all your adventures. From daily commutes to weekend escapes, each bag seamlessly combines functionality and fashion, empowering you to conquer the world with confidence and style."
+  },
+  "Name Drop": {
+    "tagline": "Drop it Like it's Hot",
+    "blurb": "A collection of desirable gifts that can be customized with the name of your town, lake, island, or zip code. We'll send a proof for your approval before we make it."
   }
 }
