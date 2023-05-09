@@ -37,14 +37,6 @@
   margin-left: 40px;
 }
 
-.page:nth-child(odd) .product2-image .sku {
-  text-align: left;
-}
-
-.showBarcodes .page:nth-child(odd) .product2-variants {
-  margin-left: 0;
-}
-
 .page:nth-child(even) .product2-image {
   align-items: end;
 }
@@ -129,29 +121,4 @@
 
 .product2 svg.barcode {
   width: 120px;
-}
-
-.showBarcodes .product2-variants .image-container {
-  margin-top: -30%;
-}
-
-.showBarcodes .product2-variants img {
-  max-width: 70%;
-  max-height: 70%;
-  margin: auto;
-  left: 0;
-  right: 0;
-}
-
-.showBarcodes .product2-image {
-  row-gap: 5px;
-}
-
-.showBarcodes .product2-image .barcode-container {
-  padding: 0 4px;
-  background: white;
-}
-
-.showBarcodes .product2-image .sku {
-  padding-top: 0;
 }

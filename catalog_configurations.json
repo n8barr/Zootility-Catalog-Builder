@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Rep Catalog",
+    "showBarcodes": true
+  },
+  {
+    "name": "2023 Summer Catalog"
+  },
+  {
+    "name": "Custom",
+    "collections": [
+      "Timeless Terrain",
+      "Name Drop"
+    ]
+  },
+  {
+    "name": "TechPets",
+    "collections": [
+      "TechPets",
+      "Loopets"
+    ]
+  },
+  {
+    "name": "Everday Carry",
+    "collections": [
+      "Zootility Tools",
+      "Rift Collection",
+      "WanderMade Wallets"  
+    ]
+  },
+  {
+    "name": "Peak and Port",
+    "collections": [
+      "Peak and Port Bags"
+    ]
+  },
+  {
+    "name": "Definitively Stickers",
+    "collections": [
+      "Definitively Stickers"
+    ]
+  }
+]

@@ -1,7 +1,8 @@
 import { addProductImages, addVariantImages } from "./addImagePaths.js";
 import { sortProducts } from "./sortProducts.js";
 
-function groupProductsWithVariants(products) {
+function groupProductsWithVariants(products, config) {
+    const collections = config.collections;
     const productsByName = {};
   
     products.forEach((product) => {
@@ -14,7 +15,9 @@ function groupProductsWithVariants(products) {
         retailPrice: retailPrice.toFixed(2),
         'option1Value': product.option1Value,
         'option2Value': product.option2Value,
+        barcode: product.barcode,
         images: [],
+        showBarcodes: config.showBarcodes
       };
 
       addVariantImages(variant);
@@ -81,7 +84,7 @@ function groupProductsWithVariants(products) {
     });
   
     const productsWithVariants = Object.values(productsByName);
-    const sortedProducts = sortProducts(productsWithVariants);
+    const sortedProducts = sortProducts(productsWithVariants, collections);
     return sortedProducts;
 };   
 

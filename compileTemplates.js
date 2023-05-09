@@ -19,19 +19,20 @@ const pageTemplate = `
 <!doctype html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css"  href="views/css/pageContent.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate1.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate2.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate3.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/productTemplate4.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/imageContainer.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/skuStyles.css">
-  <link rel="stylesheet" type="text/css"  href="views/css/cover.css">
-  <style>
-    /* CSS styles go here */
-  </style>
+  <link rel="stylesheet" type="text/css"  href="../css/pageContent.css">
+  <link rel="stylesheet" type="text/css"  href="../css/productTemplate1.css">
+  <link rel="stylesheet" type="text/css"  href="../css/productTemplate2.css">
+  <link rel="stylesheet" type="text/css"  href="../css/productTemplate3.css">
+  <link rel="stylesheet" type="text/css"  href="../css/productTemplate4.css">
+  <link rel="stylesheet" type="text/css"  href="../css/imageContainer.css">
+  <link rel="stylesheet" type="text/css"  href="../css/skuStyles.css">
+  <link rel="stylesheet" type="text/css"  href="../css/cover.css">
+  {{#if showBarcodes}}
+    <script src="../../node_modules/jsbarcode/dist/JsBarcode.all.min.js"></script>
+  {{/if}}
+
 </head>
-<body>
+<body {{#if showBarcodes}}class="showBarcodes"{{/if}}>
   {{#each pages}}
     <div class="page">
       <div class="page-header">{{collectionName}}</div>
@@ -39,6 +40,12 @@ const pageTemplate = `
       <div class="page-footer">{{page}}</div>
     </div>
   {{/each}}
+
+  {{#if showBarcodes}}
+    <script type="text/javascript">
+      JsBarcode(".barcode").init();
+    </script>
+  {{/if}}
 </body>
 </html>
 `;
@@ -53,12 +60,34 @@ const productImage1Template = `
 const productInfo1Template = `
   <div class="product-info">
     <h2 class="product-name">{{productName}}</h2>
-    <div class="prices">
-      <div class="wholesale-price">Wholesale: {{priceRange "wholesale"}}</div>
-      {{#isNotZero retailPrice}}<div class="retail-price">Retail: {{priceRange "retail"}}</div>{{/isNotZero}}
-      {{#isNotZero minimumOrderQuantity}}<div class="min-qty">Min: {{minimumOrderQuantity}}</div>{{/isNotZero}}
+    <div class="product-sales-data">
+      <div class="prices">
+        <div class="wholesale-price">Wholesale: {{priceRange "wholesale"}}</div>
+        {{#isNotZero retailPrice}}<div class="retail-price">Retail: {{priceRange "retail"}}</div>{{/isNotZero}}
+        {{#isNotZero minimumOrderQuantity}}<div class="min-qty">Min: {{minimumOrderQuantity}}</div>{{/isNotZero}}
+      </div>
+      <div class="product-barcode">
+        {{#if showSkuInOverview}}
+          <div class="sku">{{variants.0.sku}}</div>
+          {{#if showBarcodes}}
+            {{#if variants.0.barcode}}
+              <div class="barcode-container">
+                <svg class="barcode"
+                  jsbarcode-format="upc"
+                  jsbarcode-value="{{variants.0.barcode}}"
+                  jsbarcode-textMargin="0"
+                  jsbarcode-margin="0"
+                  jsbarcode-fontOptions="bold"
+                  jsbarcode-height="18"
+                  jsbarcode-fontSize="0"
+                  jsbarcode-displayValue="false">
+                </svg>
+              </div>
+            {{/if}}
+          {{/if}}
+        {{/if}}
+      </div>
     </div>
-    <div class="sku">{{variants.0.sku}}</div>
     <div class="product-description">{{{productDescription}}}</div>
     <div class="product-variants {{#if use1x2Grid}}grid-1x2{{/if}}">
       {{#each imageTemplates}}
@@ -97,7 +126,24 @@ const productImage2Template = `
     <img src="{{variants.[0].images.[0]}}" alt="{{productName}}" />
     </div>
     {{#unless hasLifestyleImage}}
-      <div class="sku">{{variants.0.option1Value}}</br>{{variants.0.sku}}</div>
+      <div class="sku">{{variants.0.option1Value}}</div>
+      <div class="sku">{{variants.0.sku}}</div>
+      {{#if showBarcodes}}
+        {{#if barcode}}
+          <div class="barcode-container">
+            <svg class="barcode"
+              jsbarcode-format="upc"
+              jsbarcode-value="{{barcode}}"
+              jsbarcode-textMargin="0"
+              jsbarcode-margin="0"
+              jsbarcode-fontOptions="bold"
+              jsbarcode-height="18"
+              jsbarcode-fontSize="0"
+              jsbarcode-displayValue="false">
+            </svg>
+          </div>
+        {{/if}}
+      {{/if}}
     {{/unless}}
   </div>
 `;
@@ -148,6 +194,22 @@ const variantTemplate = `
     <img src="{{images.[0]}}" alt="{{sku}} - {{option1Value}}" />
   </div>
   <div class="sku">{{option1Value}}</br>{{sku}}</div>
+  {{#if showBarcodes}}
+    {{#if barcode}}
+      <div class="barcode-container">
+        <svg class="barcode"
+          jsbarcode-format="upc"
+          jsbarcode-value="{{barcode}}"
+          jsbarcode-textMargin="0"
+          jsbarcode-margin="0"
+          jsbarcode-fontOptions="bold"
+          jsbarcode-height="18"
+          jsbarcode-fontSize="0"
+          jsbarcode-displayValue="false">
+        </svg>
+      </div>
+    {{/if}}
+  {{/if}}
 </div>
 `;
 
@@ -160,6 +222,22 @@ const variantTemplateWithPrice = `
   <div class="variant-price">
     <div class="wholesale-price">Cost: $ {{wholesalePrice}}</div>
   </div>
+  {{#if showBarcodes}}
+    {{#if barcode}}
+      <div class="barcode-container">
+        <svg class="barcode"
+          jsbarcode-format="upc"
+          jsbarcode-value="{{barcode}}"
+          jsbarcode-textMargin="0"
+          jsbarcode-margin="0"
+          jsbarcode-fontOptions="bold"
+          jsbarcode-height="18"
+          jsbarcode-fontSize="0"
+          jsbarcode-displayValue="false">
+        </svg>
+      </div>
+    {{/if}}
+  {{/if}}
 </div>
 `;
 

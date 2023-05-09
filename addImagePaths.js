@@ -22,7 +22,8 @@ function addVariantImages(variant) {
       const imagePath = path.join(basePath, subfolder1, subfolder2, imageFileName);
 
       if (fs.existsSync(imagePath)) {
-        variant.images.push(imagePath);
+        const htmlImagePath = '../../' + imagePath;
+        variant.images.push(htmlImagePath);
         break;
       }
     }
@@ -65,7 +66,8 @@ function getAdditionalImagePath(product, folder) {
       const imagePath = path.join(folder, subfolder1, productImageName);
 
       if (fs.existsSync(imagePath)) {
-        return imagePath;
+        const htmlImagePath = '../../' + imagePath;
+        return htmlImagePath;
       }
     }
   }

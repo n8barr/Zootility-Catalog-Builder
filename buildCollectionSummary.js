@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { compiledCollectionSummaryTemplate } from "./compileTemplates.js";
-import { findCoverImage } from "./findImagePath.js";
+import { FindImagePathManager } from "./FindImagePathManager.js";
 
 // Read the modified_skus.json file and store the skus in an array
 const collectionBlurbs = JSON.parse(fs.readFileSync('collection_blurbs.json', 'utf8'));
@@ -34,7 +34,7 @@ function buildCollectionSummary(product, collectionProducts) {
     blurb,
     tagline,
     products: collectionProducts,
-    cover: findCoverImage(collectionName),
+    cover: FindImagePathManager.findCoverImage(collectionName),
   });
 
   return collectionSummaryPage;

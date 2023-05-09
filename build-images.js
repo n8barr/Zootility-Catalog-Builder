@@ -207,6 +207,11 @@ async function processFolders() {
             await resizeImages(destinationBasePath, folderConfig.maxWidth, folderConfig.minHeight);
         }
     }
+
+    // Create the HTML destination directory
+    await fs.ensureDir('build/digital');
+    await fs.ensureDir('build/print');
+    await fs.ensureDir('build/css');
 }
   
 processFolders().catch(console.error);

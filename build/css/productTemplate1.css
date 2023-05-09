@@ -150,17 +150,5 @@
 
 svg.barcode {
   display: block;
-  width: 120px;
-}
-
-.showBarcodes .product-sales-data {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  width: 100%;
-}
-
-.showBarcodes .prices, 
-.showBarcodes .product-barcode {
-  display: flex;
-  flex-direction: column;
+  width: 210px;
 }

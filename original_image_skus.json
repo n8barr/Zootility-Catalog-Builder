@@ -1,4 +1,5 @@
 [
+    "GR-MC-6",
     "Z-K-1",
     "Z-K-2",
     "ZL-EXO-PEAC",
@@ -22,6 +23,9 @@
     "ZL-PET-DOG",
     "LG-CAC-1",
     "LG-CAC-4",
+    "LG-CPWC-ET4",
+    "LG-CPWC-P4",
+    "LG-CPWM-BOOT",
     "PG-BIG-BELIB",
     "PG-BIG-IBIYB",
     "PG-COA-BL-WHT",
@@ -55,8 +59,6 @@
     "PG-UPL-EMPA",
     "PG-UPL-BEAFL",
     "PG-UPL-YAE",
-    "GR-MC-6",
-    "LG-CPWC-ET4",
-    "LG-CPWC-P4"
+    "PS-RFID-2"
 ]
   

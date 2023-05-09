@@ -1,8 +1,19 @@
 import fs from 'fs';
 import { parse } from './node_modules/csv-parse/lib/sync.js';
 
-// Desired order of product types
-const desiredOrder = JSON.parse(fs.readFileSync('product_type_order.json', 'utf8'));
+// Desired order of products within a product type
+const desiredProductOrder = JSON.parse(fs.readFileSync('product_order.json', 'utf8'));
+
+// Get the sales totals for each sku
+let salesTotals = {};
+try {
+    // Parse the CSV file and created a salesTotals object
+    // e.g., { 'sku1': 100, 'sku2': 50, 'sku3': 200, ... }
+    const csvFilePath = './sales_by_baseSku.csv';
+    salesTotals = parseSalesTotalsCSV(csvFilePath);
+} catch (error) {
+    console.error('Error reading CSV file:', error);
+}
 
 // Function to parse the CSV file and create a mapping of SKUs to sales totals
 function parseSalesTotalsCSV(filePath) {
@@ -19,15 +30,30 @@ function parseSalesTotalsCSV(filePath) {
 }
 
 // Custom sort function
-function customProductSort(salesTotals, a, b) {
-    const orderA = desiredOrder.indexOf(a.productType);
-    const orderB = desiredOrder.indexOf(b.productType);
+function customProductSort(collections, a, b) {
+    const orderA = collections.indexOf(a.productType);
+    const orderB = collections.indexOf(b.productType);
   
-    // Test the productType
+    // Test the productType, keep the same product types together
     if (orderA !== orderB) {
       return orderA - orderB;
     }
+
+    // Test the product order override, put the products in the desired order first
+    // Check if the product type is in the desired order object as a key
+    if (desiredProductOrder[a.productType]) {
+        // Check if the product is in the desired order array
+        const productOrderA = desiredProductOrder[a.productType].indexOf(a.baseSku);
+        const productOrderB = desiredProductOrder[b.productType].indexOf(b.baseSku);
+        // If the product is in the desired order array, put it in the desired order
+        if (productOrderA !== -1 || productOrderB !== -1) {
+            if (productOrderA !== productOrderB) {
+                return productOrderA - productOrderB;
+            }
+        } // else, continue with the normal sort by sales
+    }
   
+    // Test the sales totals, keep the best selling products at the top
     const salesTotalA = salesTotals[a.baseSku] || 0;
     const salesTotalB = salesTotals[b.baseSku] || 0;
     return salesTotalB - salesTotalA;
@@ -48,24 +74,14 @@ function customVariantSort(a, b) {
 }
 
 
-function sortProducts(products) {
-    try {
-        // Parse the CSV file and created a salesTotals object
-        // e.g., { 'sku1': 100, 'sku2': 50, 'sku3': 200, ... }
-        const csvFilePath = './sales_by_baseSku.csv';
-        const salesTotals = parseSalesTotalsCSV(csvFilePath);
-      
-        // Sort the products array using the custom sort function and the salesTotals data
-        products.sort((a, b) => customProductSort(salesTotals, a, b));
+function sortProducts(products, collections) {
+    // Sort the products array using the custom sort function and the salesTotals data
+    products.sort((a, b) => customProductSort(collections, a, b));
 
-        // Sort the variants array on each product
-        products.forEach(product => {
-            product.variants.sort((a, b) => customVariantSort(a, b));
-        });
-      
-    } catch (error) {
-        console.error('Error reading CSV file:', error);
-    }
+    // Sort the variants array on each product
+    products.forEach(product => {
+        product.variants.sort((a, b) => customVariantSort(a, b));
+    });
 
     // Now the products array is sorted by the desired productType order and sales total
     return products;
