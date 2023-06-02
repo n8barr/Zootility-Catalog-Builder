@@ -8,39 +8,106 @@
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Primary Product Image/",
       "destinationBasePath": "cropped_images",
-      "maxWidth": 500,
-      "minHeight": 250,
+      "compressed": {
+        "maxWidth": 200,
+        "minHeight": 175
+      },
+      "digital": {
+        "maxWidth": 225,
+        "minHeight": 225
+      },
+      "print": {
+        "maxWidth": 600,
+        "minHeight": 600
+      },
       "trimWhitespace": true,
       "type": "variant"
     },
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Packaging_Images/",
       "destinationBasePath": "packaging_images",
-      "maxWidth": 300,
-      "minHeight": 150,
+      "compressed": {
+        "maxWidth": 125,
+        "minHeight": 125
+      },
+      "digital": {
+        "maxWidth": 225,
+        "minHeight": 225
+      },
+      "print": {
+        "maxWidth": 600,
+        "minHeight": 600
+      },
       "trimWhitespace": true,
       "type": "product"
     },
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Lifestyle_Images/",
       "destinationBasePath": "lifestyle_images",
-      "maxWidth": 500,
-      "minHeight": 600,
+      "compressed": {
+        "maxWidth": 275,
+        "minHeight": 350
+      },
+      "digital": {
+        "maxWidth": 500,
+        "minHeight": 630
+      },
+      "print": {
+        "maxWidth": 1375,
+        "minHeight": 1650
+      },
       "type": "product"
     },
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Collection Images/",
       "destinationBasePath": "collection_images",
-      "maxWidth": 1000,
-      "minHeight": 600,
+      "compressed": {
+        "maxWidth": 600,
+        "minHeight": 350
+      },
+      "digital": {
+        "maxWidth": 1100,
+        "minHeight": 630
+      },
+      "print": {
+        "maxWidth": 3000,
+        "minHeight": 1650
+      },
       "type": "collection"
     },
     {
       "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Cover Images/",
       "destinationBasePath": "cover_images",
-      "maxWidth": 2600,
-      "minHeight": 3300,
+      "compressed": {
+        "maxWidth": 600,
+        "minHeight": 680
+      },
+      "digital": {
+        "maxWidth": 1100,
+        "minHeight": 1260
+      },
+      "print": {
+        "maxWidth": 2600,
+        "minHeight": 3300
+      },
       "type": "cover"
+    },
+    {
+      "sourceBasePath": "../../Google Drive/Shared drives/Design/Photos/Logo Images/",
+      "destinationBasePath": "logo_images",
+      "compressed": {
+        "maxWidth": 600,
+        "minHeight": 100
+      },
+      "digital": {
+        "maxWidth": 600,
+        "minHeight": 100
+      },
+      "print": {
+        "maxWidth": 600,
+        "minHeight": 100
+      },
+      "type": "logo"
     }
   ]
 }

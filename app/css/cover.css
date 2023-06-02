@@ -19,6 +19,11 @@
   margin-top: 10%;
 }
 
+.collection-summary-logo img {
+  margin: auto;
+  display: block;
+}
+
 .collection-tagline {
   margin: auto;
   width: 80%;

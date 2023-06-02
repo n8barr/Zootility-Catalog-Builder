@@ -1,11 +1,54 @@
 {
-  "Rift Collection": [
-    "PS-RBS",
+  "Rift Gear": [
     "PS-ARB",
+    "PS-RBS",
     "PS-SCRB",
+    "PS-RMW",
+    "PS-RMWB",
     "Z-RB",
     "Z-RBA",
-    "PS-RMW",
-    "PS-RMWB"
+    "D-DP-RC",
+    "D-DP-RB"
+  ],
+  "Zootility Tools": [
+    "Z-PMD",
+    "Z-WC",
+    "Z-WSK",
+    "Z-FSK",
+    "Z-SSK",
+    "Z-WCSK",
+    "Z-HH",
+    "Z-PMX",
+    "Z-ST1",
+    "Z-ST2",
+    "Z-PK",
+    "Z-TT",
+    "Z-HEX",
+    "DP-SKK",
+    "Z-PP",
+    "Z-K"
+  ],
+  "TūLRY": [
+    "J-TSZN",
+    "J-TSN",
+    "D-STD"
+  ],
+  "WanderMade Wallets": [
+    "PS-LSW",
+    "D-DP",
+    "PS-LSWP",
+    "PS-RFID",
+    "PS-FPWP",
+    "PS-FPW",
+    "PS-EPW",
+    "PS-MPW",
+    "PS-EFW",
+    "PS-LFW",
+    "D-FWD"
+  ],
+  "Backyard & Bar": [
+    "GR-G",
+    "GR-AGS",
+    "GR-MC"
   ]
 }

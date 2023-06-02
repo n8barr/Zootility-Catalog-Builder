@@ -20,7 +20,7 @@ class PagesManager {
   }
 
   // Create pages from the product list
-  createPages(productsWithVariants) {
+  createPages(productsWithVariants, catalogStyle) {
 
     // Build the pages in order of the product entries
     let lastProduct = {};
@@ -29,7 +29,7 @@ class PagesManager {
       // Check for a transition from one Collection to another.
       if (this.pageSections.length === 1 && collectionName !== this.pageSections[0].collectionName) {
         // Add filler section if page is only half full
-          this.insertFillerSection(lastProduct);
+          this.insertFillerSection(lastProduct, catalogStyle);
       }
 
       // Check if the lastProduct is a different collection than the current
@@ -42,7 +42,7 @@ class PagesManager {
           return product.productType === collectionName;
         });
 
-        const collectionSummaryPage = buildCollectionSummary(product, collectionProducts);
+        const collectionSummaryPage = buildCollectionSummary(product, collectionProducts, catalogStyle);
         
         this.insertPage(collectionSummaryPage, "MADE IN USA");
       }
@@ -50,12 +50,12 @@ class PagesManager {
       lastProduct = product;
 
       // Generate the page sections for the product
-      this.generatePageSections(product);
+      this.generatePageSections(product, catalogStyle);
     });
 
     // Fill to the end of the page if needed
     if (this.pageSections.length === 1) {
-      this.insertFillerSection(lastProduct);
+      this.insertFillerSection(lastProduct, catalogStyle);
     }
 
     return this.pages;
@@ -63,13 +63,13 @@ class PagesManager {
 
 
   //split a product into the number of needed page sections
-  generatePageSections(product) {
+  generatePageSections(product, catalogStyle) {
     const variantsCount = product.variants.length;
 
     // Don't split a product over multiple pages
     // If a pageSection is started, put a two-section product on the next page
-    if (this.pageSections.length === 1 && variantsCount >= 8) {
-      this.insertFillerSection(product);
+    if (this.pageSections.length === 1 && (variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage))) {
+      this.insertFillerSection(product, catalogStyle);
     }
 
     // Check if the product needs a price range
@@ -234,10 +234,10 @@ class PagesManager {
     this.pageSections = [];
   }
 
-  insertFillerSection(product) {
+  insertFillerSection(product, catalogStyle) {
     const [collectionPrefix] = product.baseSku.split('-');
 
-    const { imagePath, count } = FindImagePathManager.findCollectionImage(collectionPrefix);
+    const { imagePath, count } = FindImagePathManager.findCollectionImage(collectionPrefix, catalogStyle);
 
     // Generate the content to add the section
     this.pageSections.push({

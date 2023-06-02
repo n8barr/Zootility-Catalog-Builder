@@ -46,12 +46,21 @@ function customProductSort(collections, a, b) {
         const productOrderA = desiredProductOrder[a.productType].indexOf(a.baseSku);
         const productOrderB = desiredProductOrder[b.productType].indexOf(b.baseSku);
         // If the product is in the desired order array, put it in the desired order
-        if (productOrderA !== -1 || productOrderB !== -1) {
-            if (productOrderA !== productOrderB) {
-                return productOrderA - productOrderB;
+        if (productOrderA === -1 || productOrderB === -1) {
+            if (productOrderA === productOrderB) {
+                return 0;
             }
-        } // else, continue with the normal sort by sales
-    }
+            if (productOrderA !== -1) {
+                return -1;
+            }
+            return 1;
+        }
+        if (productOrderA !== productOrderB) {
+            return productOrderA - productOrderB;
+        }
+        return 0;
+
+    } // else, continue with the normal sort by sales
   
     // Test the sales totals, keep the best selling products at the top
     const salesTotalA = salesTotals[a.baseSku] || 0;

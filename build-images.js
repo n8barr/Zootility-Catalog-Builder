@@ -10,6 +10,7 @@ const BUILD_BASE_PATH = './build';
 const TRIM_OPTIONS = {
     threshold: 1,
 };
+const CATALOG_TYPES = ['compressed', 'digital', 'print'];
 
 async function readConfiguration() {
     const config = await fs.readJson('build-images-configuration.json');
@@ -27,7 +28,7 @@ function findImagesInFolderStructure(config, identifier) {
             const [subfolder1, subfolder2] = identifier.split('-');
             imageFileName = i === 1 ? `${subfolder1}${ext}` : `${subfolder1}-${i}${ext}`;
             imagePath = path.join(basePath, imageFileName);
-        } else if (config.type === 'cover') {
+        } else if (config.type === 'cover' || config.type === 'logo') {
             const collectionName = identifier;
             imageFileName = i === 1 ? `${collectionName}${ext}` : `${collectionName}-${i}${ext}`;
             imagePath = path.join(basePath, imageFileName);
@@ -67,11 +68,28 @@ async function resizeImages(folder, maxWidth, minHeight) {
                 const metadata = await image.metadata();
         
                 if (metadata.width > maxWidth || metadata.height > minHeight) {
-                    const newWidth = Math.min(maxWidth, metadata.width);
-                    const newHeight = Math.max(minHeight, metadata.height);
-                    const scalingFactor = Math.min(newWidth / metadata.width, newHeight / metadata.height);
-                    const resizedWidth = Math.round(metadata.width * scalingFactor);
-                    const resizedHeight = Math.round(metadata.height * scalingFactor);
+                    // Scale the image so that the width becomes the maxWidth and the height is scaled proportionally
+                    // But if the height becomes less than the minHeight, then scale the image so that the height becomes the minHeight and the width is scaled proportionally
+                    const widthScalingFactor = maxWidth / metadata.width;
+                    const proposedHeight = metadata.height * widthScalingFactor;
+                    let resizedWidth, resizedHeight;
+                    if (proposedHeight < minHeight) {
+                        const heightScalingFactor = minHeight / metadata.height;
+                        resizedWidth = Math.round(metadata.width * heightScalingFactor);
+                        resizedHeight = Math.round(metadata.height * heightScalingFactor);
+                    } else {
+                        resizedWidth = maxWidth;
+                        resizedHeight = Math.round(metadata.height * widthScalingFactor);
+                    }
+
+
+                    // const newWidth = Math.min(maxWidth, metadata.width);
+                    // const newHeight = Math.max(minHeight, metadata.height);
+                    // const scalingFactor = Math.min(newWidth / metadata.width, newHeight / metadata.height);
+                    // const resizedWidth = Math.round(metadata.width * scalingFactor);
+                    // const resizedHeight = Math.round(metadata.height * scalingFactor);
+
+                    
             
                     await image.resize(resizedWidth, resizedHeight).toBuffer(async function(err, buffer) {
                         if (!err) await fs.writeFile(filePath, buffer);
@@ -121,9 +139,9 @@ async function processCSVFile(csvFilePath) {
     });
 }
 
-async function processProduct(identifier, folderConfig) {
+async function processProduct(identifier, catalogType, folderConfig) {
     const sourceBasePath = folderConfig.sourceBasePath;
-    const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath);
+    const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath, catalogType);
     const imagePaths = findImagesInFolderStructure(folderConfig, identifier);
 
     for (const imagePath of imagePaths) {
@@ -141,77 +159,87 @@ async function processFolders() {
     const products = await processCSVFile(CSV_FILE_PATH);
   
     for (const folderConfig of config.folders) {
-        // Avoid trouble if the destinationBasePath wasn't properly specified
-        if (!folderConfig.destinationBasePath || folderConfig.destinationBasePath.length <= 2) break;
+        console.log('Starting ' + folderConfig.destinationBasePath);
 
-        // Remove the destination directory if it exists
-        const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath);
-        await fs.remove(destinationBasePath);
+        // Execute for each of the catalog types
+        for (const catalogType of CATALOG_TYPES) {
+            // Avoid trouble if the destinationBasePath wasn't properly specified
+            if (!folderConfig.destinationBasePath || folderConfig.destinationBasePath.length <= 2) break;
 
-        // Create the destination directory
-        await fs.ensureDir(destinationBasePath);
+            // Remove the destination directory if it exists
+            const destinationBasePath = path.join(BUILD_BASE_PATH, folderConfig.destinationBasePath, catalogType);
+            await fs.remove(destinationBasePath);
 
-        const componentList = [];
-        for (const product of products) {
-            const sku = product.sku;
+            // Create the destination directory
+            await fs.ensureDir(destinationBasePath);
 
-            // Collections don't need to repeat the search for every variant in the collection
-            if (folderConfig.type === 'collection') {
-                const regex = /^[^-]+/;
-                const match = sku.match(regex);
-                if (componentList.find(component => component === match[0])) { 
-                    // skip
+            const componentList = [];
+            for (const product of products) {
+                const sku = product.sku;
+
+                // Collections don't need to repeat the search for every variant in the collection
+                if (folderConfig.type === 'collection') {
+                    const regex = /^[^-]+/;
+                    const match = sku.match(regex);
+                    if (componentList.find(component => component === match[0])) { 
+                        // skip
+                    } else {
+                        componentList.push(match[0]);
+                        // Copy the images for each SKU
+                        await processProduct(sku, catalogType, folderConfig);
+                    }
+
+                // Products don't need to repeat the search for every variant in the prodcut
+                } else if (folderConfig.type === 'product') {
+                    const regex = /^([^-]+-[^-]+)/;
+                    const match = sku.match(regex);
+                    if (componentList.find(component => component === match[0])) {
+                        // skip
+                    } else {
+                        componentList.push(match[0]);
+                        // Copy the images for each SKU
+                        await processProduct(sku, catalogType, folderConfig);
+                    }
+                    
+                } else if (folderConfig.type === 'cover' || folderConfig.type === 'logo') {
+                    // Collections don't need to repeat on every variant in the product
+                    const collectionName = product.productType;
+                    if (componentList.includes(collectionName)) { 
+                        // skip
+                    } else {
+                        componentList.push(componentList);
+                        // Copy the images for each Collection
+                        await processProduct(collectionName, catalogType, folderConfig);
+                    }
                 } else {
-                    componentList.push(match[0]);
                     // Copy the images for each SKU
-                    await processProduct(sku, folderConfig);
+                    await processProduct(sku, catalogType, folderConfig);
                 }
 
-            // Products don't need to repeat the search for every variant in the prodcut
-            } else if (folderConfig.type === 'product') {
-                const regex = /^([^-]+-[^-]+)/;
-                const match = sku.match(regex);
-                if (componentList.find(component => component === match[0])) {
-                    // skip
-                } else {
-                    componentList.push(match[0]);
-                    // Copy the images for each SKU
-                    await processProduct(sku, folderConfig);
-                }
-                
-            } else if (folderConfig.type === 'cover') {
-                // Collections don't need to repeat on every variant in the product
-                const collectionName = product.productType;
-                if (componentList.includes(collectionName)) { 
-                    // skip
-                } else {
-                    componentList.push(componentList);
-                    // Copy the images for each Collection
-                    await processProduct(collectionName, folderConfig);
-                }
-            } else {
-                // Copy the images for each SKU
-                await processProduct(sku, folderConfig);
+
             }
 
+            // Trim Whitespace from each image in the destinationBase folder
+            if (folderConfig.trimWhitespace) {
+                await trimWhitespace(destinationBasePath);
+            }
+            
+            // Resize each image in the destinationBase folder
+            const maxWidth = folderConfig[catalogType] && folderConfig[catalogType].maxWidth;
+            const minHeight = folderConfig[catalogType] && folderConfig[catalogType].minHeight;
 
-        }
+            if (maxWidth && minHeight) {
+                await resizeImages(destinationBasePath, maxWidth, minHeight);
+            }
 
-        // Trim Whitespace from each image in the destinationBase folder
-        if (folderConfig.trimWhitespace) {
-            await trimWhitespace(destinationBasePath);
-        }
-        
-        // Resize each image in the destinationBase folder
-        if (folderConfig.maxWidth && folderConfig.minHeight) {
-            await resizeImages(destinationBasePath, folderConfig.maxWidth, folderConfig.minHeight);
+            console.log('  Done ' + catalogType);
         }
     }
 
     // Create the HTML destination directory
-    await fs.ensureDir('build/digital');
-    await fs.ensureDir('build/print');
-    await fs.ensureDir('build/css');
+    // await fs.ensureDir('build/digital');
+    // await fs.ensureDir('build/print');
+    // await fs.ensureDir('build/css');
 }
   
 processFolders().catch(console.error);

@@ -5,7 +5,7 @@ import { FindImagePathManager } from "./FindImagePathManager.js";
 // Read the modified_skus.json file and store the skus in an array
 const collectionBlurbs = JSON.parse(fs.readFileSync('collection_blurbs.json', 'utf8'));
 
-function buildCollectionSummary(product, collectionProducts) {
+function buildCollectionSummary(product, collectionProducts, catalogStyle) {
   // Get the collection blurb if there is one
   const collectionBlurb = collectionBlurbs[product.productType];
 
@@ -34,7 +34,8 @@ function buildCollectionSummary(product, collectionProducts) {
     blurb,
     tagline,
     products: collectionProducts,
-    cover: FindImagePathManager.findCoverImage(collectionName),
+    cover: FindImagePathManager.findCoverImage(collectionName, catalogStyle),
+    logo: FindImagePathManager.findLogoImage(collectionName, catalogStyle),
   });
 
   return collectionSummaryPage;

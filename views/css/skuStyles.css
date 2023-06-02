@@ -8,6 +8,58 @@
     padding-right: 14%;
 }
 
+.product-baseSku-Z-FSK .product-image {
+    background-color: #006877!important;
+}
+
+.product-baseSku-Z-SSK .product-image,
+.product-baseSku-Z-SSK .product2-image {
+        background-color: #ffd85d!important;
+}
+
+.product-baseSku-Z-WSK .product-image {
+    background-color: #e1ff5c!important;
+}
+
+.product-baseSku-Z-WCSK .product-image {
+    background-color: #847c31!important;
+}
+
+
+.product-baseSku-Z-PK .product-image {
+    background-color: #c0a46a!important;
+    width: 18%;
+    padding-right: 16%;
+    padding-left: 15%;
+}
+
+.product-baseSku-DP-SKK .product-image,
+.product-baseSku-DP-SKK .product2-image {
+    background-color: #609fa9!important;
+}
+
+.product-baseSku-DP-MTBS .product-image,
+.product-baseSku-DP-MTBS .product2-image {
+    background-color: #336464!important;
+}
+
+/* .product-baseSku-Z-TT .product2-image,
+.product-baseSku-Z-TT .product-image {
+    width: 40%;
+    padding-right: 6%;
+    padding-left: 6%;
+}
+
+.product-baseSku-Z-TT .product-image img {
+    width: 80%;
+} */
+
+.product-baseSku-Z-HEX .product2-image,
+.product-baseSku-Z-HEX .product-image {
+        background-color: #b5a38a!important;
+}
+
+
 .product-baseSku-Z-HT420 .product-image {
     background-color: #efdb43!important;
     width: 40%;
@@ -21,6 +73,13 @@
 
 .product-baseSku-Z-WCB .product-image {
     background-color: darkgrey!important;
+}
+
+.product-baseSku-PS-SCRB .product-image {
+    background-color: #646363!important;
+    width: 45%;
+    padding-left: 5%;
+    padding-right: 0;
 }
 
 .product-baseSku-BG-AWO .product-image {
@@ -47,7 +106,7 @@
 }
 
 .product-baseSku-PS-LSW .product-image {
-    background-color: #c1977c!important;
+    background-color: #5eb2b7!important;
 }
 
 .product-baseSku-PS-LSW .product2-variants {
@@ -64,8 +123,12 @@
     margin: 25px;
 }
 
-.product-baseSku-PS-FPW .product-image {
-    background-color: #b9ac9b!important;
+.product-baseSku-PS-FPW .product2-image {
+    background-color: #453c30!important;
+}
+
+.product-baseSku-PS-LFW .product2-image {
+    background-color: #d9ccbb!important;
 }
 
 .product-baseSku-PS-FPWS .product2-image {
@@ -133,8 +196,16 @@
     margin-right: 5%;
 }
 
-.product-baseSku-PS-VT .product-image {
-    background-color: #79e5d7!important;
+.product-baseSku-J-TSZN .product-image {
+    background-color: #5d264c!important;
+}
+
+.product-baseSku-J-TSN .product2-image {
+    background-color: #8e7166!important;
+}
+
+.product-baseSku-PS-VT .product2-image {
+    background-color: #f5e9d8!important;
 }
 
 .product-baseSku-PS-DT .product-image {
@@ -406,11 +477,11 @@
 }
 
 .product-baseSku-D-DP .product-image {
-    background-color: #d6ccac!important;
+    background-color: #ddd1c0!important;
 }
 
 .product-baseSku-D-DP:nth-of-type(2) .product-image {
-    background-color: #fff9e8!important;
+    background-color: #e9e9e9!important;
 }
 
 .product-baseSku-D-DP ul {
@@ -422,11 +493,24 @@
     letter-spacing: initial;
 }
 
-.collection-name-rift-collection .collection-summary-title {
+.collection-name-rift-gear .collection-summary-title {
     font-style: italic;
+    font-size: 5em;
 }
 
-.collection-name-rift-collection .collection-tagline,
+.collection-name-rift-gear .collection-tagline {
+    margin-top: 0;
+}
+
+.collection-name-rift-gear .collection-summary-logo img {
+    width: 45%;
+}
+
+.collection-name-t-lry .collection-tagline {
+    letter-spacing: initial;
+}
+
+.collection-name-rift-gear .collection-tagline,
 .collection-name-techpets .collection-tagline,
 .collection-name-loopets .collection-tagline {
     font-size: 1.5em;
@@ -434,7 +518,7 @@
     letter-spacing: 0.2em;
 }
 
-.collection-name-rift-collection .collection-tagline {
+.collection-name-rift-gear .collection-tagline {
     padding-top: 0;
     padding-bottom: 40px;
     font-family: Bebas Neue;
@@ -450,7 +534,7 @@
     width: 66%;
 }
 
-.collection-name-rift-collection .collection-blurb {
+.collection-name-rift-gear .collection-blurb {
     width: 33%;
     text-align: justify;
 }

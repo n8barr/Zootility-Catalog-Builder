@@ -20,10 +20,10 @@ function groupProductsWithVariants(products, config) {
         showBarcodes: config.showBarcodes
       };
 
-      addVariantImages(variant);
+      addVariantImages(variant, config.type);
 
       if (!productsByName[productName]) {
-        addProductImages(product);
+        addProductImages(product, config.type);
         
         product.productDescription = shortenDescription(product.productDescription);
         product.productDescription = removeHTMLSpans(product.productDescription);
@@ -88,8 +88,10 @@ function groupProductsWithVariants(products, config) {
     return sortedProducts;
 };   
 
+// Regex string to match contents of html paragraph tags
+const regex = /<p[^>]*>([^<]+)<\/p>/;
+
 function shortenDescription(description) {
-  const regex = /<p>(.*?)<\/p>/;
   const matches = description.match(regex);
   const firstParagraph = matches && matches[1];
   return firstParagraph || description;

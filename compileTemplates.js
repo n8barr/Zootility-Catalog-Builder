@@ -32,7 +32,7 @@ const pageTemplate = `
   {{/if}}
 
 </head>
-<body {{#if showBarcodes}}class="showBarcodes"{{/if}}>
+<body class="{{#if showBarcodes}}showBarcodes{{/if}} {{#if isDigital}} digital-catalog{{/if}} {{#if isPrint}} print-catalog{{/if}}">
   {{#each pages}}
     <div class="page">
       <div class="page-header">{{collectionName}}</div>
@@ -267,7 +267,11 @@ const sectionFillerTemplate = `
 // Define the Collection Summary Template
 const collectionSummaryTemplate = `
 <div class="collection-summary collection-name-{{#nameToClass}}{{collectionName}}{{/nameToClass}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) {{gradientStart}}%, transparent {{gradientEnd}}%), url('{{cover}}')">
-  <div class="collection-summary-title">{{collectionName}}</div>
+  {{#if logo}}
+    <div class="collection-summary-logo"><img src="{{logo}}" /></div>
+  {{else}}
+    <div class="collection-summary-title">{{collectionName}}</div>
+  {{/if}}
   {{#if blurb}}
     <div class="collection-tagline">{{{tagline}}}</div>
     <div class="collection-blurb">{{{blurb}}}</div>
