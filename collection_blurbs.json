@@ -25,11 +25,13 @@
   },
   "TekPets": {
     "tagline": "Creative STEM Building Sets",
-    "blurb": "Discover the captivating world of TekPets, our collection of intricately designed wooden puzzle toys that spark imagination, creativity, and interactive play for ages 6+. Assemble your own delightful menagerie with TekPets, and let the adventures begin!"
+    "blurb": "Discover the captivating world of TekPets, our collection of intricately designed wooden puzzle toys that spark imagination, creativity, and interactive play for ages 6+. Color with markers, crayons, or colored penciles, then assemble with the included tools.",
+    "margin": "38%"
   },
   "Loopets": {
-    "tagline": "Simple, Charming, and Engaging",
-    "blurb": "Our enchanting series of wooden puzzle toys that combine simplicity and charm, featuring an easy peg and o-ring assembly. Dive into the delightful world of Loopets, where creativity, fun, and engagement await enthusiasts of all ages!"
+    "tagline": "Simple Peg + O-Ring Connections",
+    "blurb": "Our enchanting series of wooden puzzle toys that combine simplicity and charm, featuring an easy peg and o-ring assembly. Color with markers, crayons, or colored pencils, then assemble without any tools.",
+    "margin": "50%"
   },
   "State Goods": {
     "tagline": "State of the Heart",

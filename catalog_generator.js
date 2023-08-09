@@ -16,8 +16,8 @@ import { readCSVSync } from './readCSVSync.js';
 function generateHtml(products, config) {
   const pagesManager = new PagesManager(config);
   const pages = pagesManager.createPages(products, config.type);
-  const isDigital = (config.type === 'digital' || config.type === 'compressed') ? true : false;
-  const isPrint = config.type === 'print' ? true : false;
+  const isDigital = (config.type === 'digital') ? true : false;
+  const isPrint = (config.type === 'print' || config.type === 'compressed') ? true : false;
   return compiledPageTemplate({ 
     pages,
     showBarcodes: config.showBarcodes,
@@ -31,6 +31,12 @@ const filterProductsByCollections = (products, collections) => {
   return products.filter(product => collections.includes(product.productType));
 };
 
+// Filter products if exlucded in catalog configuration
+const filterProductsByExcluded = (products, exclude) => {
+  if (exclude === undefined) return products;
+  return products.filter(product => !exclude.includes(product.sku));
+};
+
 // Run the catalog builder for a single configuration
 async function runCatalogBuilderForConfig(config, callback) {
   // Read and parse the products CSV file
@@ -41,7 +47,8 @@ async function runCatalogBuilderForConfig(config, callback) {
   // Generate the HTML for each configuration
   FindImagePathManager.resetCollectionCounterHash();
   const filteredProducts = filterProductsByCollections(products, config.collections);
-  const productsWithVariants = groupProductsWithVariants(filteredProducts, config);
+  const includedProducts = filterProductsByExcluded(filteredProducts, config.exclude);
+  const productsWithVariants = groupProductsWithVariants(includedProducts, config);
   const html = generateHtml(productsWithVariants, config);
   const outputFilePath = './app/' + config.type + '/' + config.name + '.html';
   fs.writeFileSync(outputFilePath, html);
@@ -77,6 +84,7 @@ const configurations = configReader.getConfigurations();
 
 // Run the builder once for print and once for digital
 for (const config of configurations) {
+  await runCatalogBuilderForConfig({ ...config, type: 'mobile'});
   await runCatalogBuilderForConfig({ ...config, type: 'compressed'});
   await runCatalogBuilderForConfig({ ...config, type: 'digital'});
   await runCatalogBuilderForConfig({ ...config, type: 'print'});

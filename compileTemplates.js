@@ -266,11 +266,11 @@ const sectionFillerTemplate = `
 
 // Define the Collection Summary Template
 const collectionSummaryTemplate = `
-<div class="collection-summary collection-name-{{#nameToClass}}{{collectionName}}{{/nameToClass}}" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) {{gradientStart}}%, transparent {{gradientEnd}}%), url('{{cover}}')">
+<div class="collection-summary collection-name-{{#nameToClass}}{{collectionName}}{{/nameToClass}}" style="background-image: {{gradient}} url('{{cover}}')">
   {{#if logo}}
-    <div class="collection-summary-logo"><img src="{{logo}}" /></div>
+    <div class="collection-summary-logo" style="margin-top: {{margin}}"><img src="{{logo}}" /></div>
   {{else}}
-    <div class="collection-summary-title">{{collectionName}}</div>
+    <div class="collection-summary-title" style="margin-top: {{margin}}">{{collectionName}}</div>
   {{/if}}
   {{#if blurb}}
     <div class="collection-tagline">{{{tagline}}}</div>

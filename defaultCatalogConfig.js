@@ -4,7 +4,7 @@ const defaultConfig = {
   "barcodes": false,
   collections: [
     "Zootility Tools",
-    "Rift Collection",
+    "Rift Gear",
     "WanderMade Wallets",
     "Peak and Port Bags",
     "TūLRY",
@@ -22,8 +22,8 @@ const defaultConfig = {
 
 const defaultPdfOptions = {
   compressed: {
-    format: 'Ledger',
-    width: '1000px'
+    format: 'Letter',
+    width: '500px'
   },
   digital: {
     format: 'Ledger',

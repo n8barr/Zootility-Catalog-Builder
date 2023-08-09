@@ -51,3 +51,4 @@ build/
 # Files #
 #########
 catalog.html
+.DS_Store

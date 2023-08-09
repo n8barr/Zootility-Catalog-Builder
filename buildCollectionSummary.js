@@ -13,7 +13,7 @@ function buildCollectionSummary(product, collectionProducts, catalogStyle) {
   let blurb, tagline;
 
   // Calculate the gradient start and end points
-  let gradientStart, gradientEnd;
+  let gradientStart, gradientEnd, gradient, margin;
   if (collectionBlurb) {
     blurb = collectionBlurb.blurb;
     tagline = collectionBlurb.tagline;
@@ -26,11 +26,18 @@ function buildCollectionSummary(product, collectionProducts, catalogStyle) {
   }
   gradientEnd = 20 + gradientStart;
 
+  if (collectionBlurb && typeof collectionBlurb.margin === 'string') {
+    margin = collectionBlurb.margin;
+    gradient = '';
+  } else {
+    gradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ${gradientStart}%, transparent ${gradientEnd}%), `
+  }
+
   // Create the collection summary page using the collectionSummaryTemplate
   const collectionSummaryPage = compiledCollectionSummaryTemplate({
     collectionName,
-    gradientStart,
-    gradientEnd,
+    gradient,
+    margin,
     blurb,
     tagline,
     products: collectionProducts,

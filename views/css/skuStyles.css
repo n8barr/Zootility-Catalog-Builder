@@ -205,7 +205,7 @@
 }
 
 .product-baseSku-PS-VT .product2-image {
-    background-color: #f5e9d8!important;
+    background-color: #faefdc!important;
 }
 
 .product-baseSku-PS-DT .product-image {
@@ -237,7 +237,7 @@
 }
 /*
 .product-baseSku-PG-MOU .product2-image img,*/
-.product-baseSku-PG-SLY .product2-image img,
+.product-baseSku-PG-UPL .product2-image img,
 .product-baseSku-PG-PEA .product-image img
 {
     width: 65%;
@@ -477,7 +477,7 @@
 }
 
 .product-baseSku-D-DP .product-image {
-    background-color: #ddd1c0!important;
+    background-color: #856a6a!important;
 }
 
 .product-baseSku-D-DP:nth-of-type(2) .product-image {
@@ -486,7 +486,7 @@
 
 .product-baseSku-D-DP ul {
     list-style: none;
-    line-height: 1.75em;
+    line-height: 1.5em;
 }
 
 .collection-name-zootility-tools .collection-tagline {
@@ -510,8 +510,13 @@
     letter-spacing: initial;
 }
 
+.collection-name-tekpets .collection-tagline {
+    font-family: monospace;
+    rotate: initial;
+    margin-top: 0;
+}
+
 .collection-name-rift-gear .collection-tagline,
-.collection-name-techpets .collection-tagline,
 .collection-name-loopets .collection-tagline {
     font-size: 1.5em;
     rotate: initial;
