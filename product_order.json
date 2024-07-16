@@ -2,13 +2,8 @@
   "Rift Gear": [
     "PS-ARB",
     "PS-RBS",
-    "PS-SCRB",
     "PS-RMW",
-    "PS-RMWB",
-    "Z-RB",
-    "Z-RBA",
-    "D-DP-RB",
-    "D-DP-RC"
+    "Z-RB"
   ],
   "Zootility Tools": [
     "Z-PMD",
@@ -18,17 +13,29 @@
     "Z-SSK",
     "Z-WCSK",
     "Z-USK",
-    "Z-PP",
+    "Z-HH",
+    "Z-PMX",
+    "Z-K",
+    "Z-PMB",
     "Z-ST1",
     "Z-ST2",
-    "Z-PK",
+    "Z-HT420",
+    "GR-G",
+    "Z-PP",
+    "Z-WENG",
+    "Z-WGOL",
+    "Z-WPB",
+    "BG-AWO",
+    "Z-KBF",
+    "Z-KREX",
     "Z-TT",
     "Z-HEX",
-    "DP-SKK",
-    "Z-K",
-    "DP-MTBS",
-    "Z-HH",
-    "Z-PMX"
+    "Z-KBEA",
+    "Z-KSCO",
+    "Z-KBUF",
+    "Z-KORB",
+    "Z-KPB",
+    "Z-KGOL"  
   ],
   "TūLRY": [
     "J-TSZN",
@@ -36,29 +43,25 @@
     "D-STD"
   ],
   "WanderMade Wallets": [
-    "PS-LSW",
-    "D-DP",
-    "PS-LSWP",
-    "PS-RFID",
-    "PS-FPWP",
     "PS-FPW",
+    "PS-FPWP",
     "PS-EPW",
     "PS-MPW",
-    "PS-EFW",
-    "PS-LFW",
-    "D-FWD"
+    "PS-LSW",
+    "PS-LSWP",
+    "PS-LFW"
   ],
-  "Backyard & Bar": [
-    "GR-G",
-    "GR-AGS",
-    "GR-MC"
-  ],
-  "Timeless Terrain": [
-    "LG-CAC",
-    "LG-CPWC",
-    "LG-CSO",
-    "LG-CMPM",
-    "LG-CWA"
+  "Patch & Stitch": [
+    "PA-LPCT",
+    "PA-CSLP",
+    "PA-GLP",
+    "PA-GLPCT",
+    "PA-CLP",
+    "PA-GFPCT",
+    "PA-CFP",
+    "PA-CSWL",
+    "PA-CSSW",
+    "PA-CWL"
   ],
   "Name Drop": [
     "LG-CPWM",

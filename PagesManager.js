@@ -1,8 +1,9 @@
-import { compiledProductLeftTemplates, 
-  compiledProductRightTemplates, 
-  compiledVariantTemplate, 
+import {
+  compiledProductLeftTemplates,
+  compiledProductRightTemplates,
+  compiledVariantTemplate,
   compiledVariantTemplateWithPrice,
-  compiledProduct1ImageTemplate, 
+  compiledProduct1ImageTemplate,
   compiledSectionFillerTemplate,
 } from "./compileTemplates.js";
 
@@ -21,29 +22,35 @@ class PagesManager {
 
   // Create pages from the product list
   createPages(productsWithVariants, catalogStyle) {
-
     // Build the pages in order of the product entries
     let lastProduct = {};
     productsWithVariants.forEach((product, index) => {
-      const collectionName = product.productType;
+      const collectionName = product.type;
       // Check for a transition from one Collection to another.
-      if (this.pageSections.length === 1 && collectionName !== this.pageSections[0].collectionName) {
+      if (
+        this.pageSections.length === 1 &&
+        collectionName !== this.pageSections[0].collectionName
+      ) {
         // Add filler section if page is only half full
-          this.insertFillerSection(lastProduct, catalogStyle);
+        this.insertFillerSection(lastProduct, catalogStyle);
       }
 
       // Check if the lastProduct is a different collection than the current
-      if (collectionName !== lastProduct.productType) {
-        // Add a collection contents summary page to the start of a 
+      if (collectionName !== lastProduct.type) {
+        // Add a collection contents summary page to the start of a
         // new section
 
         // First Return a list of products in the collection
         const collectionProducts = productsWithVariants.filter((product) => {
-          return product.productType === collectionName;
+          return product.type === collectionName;
         });
 
-        const collectionSummaryPage = buildCollectionSummary(product, collectionProducts, catalogStyle);
-        
+        const collectionSummaryPage = buildCollectionSummary(
+          product,
+          collectionProducts,
+          catalogStyle
+        );
+
         this.insertPage(collectionSummaryPage, "MADE IN USA");
       }
       // Set this for the next Insert Filler Check
@@ -61,25 +68,31 @@ class PagesManager {
     return this.pages;
   }
 
-
   //split a product into the number of needed page sections
   generatePageSections(product, catalogStyle) {
     const variantsCount = product.variants.length;
 
     // Don't split a product over multiple pages
     // If a pageSection is started, put a two-section product on the next page
-    if (this.pageSections.length === 1 && (variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage))) {
+    if (
+      this.pageSections.length === 1 &&
+      (variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage))
+    ) {
       this.insertFillerSection(product, catalogStyle);
     }
 
     // Check if the product needs a price range
     let hasPriceRange = false;
-    if (product.minRetailPrice !== product.maxRetailPrice) {
+    if (product.minWholesalePrice !== product.maxWholesalePrice) {
       hasPriceRange = true;
     }
 
     // only use the product images in the thumbnail positions on productTemplate1
-    if (variantsCount === 1 || variantsCount >= 8 || (variantsCount === 7 && product.hasLifestyleImage)) {
+    if (
+      variantsCount === 1 ||
+      variantsCount >= 8 ||
+      (variantsCount === 7 && product.hasLifestyleImage)
+    ) {
       product.imageTemplates = [];
       product.images.forEach((image, index) => {
         if (product.hasLifestyleImage && index === 0) {
@@ -89,7 +102,7 @@ class PagesManager {
         product.imageTemplates.push(compiledProduct1ImageTemplate(image));
       });
 
-      // add the variant images to the grid images 
+      // add the variant images to the grid images
       if (variantsCount === 1) {
         product.variants[0].images.forEach((image, index) => {
           if (index === 0 && !product.hasLifestyleImage) return; // Only add first image if the product has a lifestyle image
@@ -98,19 +111,20 @@ class PagesManager {
       }
 
       // set the showSkuInOverview flag
-      product.showSkuInOverview = variantsCount === 1 ? true : !product.hasLifestyleImage;
+      product.showSkuInOverview =
+        variantsCount === 1 ? true : !product.hasLifestyleImage;
 
       // use the 1x2 grid if there are 2 or less images
       if (product.imageTemplates.length <= 2) {
         product.use1x2Grid = true;
       }
-      const content = this.selectTemplate(0)({ 
-        ...product, 
-        showBarcodes: this.config.showBarcodes 
+      const content = this.selectTemplate(0)({
+        ...product,
+        showBarcodes: this.config.showBarcodes,
       });
       this.pageSections.push({
-          content,
-          collectionName: product.productType
+        content,
+        collectionName: product.type,
       });
       this.checkInsertPage();
       // Handle the case where the first variant image is shown as the product image
@@ -120,57 +134,74 @@ class PagesManager {
       }
     }
 
-    if ((variantsCount >= 2 && variantsCount <= 4) || (variantsCount === 5 && !product.hasLifestyleImage)) {
-        // Render variant templates and add them to the product object
-        product.variants.forEach((variant) => {
-            variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
-        });
-
-        if ((variantsCount <= 2) || (!product.hasLifestyleImage && variantsCount === 3)) {
-          product.use1x2Grid = true;
-        }
-
-        const content = this.selectTemplate(1)({ 
-          ...product, 
-          showBarcodes: this.config.showBarcodes 
-        });
-        this.pageSections.push({
-            content,
-            collectionName: product.productType
-          });
-
-        this.checkInsertPage();
-
-    } else if ((variantsCount >= 5 && variantsCount <= 6) || (variantsCount === 7 && !product.hasLifestyleImage)){
+    if (
+      (variantsCount >= 2 && variantsCount <= 4) ||
+      (variantsCount === 5 && !product.hasLifestyleImage)
+    ) {
       // Render variant templates and add them to the product object
       product.variants.forEach((variant) => {
-        variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
+        variant.variantTemplate = hasPriceRange
+          ? compiledVariantTemplateWithPrice(variant)
+          : compiledVariantTemplate(variant);
       });
 
-      const content = this.selectTemplate(1)({ 
-        ...product, 
-        showBarcodes: this.config.showBarcodes 
+      if (
+        variantsCount <= 2 ||
+        (!product.hasLifestyleImage && variantsCount === 3)
+      ) {
+        product.use1x2Grid = true;
+      }
+
+      const content = this.selectTemplate(1)({
+        ...product,
+        showBarcodes: this.config.showBarcodes,
       });
       this.pageSections.push({
         content,
-        collectionName: product.productType
+        collectionName: product.type,
       });
 
       this.checkInsertPage();
-    } else if ((variantsCount >= 7 && variantsCount <= 8) || (variantsCount === 9 && !product.hasLifestyleImage)) {
+    } else if (
+      (variantsCount >= 5 && variantsCount <= 6) ||
+      (variantsCount === 7 && !product.hasLifestyleImage)
+    ) {
+      // Render variant templates and add them to the product object
+      product.variants.forEach((variant) => {
+        variant.variantTemplate = hasPriceRange
+          ? compiledVariantTemplateWithPrice(variant)
+          : compiledVariantTemplate(variant);
+      });
+
+      const content = this.selectTemplate(1)({
+        ...product,
+        showBarcodes: this.config.showBarcodes,
+      });
+      this.pageSections.push({
+        content,
+        collectionName: product.type,
+      });
+
+      this.checkInsertPage();
+    } else if (
+      (variantsCount >= 7 && variantsCount <= 8) ||
+      (variantsCount === 9 && !product.hasLifestyleImage)
+    ) {
       while (product.variants.length > 0) {
         const subVariants = product.variants.splice(0, 8);
         subVariants.forEach((variant) => {
-          variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
+          variant.variantTemplate = hasPriceRange
+            ? compiledVariantTemplateWithPrice(variant)
+            : compiledVariantTemplate(variant);
         });
         const subProduct = { ...product, variants: subVariants };
-        const content = this.selectTemplate(2)({ 
-          ...subProduct, 
-          showBarcodes: this.config.showBarcodes 
+        const content = this.selectTemplate(2)({
+          ...subProduct,
+          showBarcodes: this.config.showBarcodes,
         });
         this.pageSections.push({
-            content,
-            collectionName: product.productType
+          content,
+          collectionName: product.type,
         });
         this.checkInsertPage();
       }
@@ -178,16 +209,18 @@ class PagesManager {
       while (product.variants.length > 0) {
         const subVariants = product.variants.splice(0, 18);
         subVariants.forEach((variant) => {
-          variant.variantTemplate = hasPriceRange ? compiledVariantTemplateWithPrice(variant) : compiledVariantTemplate(variant);
+          variant.variantTemplate = hasPriceRange
+            ? compiledVariantTemplateWithPrice(variant)
+            : compiledVariantTemplate(variant);
         });
         const subProduct = { ...product, variants: subVariants };
-        const content = this.selectTemplate(3)({ 
-          ...subProduct, 
-          showBarcodes: this.config.showBarcodes 
+        const content = this.selectTemplate(3)({
+          ...subProduct,
+          showBarcodes: this.config.showBarcodes,
         });
         this.pageSections.push({
-            content,
-            collectionName: product.productType
+          content,
+          collectionName: product.type,
         });
         this.checkInsertPage();
       }
@@ -216,7 +249,10 @@ class PagesManager {
   }
 
   insertPageSections() {
-    const content = this.pageSections[0].content + '\n' + (this.pageSections[1] && this.pageSections[1].content);
+    const content =
+      this.pageSections[0].content +
+      "\n" +
+      (this.pageSections[1] && this.pageSections[1].content);
     const collectionName = this.pageSections[0].collectionName;
     this.insertPage(content, collectionName);
   }
@@ -225,7 +261,7 @@ class PagesManager {
     const page = {
       collectionName,
       content,
-      page: this.pageIndex
+      page: this.pageIndex,
     };
     this.pages.push(page);
 
@@ -235,21 +271,23 @@ class PagesManager {
   }
 
   insertFillerSection(product, catalogStyle) {
-    const [collectionPrefix] = product.baseSku.split('-');
+    const [collectionPrefix] = product.baseSku.split("-");
 
-    const { imagePath, count } = FindImagePathManager.findCollectionImage(collectionPrefix, catalogStyle);
+    const { imagePath, count } = FindImagePathManager.findCollectionImage(
+      collectionPrefix,
+      catalogStyle
+    );
 
     // Generate the content to add the section
     this.pageSections.push({
       content: compiledSectionFillerTemplate({
         image: imagePath,
-        class: `filler-${collectionPrefix}-${count}`
+        class: `filler-${collectionPrefix}-${count}`,
       }),
-      collectionName: product.productType
+      collectionName: product.type,
     });
 
     this.checkInsertPage();
-
   }
 }
 

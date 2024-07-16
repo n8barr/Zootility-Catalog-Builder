@@ -38,7 +38,7 @@ import {
   
       pageSections.push({
         content: selectTemplate(0)(product),
-        collectionName: product.productType,
+        collectionName: product.type,
       });
   
       checkInsertPage();
@@ -104,7 +104,7 @@ import {
         ...product,
         variants: subVariants,
       }),
-      collectionName: product.productType,
+      collectionName: product.type,
     });
   
     checkInsertPage();

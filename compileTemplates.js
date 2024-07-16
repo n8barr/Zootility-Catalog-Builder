@@ -1,18 +1,18 @@
-import Handlebars from 'handlebars';
-import { 
+import Handlebars from "handlebars";
+import {
   lifestyleBgColorHelper,
-  productBgColorHelper
-} from './helpers/backgroundColorHelper.js';
-import './helpers/isNotZero.js';
-import { isNotZero } from './helpers/isNotZero.js';
-import { nameToClass } from './helpers/nameToClass.js';
-import { priceRangeHelper } from './helpers/priceRangeHelper.js';
+  productBgColorHelper,
+} from "./helpers/backgroundColorHelper.js";
+import "./helpers/isNotZero.js";
+import { isNotZero } from "./helpers/isNotZero.js";
+import { nameToClass } from "./helpers/nameToClass.js";
+import { priceRangeHelper } from "./helpers/priceRangeHelper.js";
 
-Handlebars.registerHelper('lifestyleBgColor', lifestyleBgColorHelper);
-Handlebars.registerHelper('productBgColor', productBgColorHelper);
-Handlebars.registerHelper('isNotZero', isNotZero);
-Handlebars.registerHelper('nameToClass', nameToClass);
-Handlebars.registerHelper('priceRange', priceRangeHelper);
+Handlebars.registerHelper("lifestyleBgColor", lifestyleBgColorHelper);
+Handlebars.registerHelper("productBgColor", productBgColorHelper);
+Handlebars.registerHelper("isNotZero", isNotZero);
+Handlebars.registerHelper("nameToClass", nameToClass);
+Handlebars.registerHelper("priceRange", priceRangeHelper);
 
 // Define the HTML templates
 const pageTemplate = `
@@ -27,6 +27,7 @@ const pageTemplate = `
   <link rel="stylesheet" type="text/css"  href="../css/imageContainer.css">
   <link rel="stylesheet" type="text/css"  href="../css/skuStyles.css">
   <link rel="stylesheet" type="text/css"  href="../css/cover.css">
+  <script src="../js/missing-images.js"></script>
   {{#if showBarcodes}}
     <script src="../../node_modules/jsbarcode/dist/JsBarcode.all.min.js"></script>
   {{/if}}
@@ -187,13 +188,16 @@ const productTemplateRight2 = `
 </div>
 `;
 
-
 const variantTemplate = `
 <div class="variant variant-sku-{{sku}}">
   <div class="image-container">
     <img src="{{images.[0]}}" alt="{{sku}} - {{option1Value}}" />
   </div>
-  <div class="sku">{{option1Value}}</br>{{sku}}</div>
+  <div class="sku">{{option1Value}}
+  {{#if option2Value}}
+    / {{option2Value}}
+  {{/if}}
+  </br>{{sku}}</div>
   {{#if showBarcodes}}
     {{#if barcode}}
       <div class="barcode-container">
@@ -218,7 +222,12 @@ const variantTemplateWithPrice = `
   <div class="image-container">
     <img src="{{images.[0]}}" alt="{{sku}} - {{option1Value}}" />
   </div>
-  <div class="sku">{{option1Value}}</br>{{sku}}</div>
+  <div class="sku">
+  {{option1Value}}
+  {{#if option2Value}}
+    / {{option2Value}}
+  {{/if}}
+  </br>{{sku}}</div>
   <div class="variant-price">
     <div class="wholesale-price">Cost: $ {{wholesalePrice}}</div>
   </div>
@@ -302,21 +311,25 @@ const compiledProductRightTemplates = [
 ];
 
 const compiledVariantTemplate = Handlebars.compile(variantTemplate);
-const compiledVariantTemplateWithPrice = Handlebars.compile(variantTemplateWithPrice);
+const compiledVariantTemplateWithPrice = Handlebars.compile(
+  variantTemplateWithPrice
+);
 
 const compiledProduct1ImageTemplate = Handlebars.compile(product1ImageTemplate);
 
 const compiledSectionFillerTemplate = Handlebars.compile(sectionFillerTemplate);
 
-const compiledCollectionSummaryTemplate = Handlebars.compile(collectionSummaryTemplate);
+const compiledCollectionSummaryTemplate = Handlebars.compile(
+  collectionSummaryTemplate
+);
 
-export { 
-  compiledPageTemplate, 
-  compiledProductLeftTemplates, 
-  compiledProductRightTemplates, 
-  compiledVariantTemplate, 
+export {
+  compiledPageTemplate,
+  compiledProductLeftTemplates,
+  compiledProductRightTemplates,
+  compiledVariantTemplate,
   compiledVariantTemplateWithPrice,
-  compiledProduct1ImageTemplate, 
+  compiledProduct1ImageTemplate,
   compiledSectionFillerTemplate,
   compiledCollectionSummaryTemplate,
 };

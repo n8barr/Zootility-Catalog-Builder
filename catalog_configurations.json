@@ -6,90 +6,20 @@
       "Zootility Tools",
       "Rift Gear",
       "WanderMade Wallets",
-      "Peak and Port Bags",
-      "TūLRY",
-      "Timeless Terrain",
+      "Patch & Stitch",
       "Name Drop",
+      "Timeless Terrain",
       "State Goods",
+      "Sustainable Stickers",
+      "Color-Me Creative",
       "TekPets",
-      "Loopets",
-      "Displays"
+      "Displays",
+      "Services and Fees"
     ],
-    "exclude": [
-      "DP-SKK",
-      "DP-MTBS",
-      "D-DP-RB",
-      "D-DP-RC",
-      "J-ZCPG-VIR",
-      "J-ZCPG-TAU",
-      "J-ZCPG-SCO",
-      "J-ZCPG-SAG",
-      "J-ZCPG-PIS",
-      "J-ZCPG-LIB",
-      "J-ZCPG-LEO",
-      "J-ZCPG-GEM",
-      "J-ZCPG-CAP",
-      "J-ZCPG-CAN",
-      "J-ZCPG-ARI",
-      "J-ZCPG-AQU",
-      "H-TPC-4",
-      "LG-CEWO",
-      "ZL-CT",
-      "ZL-CL",
-      "CG-CPMX",
-      "CG-CPMD",
-      "PS-CNN-BLK",
-      "PS-CNN-COY",
-      "PS-CNN-HPT",
-      "PS-CNN-WN"
-    ]
+    "exclude": []
   },
   {
-    "name": "2023 Summer Catalog"
-  },
-  {
-    "name": "Custom",
-    "collections": [
-      "Timeless Terrain",
-      "Name Drop",
-      "State Goods"
-    ]
-  },
-  {
-    "name": "TekPets",
-    "collections": [
-      "TekPets",
-      "Loopets"
-    ]
-  },
-  {
-    "name": "Everday Carry",
-    "collections": [
-      "Zootility Tools",
-      "Rift Gear",
-      "WanderMade Wallets"  
-    ]
-  },
-  {
-    "name": "Peak and Port",
-    "collections": [
-      "Peak and Port Bags"
-    ]
-  },
-  {
-    "name": "Definitively Stickers",
-    "collections": [
-      "Definitively Stickers"
-    ]
-  },
-  {
-    "name": "Zootility Outdoors",
-    "collections": [
-      "Zootility Tools",
-      "Rift Gear",
-      "WanderMade Wallets",
-      "Peak and Port Bags",
-      "TūLRY"
-    ]
+    "name": "Eco Stickers",
+    "collections": ["Sustainable Stickers"]
   }
 ]
