@@ -11,6 +11,7 @@ import { FindImagePathManager } from "./FindImagePathManager.js";
 import { convertHtmlToPdf } from "./htmlToPdf.js";
 import { defaultConfig, defaultPdfOptions } from "./defaultCatalogConfig.js";
 import { readCSVSync } from "./readCSVSync.js";
+import { generateBrandwiseFile } from "./generateBrandwiseFile.js";
 
 // Generate the final HTML
 function generateHtml(products, config) {
@@ -90,6 +91,37 @@ async function runCatalogBuilderForConfig(config, callback) {
     includedProducts,
     config
   );
+
+  // generate the Brandwise File
+  generateBrandwiseFile(productsWithVariants);
+
+  // Generate the folder of images for Brandwise upload
+  // Only do this once - use "print" so the files have larger resolution
+  if (config.type === "print") {
+    console.log ("Generating Brandwise images...");
+    const brandwiseImagesFolder = "./app/brandwise_images";
+    fs.mkdirSync(brandwiseImagesFolder, { recursive: true });
+    productsWithVariants.forEach((product) => {
+      product.variants.forEach((variant) => {
+        const imageFile = variant.images[0];
+        if (imageFile) {
+          // name the image file the same as the SKU and use the same extension
+          const imageFileName = variant.sku + path.extname(imageFile);
+          const imageFileOutputPath = path.join(
+            brandwiseImagesFolder,
+            imageFileName
+          );
+
+          // change the image file name to the folder accessible from this file instead of the HTML file
+          const imageFilePath = imageFile.replace("../../", "./");
+          fs.copyFileSync(imageFilePath, imageFileOutputPath);
+        }
+      });
+    });
+    console.log("Brandwise images generated successfully.");
+  }
+
+  // generate the HTML
   const html = generateHtml(productsWithVariants, config);
   const outputFilePath = "./app/" + config.type + "/" + config.name + ".html";
   fs.writeFileSync(outputFilePath, html);
@@ -106,6 +138,12 @@ async function runCatalogBuilderForConfig(config, callback) {
 
   console.log(config.name + " generated successfully.");
 }
+
+/* 
+**
+****** Main *****
+**
+*/
 
 // Copy the images and CSS to the app folder
 await copyFolderSync("views/css", "app/css");
@@ -130,8 +168,7 @@ const configurations = configReader.getConfigurations();
 
 // Run the builder once for print and once for digital
 for (const config of configurations) {
-  // await runCatalogBuilderForConfig({ ...config, type: "mobile" });
-  await runCatalogBuilderForConfig({ ...config, type: "compressed" });
-  await runCatalogBuilderForConfig({ ...config, type: "digital" });
-  await runCatalogBuilderForConfig({ ...config, type: "print" });
+await runCatalogBuilderForConfig({ ...config, type: "compressed" });
+// await runCatalogBuilderForConfig({ ...config, type: "digital" });
+// await runCatalogBuilderForConfig({ ...config, type: "print" });
 }

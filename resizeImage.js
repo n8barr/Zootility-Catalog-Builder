@@ -59,6 +59,7 @@ async function resizeImageForFolder(
 
       await image
         .resize(resizedWidth, resizedHeight)
+        .png({ quality: 80, palette: true })
         .toBuffer()
         .then(async (buffer) => {
           await fs.promises.writeFile(filePathOut, buffer);

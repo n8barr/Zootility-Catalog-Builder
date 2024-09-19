@@ -16,7 +16,7 @@ async function processImportedImage(file, filePath) {
   await fs.ensureDir(path.join(filePath, "cropped"));
 
   // trim whitespace from image
-  const buffer = await sharp(filePathIn).trim(TRIM_OPTIONS).toBuffer();
+  const buffer = await sharp(filePathIn).trim(TRIM_OPTIONS).png({ quality: 80, palette: true }).toBuffer();
   fs.writeFileSync(filePathOut, buffer);
 
   // resize the image

@@ -46,6 +46,7 @@ cropped_images/
 collection_images/
 cover_images/
 app/
+app.bak/
 build/
 
 # Files #
