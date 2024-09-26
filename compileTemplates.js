@@ -19,6 +19,7 @@ const pageTemplate = `
 <!doctype html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css"  href="../css/pageContent.css">
   <link rel="stylesheet" type="text/css"  href="../css/productTemplate1.css">
   <link rel="stylesheet" type="text/css"  href="../css/productTemplate2.css">

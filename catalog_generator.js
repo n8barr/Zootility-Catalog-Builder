@@ -11,7 +11,7 @@ import { FindImagePathManager } from "./FindImagePathManager.js";
 import { convertHtmlToPdf } from "./htmlToPdf.js";
 import { defaultConfig, defaultPdfOptions } from "./defaultCatalogConfig.js";
 import { readCSVSync } from "./readCSVSync.js";
-import { generateBrandwiseFile } from "./generateBrandwiseFile.js";
+import { generateMTFile } from "./generateMarketTimeFile.js";
 
 // Generate the final HTML
 function generateHtml(products, config) {
@@ -43,7 +43,7 @@ const filterProductsByExcluded = (products, exclude) => {
 async function runCatalogBuilderForConfig(config, callback) {
   console.log("\n\nGenerating " + config.name + " " + config.type + "...");
   // Read and parse the products CSV file
-  const csvFilePath = "./products-shopify.csv";
+  const csvFilePath = "./Products.csv";
   const csvData = readCSVSync(csvFilePath);
   const products = processData(csvData);
 
@@ -93,7 +93,7 @@ async function runCatalogBuilderForConfig(config, callback) {
   );
 
   // generate the Brandwise File
-  generateBrandwiseFile(productsWithVariants);
+  generateMTFile(productsWithVariants);
 
   // Generate the folder of images for Brandwise upload
   // Only do this once - use "print" so the files have larger resolution
@@ -168,7 +168,7 @@ const configurations = configReader.getConfigurations();
 
 // Run the builder once for print and once for digital
 for (const config of configurations) {
-await runCatalogBuilderForConfig({ ...config, type: "compressed" });
-// await runCatalogBuilderForConfig({ ...config, type: "digital" });
+// await runCatalogBuilderForConfig({ ...config, type: "compressed" });
+await runCatalogBuilderForConfig({ ...config, type: "digital" });
 // await runCatalogBuilderForConfig({ ...config, type: "print" });
 }

@@ -8,7 +8,6 @@
       "WanderMade Wallets",
       "Patch & Stitch",
       "Name Drop",
-      "Timeless Terrain",
       "State Goods",
       "Sustainable Stickers",
       "Color-Me Creative",
@@ -17,9 +16,5 @@
       "Services and Fees"
     ],
     "exclude": []
-  },
-  {
-    "name": "Eco Stickers",
-    "collections": ["Sustainable Stickers"]
   }
 ]

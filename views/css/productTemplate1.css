@@ -9,7 +9,7 @@
 .product-info {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 65%;
   gap: 10px;
   padding: 25px;
   box-sizing: border-box;
@@ -80,15 +80,15 @@
 }
 
 .page:nth-child(odd) .product-info {
-  margin-right: 10%;
+  margin-right: 5%;
 }
 
 .page:nth-child(even) .product-info {
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 .imageType-lifestyle .product-image {
-  width: 50%;
+  width: 35%;
   margin: 0;
   box-sizing: border-box;
 }

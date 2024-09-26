@@ -13,11 +13,11 @@
 }
 
 .page:nth-child(odd) .product3-variants {
-    margin-right: 10%;
+    margin-right: 5%;
 }
 
 .page:nth-child(even) .product3-variants {
-    margin-left: 10%;
+    margin-left: 5%;
 }
 
 .product3-variants svg.barcode {

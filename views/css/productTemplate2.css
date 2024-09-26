@@ -4,12 +4,12 @@
 }
 
 .page:nth-child(odd) .product2-info {
-  margin-right: 10%;
+  margin-right: 5%;
   padding-right: 0;
 }
 
 .page:nth-child(even) .product2-info {
-  margin-left: 10%;
+  margin-left: 5%;
   padding-left: 0;
 }
 
@@ -102,7 +102,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 70%;
   gap: 10px;
   padding: 25px;
 }
@@ -140,12 +140,16 @@
 }
 
 .showBarcodes .product2-variants .image-container {
-  margin-top: -30%;
+  margin-top: -18%;
+}
+
+.showBarcodes .product2-variants.grid-1x2 .image-container {
+  margin-top: 0;
 }
 
 .showBarcodes .product2-variants img {
-  max-width: 70%;
-  max-height: 70%;
+  max-width: 100%;
+  max-height: 90%;
   margin: auto;
   left: 0;
   right: 0;

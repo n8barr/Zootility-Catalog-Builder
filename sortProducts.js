@@ -50,7 +50,7 @@ function customProductSort(collections, a, b) {
     // If the product is in the desired order array, put it in the desired order
     if (productOrderA === -1 || productOrderB === -1) {
       if (productOrderA === productOrderB) {
-        return 0;
+        return testVariantSales(a, b);
       }
       if (productOrderA !== -1) {
         return -1;
@@ -60,9 +60,14 @@ function customProductSort(collections, a, b) {
     if (productOrderA !== productOrderB) {
       return productOrderA - productOrderB;
     }
-    return 0;
+    return testVariantSales(a, b);
   } // else, continue with the normal sort by sales
 
+  // Test the sales totals, keep the best selling products at the top
+  return testVariantSales(a, b);
+}
+
+function testVariantSales(a, b) {
   // Test the sales totals, keep the best selling products at the top
   const salesTotalA = salesTotals[a.baseSku] || 0;
   const salesTotalB = salesTotals[b.baseSku] || 0;

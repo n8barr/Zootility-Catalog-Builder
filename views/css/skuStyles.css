@@ -1,5 +1,6 @@
-.product-baseSku-Z-PP .product2-image {
-  background-color: #5cbdbd !important;
+.product-baseSku-Z-PMD .product-image,
+.product-baseSku-Z-WC .product-image {
+  width: 40%;
 }
 
 .product-baseSku-Z-WCB .product-image {
@@ -25,11 +26,17 @@
   background-color: #847c31 !important;
 }
 
+.product-baseSku-Z-PMB .product-image {
+  width: 40%;
+  padding-left: 5%;
+  padding-right: 5.5%;
+}
+
 .product-baseSku-Z-PK .product-image {
   background-color: #c0a46a !important;
-  width: 18%;
-  padding-right: 16%;
-  padding-left: 15%;
+  width: 23%;
+  padding-right: 13%;
+  padding-left: 12%;
 }
 
 .product-baseSku-DP-SKK .product-image,
@@ -60,9 +67,12 @@
 
 .product-baseSku-Z-HT420 .product-image {
   background-color: #efdb43 !important;
-  width: 40%;
-  padding-left: 5%;
-  padding-right: 5%;
+  width: 37%;
+  padding: 0;
+}
+
+.product-baseSku-Z-HT420 .product-image img {
+  rotate: 90deg;
 }
 
 .product-baseSku-Z-K .product2-image {
@@ -106,6 +116,9 @@
 
 .product-baseSku-PS-LSW .product-image {
   background-color: #5eb2b7 !important;
+  width: 50%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .product-baseSku-PS-LSW .product2-variants {
@@ -120,6 +133,11 @@
 .product.section-filler.filler-PS-2,
 .product.section-filler.filler-ZL-3 {
   margin: 25px;
+}
+
+.product-baseSku-ZL-CT .product-image {
+  width: 65%;
+  padding: 5%;
 }
 
 .product-baseSku-PS-FPW .product2-image {
@@ -346,6 +364,19 @@
   background-color: white !important;
 }
 
+.product-baseSku-PS-ARB .product2-variants .image-container,
+ .product-baseSku-PS-RBS .product2-variants .image-container {
+  margin-top: -35%;
+}
+
+.product-baseSku-PS-MPW .product2-variants .image-container {
+  margin-top: -33%;
+}
+
+.product-baseSku-PS-MPW .product2-variants img {
+  max-height: 73%;
+}
+
 .product-baseSku-SG-CCWO .product-image {
   background-color: #0b2126 !important;
 }
@@ -432,6 +463,8 @@
 .product-baseSku-PS-CLSW .product2-image {
   background-color: #b27e55 !important;
   color: ivory;
+  width: 46%;
+  padding: 4%;
 }
 
 .product-baseSku-PS-CFPW .product2-image {
@@ -441,10 +474,13 @@
 
 .product-baseSku-SG-CCWO .product-image,
 .product-baseSku-LG-CEWO .product-image,
-.product-baseSku-BG-AWO .product-image {
-  width: 20%;
-  padding-left: 14%;
-  padding-right: 15%;
+.product-baseSku-BG-AWO .product-image,
+.product-baseSku-Z-WGOL .product-image,
+.product-baseSku-Z-WENG .product-image,
+.product-baseSku-Z-WPB .product-image {
+  width: 25%;
+  padding-left: 12%;
+  padding-right: 12%;
 }
 
 .product-baseSku-CG-CPMD .product-image {
@@ -461,6 +497,39 @@
 
 .product-baseSku-SG-SNO .product-variants.grid-1x2 {
   margin-right: 0;
+}
+
+.showBarcodes [class*="product-baseSku-ES-"] .product2-variants .image-container {
+  margin-top: -23%;
+}
+
+.showBarcodes [class*="product-baseSku-ES-"] .product2-variants img {
+  max-width: 95%;
+  max-height: 85%;
+}
+
+.product-baseSku-ES-SAY .product-image {
+  width: 54%;
+  padding-left: 11%;
+  padding-right: 11%;
+}
+
+.product-baseSku-ES-LAN .product-image {
+  width: 65%;
+}
+
+.product-baseSku-ES-VEH .product-image,
+.product-baseSku-ES-NS .product-image,
+.product-baseSku-ES-TRE .product-image,
+.product-baseSku-ES-SAN .product-image,
+.product-baseSku-ES-ANI .product-image,
+.product-baseSku-ES-NAT .product-image,
+.product-baseSku-ES-CA .product-image,
+.product-baseSku-ES-STA .product-image,
+.product-baseSku-ES-ACT .product-image {
+  width: 40%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .product-baseSku-D-BOX .product2-image {
@@ -486,10 +555,36 @@
 
 .product-baseSku-Z-KREX .product-image {
   background-color: #605b48 !important;
+  width: 36%;
+  padding-right: 8%;
+  padding-left: 7%;
+}
+.product-baseSku-Z-KBF .product-image {
+  background-color: #514b10 !important;
 }
 
 .product-baseSku-Z-KBF .product-image {
-  background-color: #514b10 !important;
+  width: 27%;
+  padding-right: 11%;
+  padding-left: 11%;
+}
+
+.product-baseSku-Z-KBEA .product-image {
+  width: 37%;
+  padding-right: 7%;
+  padding-left: 7%;
+}
+
+.product-baseSku-Z-KSCO .product-image {
+  width: 45%;
+  padding-right: 4%;
+  padding-left: 4%;
+}
+
+.product-baseSku-Z-KBUF .product-image {
+  width: 43%;
+  padding-right: 5%;
+  padding-left: 5%;
 }
 
 .product-baseSku-Z-KBEA .product-image {
@@ -506,14 +601,23 @@
 
 .product-baseSku-Z-KORB .product-image {
   background-color: #1c1c1c !important;
+  width: 28%;
+  padding-left: 11%;
+  padding-right: 11%;
 }
 
 .product-baseSku-Z-KGOL .product-image {
   background-color: #6faa6f !important;
+  width: 28%;
+  padding-left: 10%;
+  padding-right: 11%;
 }
 
 .product-baseSku-Z-KPB .product-image {
   background-color: #ea824a !important;
+  width: 22%;
+  padding-left: 13%;
+  padding-right: 13%;
 }
 
 .product-baseSku-Z-WGOL .product-image {
@@ -530,6 +634,7 @@
 
 .product-baseSku-Z-WENG .product-image {
   background-color: #f1ff5f !important;
+
 }
 
 .product-baseSku-PS-VP .product-image {

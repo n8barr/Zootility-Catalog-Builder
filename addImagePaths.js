@@ -29,7 +29,7 @@ async function addVariantImages(variant, catalogStyle) {
     ? ORIGINAL_FOLDER
     : CROPPED_FOLDER;
 
-  for (let i = 1; i <= 4; i++) {
+  for (let i = 1; i <= 2; i++) {
     for (const ext of SUPPORTED_EXTENSIONS) {
       const imageFileName = i === 1 ? `${sku}${ext}` : `${sku}-${i}${ext}`;
       const imagePath = path.join(
