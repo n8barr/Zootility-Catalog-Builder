@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 const IMAGE_CACHE_FOLDER = "build/online_image_cache";
 
-async function checkForOnlineImage(variant, onlineImgUrl, catalogStyle) {
+async function checkForOnlineImage(onlineImgUrl, catalogStyle) {
   if (!onlineImgUrl) {
     return;
   }
@@ -23,7 +23,7 @@ async function checkForOnlineImage(variant, onlineImgUrl, catalogStyle) {
   const htmlImagePath = "../../" + processedImagePath;
 
   if (fs.existsSync(processedImagePath)) {
-    variant.images.push(htmlImagePath);
+    return htmlImagePath;
   } else {
     // try to download the image
     const options = {
@@ -39,10 +39,11 @@ async function checkForOnlineImage(variant, onlineImgUrl, catalogStyle) {
       }
       fs.writeFileSync(downloadImagePath, response.data);
       await processImportedImage(localImgFileName, downloadDir);
-      variant.images.push(htmlImagePath);
+      return htmlImagePath;
     } catch (error) {
       console.error(`Error downloading image ${onlineImgUrl}: ${error}`);
     }
+    return;
   }
 }
 

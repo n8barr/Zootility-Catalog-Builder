@@ -12,6 +12,7 @@ import { convertHtmlToPdf } from "./htmlToPdf.js";
 import { defaultConfig, defaultPdfOptions } from "./defaultCatalogConfig.js";
 import { readCSVSync } from "./readCSVSync.js";
 import { generateMTFile } from "./generateMarketTimeFile.js";
+import checkForOnlineImage from "./checkForOnlineImage.js";
 
 // Generate the final HTML
 function generateHtml(products, config) {
@@ -47,6 +48,21 @@ async function runCatalogBuilderForConfig(config, callback) {
   const csvData = readCSVSync(csvFilePath);
   const products = processData(csvData);
 
+  // Extract the images for each product from the Shopify CSV Export
+  const packagingImagesById = {};
+  for (const product of products) {
+    const id = product.id;
+    const imageSrc = product.imageSrc;
+    const imageAltText = product.imageAltText;
+    // Check if the Alt Text includes the word "packaging"
+    if (imageAltText.toLowerCase().includes("packaging")) {
+      // Only include the first packaging image
+      if (!packagingImagesById[id]) {
+        packagingImagesById[id] = imageSrc;
+      }
+    }
+  }
+
   // When including the product image, we need to filter out entries that are just images
   const actualProductEntries = products.filter(
     (product) => product.variantId.length > 0
@@ -76,6 +92,18 @@ async function runCatalogBuilderForConfig(config, callback) {
       ...rest, // include remaining properties unchanged
     })
   );
+
+  // Add the packaging images to the products
+  for (const product of renamedProducts) {
+    const id = product.id;
+    const packagingImage = packagingImagesById[id];
+    if (packagingImage) {
+      const imageFound = await checkForOnlineImage(packagingImage, config.type);
+      if (imageFound) {
+        product.packagingImage = imageFound;
+      }
+    }
+  }
 
   // Generate the HTML for each configuration
   FindImagePathManager.resetCollectionCounterHash();

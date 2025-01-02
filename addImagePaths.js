@@ -51,11 +51,14 @@ async function addVariantImages(variant, catalogStyle) {
   // if no image was found, check for the image online
   if (variant.images.length === 0) {
     const onlineImgUrl = variant.onlineVariantImgUrl;
-    await checkForOnlineImage(variant, onlineImgUrl, catalogStyle);
+    const imageFound = await checkForOnlineImage(onlineImgUrl, catalogStyle);
+    if (imageFound) {
+      variant.images.push(imageFound);
+    }
   }
 }
 
-function addProductImages(product, catalogStyle) {
+async function addProductImages(product, catalogStyle) {
   if (!product.images) {
     product.images = [];
   }
@@ -86,10 +89,17 @@ function addProductImages(product, catalogStyle) {
   if (packagingImagePath) {
     product.hasPackagingImage = true;
     product.images.push(packagingImagePath);
+  } else {
+    // if no image was found, check for the packaging image on the product
+    if (product.packagingImage) {
+      const onlineImg = product.packagingImage;
+      product.hasPackagingImage = true;
+      product.images.push(onlineImg);
+    }
   }
 }
 
-function getAdditionalImagePath(product, folder, catalogStyle) {
+function getAdditionalImagePath(product, folder) {
   const [subfolder1, subfolder2] = product.sku.split("-");
   const baseSku = `${subfolder1}-${subfolder2}`;
 

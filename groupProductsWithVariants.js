@@ -35,7 +35,10 @@ async function groupProductsWithVariants(products, config) {
       // if no variant image was found, check for the product image online
       if (variant.images.length === 0) {
         const onlineImgUrl = variant.onlineProductImgUrl;
-        await checkForOnlineImage(variant, onlineImgUrl, config.type);
+        const imageFound = await checkForOnlineImage(onlineImgUrl, config.type);
+        if (imageFound) {
+          variant.images.push(imageFound);
+        }
       }
 
       product.productDescription = shortenDescription(
