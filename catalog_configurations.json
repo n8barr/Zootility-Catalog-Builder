@@ -1,19 +1,10 @@
 [
   {
-    "name": "Rep Catalog",
+    "name": "Zootility Tools - Rep Catalog",
     "showBarcodes": true,
     "collections": [
       "Zootility Tools",
-      "Rift Gear",
-      "WanderMade Wallets",
-      "Patch & Stitch",
-      "Name Drop",
-      "State Goods",
-      "Sustainable Stickers",
-      "Color-Me Creative",
-      "TekPets",
-      "Displays",
-      "Services and Fees"
+      "WanderMade Wallets"
     ],
     "exclude": []
   }

@@ -1,0 +1,26 @@
+{
+  "Keychain Multi-Tools": [
+    { "sku": "Z-KBF", "variantName": "Bigfoot" },
+    { "sku": "Z-KREX", "variantName": "T-Rex" },
+    { "sku": "Z-TT", "variantName": "Turtool" },
+    { "sku": "Z-HEX-MET", "variantName": "Hexalotl" },
+    { "sku": "Z-KBEA", "variantName": "Bear" },
+    { "sku": "Z-KBUF", "variantName": "Buffalo" },
+    { "sku": "Z-KSCO", "variantName": "Scorpion" },
+    { "sku": "Z-KPB", "variantName": "Pickle Ball" },
+    { "sku": "Z-KGOL", "variantName": "Golf" },
+    { "sku": "Z-KGAT", "variantName": "Gator" },
+    { "sku": "Z-KORB", "variantName": "Orbit"},
+    { "sku": "Z-PK-9", "variantName": "Parakeyd" }
+  ],
+  "Buildable TekPet Multi-Tools": [
+    { "sku": "ZL-MT-TREX", "variantName": "T-Rex" },
+    { "sku": "ZL-MT-BIGF", "variantName": "Bigfoot" },
+    { "sku": "ZL-MT-BEAR", "variantName": "Bear" },
+    { "sku": "ZL-MT-SHAR", "variantName": "Shark" },
+    { "sku": "ZL-MT-BUTT", "variantName": "Butterfly" },
+    { "sku": "ZL-MT-NARW", "variantName": "Narwhal" },
+    { "sku": "ZL-MT-STEG", "variantName": "Stegosaurus" },
+    { "sku": "ZL-MT-LADY", "variantName": "Ladybug" }
+  ]
+}
