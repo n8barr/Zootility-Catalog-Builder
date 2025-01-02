@@ -1,23 +1,42 @@
 import { addProductImages, addVariantImages } from "./addImagePaths.js";
 import { sortProducts } from "./sortProducts.js";
 import checkForOnlineImage from "./checkForOnlineImage.js";
+import productsAsVariants from "./productsAsVariants.json" with { type: "json" };
 
 async function groupProductsWithVariants(products, config) {
   const collections = config.collections;
   const productsByName = {};
 
   for (const product of products) {
-    const productName = product.productName;
+
+    // Check the productsAsVariants configuration to see if the product should be handled as a variant
+    // If the sku is found in a product list, override the product name
+    let productName = product.productName;
+    let variantName = product.option1Value;
+    let variantImage = product.variantImage;
+    for (const [name, variants] of Object.entries(productsAsVariants)) {
+      const variant = variants.find(v => v.sku === product.sku);
+      if (variant) {
+        productName = name;
+        variantImage = product.productImage;
+        if (variant.variantName) {
+          variantName = variant.variantName;
+        }
+        break;
+      }
+    }
+
+    product.productName = productName;
     const wholesalePrice = parseFloat(product.wholesalePrice);
     const retailPrice = parseFloat(product.retailPrice);
     const variant = {
       sku: product.sku,
       wholesalePrice: wholesalePrice.toFixed(2),
       retailPrice: retailPrice.toFixed(2),
-      option1Value: product.option1Value,
+      option1Value: variantName,
       option2Value: product.option2Value,
       barcode: product.barcode,
-      onlineVariantImgUrl: product.variantImage,
+      onlineVariantImgUrl: variantImage,
       onlineProductImgUrl: product.productImage,
       images: [],
       showBarcodes: config.showBarcodes,

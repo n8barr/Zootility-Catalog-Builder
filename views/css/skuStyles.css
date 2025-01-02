@@ -703,3 +703,7 @@
   width: 33%;
   text-align: justify;
 }
+
+.product-baseSku-Z-HEX .product-image {
+  background-color: white!important;
+}
