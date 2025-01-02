@@ -12,13 +12,15 @@
     top: initial;
 }
 
+/*
 .page:nth-child(odd) .product4-variants {
-    /* margin-right: 10%; */
+    margin-right: 10%;
 }
 
 .page:nth-child(even) .product4-variants {
-    /* margin-left: 10%; */
+    margin-left: 10%;
 }
+*/
 
 .product4-variants svg.barcode {
     width: 120px;
