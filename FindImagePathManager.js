@@ -44,6 +44,13 @@ class FindImagePathManager {
       }
     }
 
+    if (foundImagePath.length === 0) {
+      return {
+        imagePath: undefined,
+        count: 0
+      }
+    }
+
     const imagePath = RELATIVE_PATH_TO_BUILD + foundImagePath;
 
     return {

@@ -38,6 +38,14 @@ function buildCollectionSummary(product, collectionProducts, catalogStyle) {
     gradient = `linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ${gradientStart}%, transparent ${gradientEnd}%), `;
   }
 
+  // Find the cover image
+  const cover = FindImagePathManager.findCoverImage(collectionName, catalogStyle);
+
+  // Only insert the collection summary page if a cover image was found
+  if (!cover) {
+    return;
+  }
+  
   // Create the collection summary page using the collectionSummaryTemplate
   const collectionSummaryPage = compiledCollectionSummaryTemplate({
     collectionName,
@@ -46,7 +54,7 @@ function buildCollectionSummary(product, collectionProducts, catalogStyle) {
     blurb,
     tagline,
     products: collectionProducts,
-    cover: FindImagePathManager.findCoverImage(collectionName, catalogStyle),
+    cover,
     logo: FindImagePathManager.findLogoImage(collectionName, catalogStyle),
   });
 

@@ -51,7 +51,10 @@ class PagesManager {
           catalogStyle
         );
 
-        this.insertPage(collectionSummaryPage, "MADE IN USA");
+        // only insert the collection summary page if a cover image was found
+        if (collectionSummaryPage) {
+          this.insertPage(collectionSummaryPage, "MADE IN USA");
+        }
       }
       // Set this for the next Insert Filler Check
       lastProduct = product;

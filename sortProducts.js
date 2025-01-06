@@ -76,12 +76,12 @@ function testVariantSales(a, b) {
 
 // Custom variant sort function
 function customVariantSort(a, b) {
-  const option1ValueA = a.option1Value;
-  const option1ValueB = b.option1Value;
+  const skuA = a.sku;
+  const skuB = b.sku;
 
-  if (option1ValueA < option1ValueB) {
+  if (skuA < skuB) {
     return -1;
-  } else if (option1ValueA > option1ValueB) {
+  } else if (skuA > skuB) {
     return 1;
   } else {
     // nothing to split them

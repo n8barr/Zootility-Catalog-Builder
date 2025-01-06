@@ -1,6 +1,33 @@
+.product-baseSku-DP-STS .product-image,
+.product-baseSku-DP-BTS .product-image {
+  padding: 0;
+  width: 60%;
+}
+
+.product-baseSku-DP-SFS .product-image,
+.product-baseSku-DP-BFS .product-image {
+  padding: 2% 0;
+  width: 60%;
+}
+
 .product-baseSku-Z-PMD .product-image,
 .product-baseSku-Z-WC .product-image {
   width: 40%;
+}
+
+.product-baseSku-Z-PMD .variant:nth-of-type(even),
+.product-baseSku-Z-WC .variant:nth-of-type(even) {
+  padding: 5%;
+}
+
+.product-baseSku-Z-HH .variant:nth-of-type(even),
+.product-baseSku-Z-PMX .variant:nth-of-type(even) {
+  padding: 8%;
+}
+
+.product-baseSku-Z-HH .variant:nth-of-type(odd),
+.product-baseSku-Z-PMX .variant:nth-of-type(odd) {
+  padding: 3%;
 }
 
 .product-baseSku-Z-WCB .product-image {
@@ -71,6 +98,14 @@
   padding: 0;
 }
 
+.product-baseSku-ZL-MT .product-image {
+  width: 75%;
+}
+
+.product-baseSku-ZL-MT .product-variants {
+  grid-template-columns: repeat(1, 1fr);
+}
+
 .product-baseSku-Z-HT420 .product-image img {
   rotate: 90deg;
 }
@@ -116,6 +151,10 @@
 
 .product-baseSku-PS-LSW .product-image {
   background-color: #5eb2b7 !important;
+}
+.product-baseSku-PS-LSW .product-image,
+.product-baseSku-PS-LSWP .product-image {
+
   width: 50%;
   padding-left: 5%;
   padding-right: 5%;
@@ -140,8 +179,12 @@
   padding: 5%;
 }
 
-.product-baseSku-PS-FPW .product2-image {
-  background-color: #453c30 !important;
+.product-baseSku-PS-FPW .product-image {
+  background-color: #4f4f4f !important;
+  width: 50%;
+}
+.product-baseSku-PS-FPWP .product-image {
+  width: 50%;
 }
 
 .product-baseSku-PS-LFW .product2-image {
@@ -472,6 +515,10 @@
   color: ivory;
 }
 
+.product-baseSku-Z-WGOL .product2-image {
+  background-size: contain;
+}
+
 .product-baseSku-SG-CCWO .product-image,
 .product-baseSku-LG-CEWO .product-image,
 .product-baseSku-BG-AWO .product-image,
@@ -483,6 +530,11 @@
   padding-right: 12%;
 }
 
+.product-baseSku-Z-CKMT .product-image {
+  background-color: #f7e19d !important;
+  padding: 5%;
+  width: 41%;
+}
 .product-baseSku-CG-CPMD .product-image {
   background-color: #535f6f !important;
 }
@@ -497,6 +549,11 @@
 
 .product-baseSku-SG-SNO .product-variants.grid-1x2 {
   margin-right: 0;
+}
+
+div[class*="variant-sku-SG-SNO-"] .image-container img {
+  rotate: 25deg;
+  translate: 0 -25px;
 }
 
 .showBarcodes [class*="product-baseSku-ES-"] .product2-variants .image-container {
