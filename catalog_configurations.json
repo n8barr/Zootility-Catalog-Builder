@@ -3,8 +3,18 @@
     "name": "Zootility Tools - Rep Catalog",
     "showBarcodes": true,
     "collections": [
+      "Outdoor Bundles",
       "Zootility Tools",
-      "WanderMade Wallets"
+      "WanderMade Wallets",
+      "Bar & Grill"
+    ],
+    "exclude": []
+  },
+  {
+    "name": "TekPets - Rep Catalog",
+    "showBarcodes": true,
+    "collections": [
+      "TekPets"
     ],
     "exclude": []
   }

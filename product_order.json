@@ -5,29 +5,30 @@
     "PS-RMW",
     "Z-RB"
   ],
+  "Outdoor Bundles": [
+    "DP-STS",
+    "DP-SFS",
+    "DP-BTS",
+    "DP-BFS"
+  ],
   "Zootility Tools": [
     "Z-PMD",
     "Z-WC",
+    "Z-HH",
+    "Z-PMX",
+    "ZL-MT",
     "Z-WSK",
     "Z-FSK",
     "Z-SSK",
-    "Z-WCSK",
     "Z-USK",
-    "Z-HH",
-    "Z-PMX",
-    "Z-K",
-    "Z-PMB",
     "Z-ST1",
-    "Z-ST2",
-    "Z-HT420",
-    "GR-G",
-    "Z-PP",
+    "Z-RB",
     "Z-WENG",
     "Z-WGOL",
     "Z-WPB",
+    "D-POS",
     "Z-HEX",
-    "ZL-MT",
-    "BG-AWO"
+    "Z-K"
   ],
   "TūLRY": [
     "J-TSZN",
@@ -43,6 +44,11 @@
     "PS-MPW",
     "PS-LFW"
   ],
+  "Bar & Grill": [
+    "LG-CNO",
+    "GR-G",
+    "BG-AWO"
+  ], 
   "Patch & Stitch": [
     "PA-LPCT",
     "PA-CSLP",
